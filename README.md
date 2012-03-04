@@ -13,9 +13,9 @@ Project is still in its infancy. Please use issue queue to submit any bug fixes 
 
 ## Quick Test:
 
-> npm install
-> chmod u+x start_dev.sh
-> ./start_dev.sh
+    > npm install
+    > chmod u+x start_dev.sh
+    > ./start_dev.sh
 
 You should see a simple "hello" at: http://localhost:9000/hello. 
 You can customize it by visting http://localhost:9000/hello?name=yourname but really what you should probably do
