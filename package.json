@@ -14,6 +14,7 @@
 	,"dependencies": {
 		"express"       : ""
 		,"config"       : ""
+    ,"argsparser"   : ""
 		,"handlebars"   : ""
 		,"underscore"   : ""
 	}

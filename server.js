@@ -20,7 +20,9 @@ app.configure(function(){
 app.get('/hello', mod_hello.root);
 
 var numCPUs = require('os').cpus().length;
-if (cluster.isMaster) {
+if (cluster.isMaster
+    && ((typeof process.env['NODE_NOT_CLUSTERED'] == 'undefined') || process.env['NODE_NOT_CLUSTERED'] == 0)) {
+
   // Fork as many workers as we have cpu cores.
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork();
