@@ -16,6 +16,7 @@
 		,"config"       : ""
     ,"argsparser"   : ""
 		,"handlebars"   : ""
+    ,"less"         : ""
 		,"underscore"   : ""
 	}
 }
