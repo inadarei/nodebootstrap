@@ -1,9 +1,9 @@
 {
-	"name" : "NodeJsBootstrap"
-	,"version" : "0.1.0"
-	,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
-	,"author" : "Sam.ge"
-	,"main" : "./app.js"
+  "name" : "NodeJsBootstrap"
+  ,"version" : "0.1.0"
+  ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
+  ,"author" : "Sam.ge"
+  ,"main" : "./app.js"
   ,"repository": {
       "type": "git",
       "url": "https://github.com/inadarei/nodebootstrap"
@@ -11,11 +11,11 @@
   ,"engines": {
       "node": ">=0.6.0"
   }
-	,"dependencies": {
-		"express"       : ""
-		,"config"       : ""
-		,"handlebars"   : ""
+  ,"dependencies": {
+    "express"       : ""
+    ,"config"       : ""
+    ,"handlebars"   : ""
     ,"less"         : ""
-		,"underscore"   : ""
-	}
+    ,"underscore"   : ""
+  }
 }
