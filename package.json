@@ -1,0 +1,13 @@
+{
+	"name" : "NodeJsBootstrap"
+	,"version" : "0.1.0"
+	,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
+	,"author" : "Sam.ge"
+	,"main" : "./app.js"
+	,"dependencies": {
+		"express"       : ""
+		,"config"       : ""
+		,"handlebars"   : ""
+		,"underscore"   : ""
+	}
+}
