@@ -4,6 +4,13 @@
 	,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
 	,"author" : "Sam.ge"
 	,"main" : "./app.js"
+  ,"repository": {
+      "type": "git",
+      "url": "https://github.com/inadarei/nodebootstrap"
+  }
+  ,"engines": {
+      "node": ">=0.6.0"
+  }
 	,"dependencies": {
 		"express"       : ""
 		,"config"       : ""
