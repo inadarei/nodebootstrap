@@ -11,6 +11,21 @@ version: start.sh assumes you want your web-server (Nginx?) to take on this job.
 
 Project is still in its infancy. Please use issue queue to submit any bug fixes or suggestions.
 
+## Quick Test:
+
+Assuming you already have node and npm installed (If not: 
+[this blog post](http://freshblurbs.com/install-node-js-and-express-js-nginx-debian-lenny) can help on Debian/Ubuntu
+and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac):
+
+    > npm install
+    > chmod u+x start_dev.sh
+    > ./start_dev.sh
+
+You should see a simple "hello" at: http://localhost:9000/hello. 
+You can customize it by visting http://localhost:9000/hello?name=yourname but really what you should probably do
+instead is dive into the code and see how it is put together.
+
+
 ## License
 
 (The MIT License)
