@@ -10,6 +10,7 @@ if [ ! `which supervisor` ]; then
     exit 1;
 fi
 
+export NODE_ENV=development
 # Currently supervisor and cluster do not work together: https://github.com/isaacs/node-supervisor/issues/40
 export NODE_NOT_CLUSTERED=1
 export NODE_SERVE_STATIC=1

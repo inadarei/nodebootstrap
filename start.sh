@@ -10,8 +10,10 @@ if [ ! `which forever` ]; then
     exit 1;
 fi
 
+export NODE_ENV=production
 # Currently supervisor and cluster do not work together: https://github.com/isaacs/node-supervisor/issues/40
 export NODE_NOT_CLUSTERED=0
+
 forever start server.js
 echo "--------------- NOTE: --------------"
 echo "You can stop the application by running (in this folder):"
