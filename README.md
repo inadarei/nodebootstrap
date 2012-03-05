@@ -1,8 +1,9 @@
-Node Bootstrap is a project skeleton for Node.js 6.x development with Twitter's Bootrstrap2 (no pun intended)
+Node Bootstrap is a project skeleton for Node.js 6.x development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended)
 framework.
 
-Project skeleton provides: common node.js webapp layout for repsonsive web development, suggests some common Node
+Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
 modules and best-practices, as well as provides two convenient shell scripts:
+
 * start_dev.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled.
 * start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
 
