@@ -11,8 +11,9 @@ if [ ! `which supervisor` ]; then
 fi
 
 export NODE_ENV=development
-# Currently supervisor and cluster do not work together: https://github.com/isaacs/node-supervisor/issues/40
-export NODE_NOT_CLUSTERED=1
+# set node_not_clustered to 1, if you do not need clustering in dev environment
+export NODE_NOT_CLUSTERED=0
 export NODE_SERVE_STATIC=1
+
 supervisor -n exit -w lib,config,server.js server.js
 

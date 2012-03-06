@@ -33,18 +33,38 @@ app.configure(function(){
 //-- Routes configuration.
 app.get('/hello', mod_hello.root);
 
+//-- End routes configuration.
+
+
+
 var numCPUs = require('os').cpus().length;
 if (cluster.isMaster
     && ((typeof process.env['NODE_NOT_CLUSTERED'] == 'undefined') || process.env['NODE_NOT_CLUSTERED'] == 0)) {
 
+  var childProcesses = [];
   // Fork as many workers as we have cpu cores.
   for (var i = 0; i < numCPUs; i++) {
-    cluster.fork();
+    childProcesses[i] = cluster.fork();
   }
 
   cluster.on('death', function(worker) {
     console.log('worker ' + worker.pid + ' died');
   });
+
+  // Trick suggested by Ian Young (https://github.com/isaacs/node-supervisor/issues/40#issuecomment-4330946)
+  // to make cluster and supervisor play nicely together:
+  if ((typeof process.env['NODE_ENV'] != 'undefined') && process.env['NODE_ENV'] == 'development') {
+    var signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+    for (i in signals) {
+      process.on(signals[i], function() {
+       for (j in childProcesses) {
+         childProcesses[j].kill();
+       }
+       process.exit();
+      })
+    }
+  }
+
 } else {
   app.listen(CONF.app.port);
   console.log("Express server instance listening on port %d", CONF.app.port);
