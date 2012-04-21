@@ -16,6 +16,7 @@
     ,"config"       : ""
     ,"handlebars"   : ""
     ,"less"         : ""
+    ,"less-middleware"    : ""
     ,"underscore"   : ""
   }
 }
