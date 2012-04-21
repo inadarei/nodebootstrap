@@ -26,6 +26,11 @@ You should see a simple "hello" at: http://localhost:9000/hello.
 You can customize it by visting http://localhost:9000/hello?name=yourname but really what you should probably do
 instead is dive into the code and see how it is put together.
 
+## Customization:
+
+It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple 
+scripts on the server it can really help differentiate between various forever or "ps" processes. However, if you
+do rename server.js, please make sure to also update corresponding lines in start.sh and start_dev.sh scripts.
 
 ## License
 
