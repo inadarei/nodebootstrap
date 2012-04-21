@@ -23,8 +23,8 @@ app.configure(function(){
   // This is not needed if you handle static with, say, Nginx (recommended in production!)
   // Additionally you should probably precompile your LESS stylesheets in production
   if ((typeof process.env['NODE_SERVE_STATIC'] != 'undefined') && process.env['NODE_SERVE_STATIC'] == 1) {
+    app.use(require('less-middleware')({ src: pub_dir }));
     app.use(express.static(pub_dir));
-    app.use(express.compiler({ src: pub_dir, enable: ['less'] }));
   }
 });
 
