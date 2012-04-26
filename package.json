@@ -12,7 +12,8 @@
       "node": ">=0.6.0"
   }
   ,"dependencies": {
-    "express"       : ""
+    "yaml"          : ""
+    ,"express"       : ""
     ,"config"       : ""
     ,"handlebars"   : ""
     ,"less"         : ""
