@@ -55,7 +55,11 @@ application in foreground (which, to be fair, in most cases, is what you probabl
 
 It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple 
 scripts on the server it can really help differentiate between various forever or "ps" processes. However, if you
-do rename server.js, please make sure to also update corresponding lines in start.sh and start_dev.sh scripts.
+do rename server.js, please make sure to also update corresponding lines in start.sh script.
+
+Most of the launch logic is located in start.sh. By looking at dev_start.sh you can see that it is just altering
+some environmental variables. Following this pattern you can easily create launch scripts for other environments
+e.g. stage_start.sh, if needed.
 
 ## License
 
