@@ -18,13 +18,13 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.query());
-  //app.use(express.cookieParser());
+  app.use(express.cookieParser());
   //app.use(express.responseTime());
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
   // This is not needed if you handle static files with, say, Nginx (recommended in production!)
   // Additionally you should probably precompile your LESS stylesheets in production
-  if ((typeof process.env['NODE_SERVE_STATIC'] != 'undefined') && process.env['NODE_SERVE_STATIC'] == 1) {
+  if ((typeof process.env['NODE_SERVE_STATIC'] !== 'undefined') && process.env['NODE_SERVE_STATIC'] == 1) {
     app.use(require('less-middleware')({ src: pub_dir }));
     app.use(express.static(pub_dir));
   }
