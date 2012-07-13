@@ -65,7 +65,7 @@ e.g. stage_start.sh, if needed.
 
 (The MIT License)
 
-Copyright (c) 2012 Irakli Nadareishvili
+Copyright (c) 2012 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
