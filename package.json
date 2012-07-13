@@ -1,6 +1,6 @@
 {
   "name" : "NodeJsBootstrap"
-  ,"version" : "0.2.0"
+  ,"version" : "0.3.0"
   ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
   ,"author" : "Irakli Nadareishvili"
   ,"main" : "./server.js"

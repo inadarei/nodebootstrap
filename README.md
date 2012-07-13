@@ -24,8 +24,34 @@ and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.gi
     > ./start_dev.sh
 
 You should see a simple "hello" at: http://localhost:9000/hello. 
-You can customize it by visting http://localhost:9000/hello?name=yourname but really what you should probably do
+You can customize it by visiting http://localhost:9000/hello?name=yourname but really what you should probably do
 instead is dive into the code and see how it is put together.
+
+## Contextualizing Runtime Environment
+
+Following environmental variables can affect the runtime behavior and startup mode:
+
+* NODE_LAUNCH_SCRIPT - defaults to "server.js"
+* NODE_ENV - defaults to "default"
+* NODE_CLUSTERED - defaults to 1 (on)
+* NODE_HOT_RELOAD - defaults to 0 (off)
+* NODE_SERVE_STATIC - defaults to 0 (off) - in production you should serve static content with NginX, not: Node.
+* NODE_CONFIG_DIR - defaults to "config" folder in the current folder
+* NODE_LOG_DIR - defaults to "logs" folder in the current folder
+
+## Hot Reloading vs. Daemon-izing Script.
+
+In production environments it is a good idea to daemon-ize your Node process using Forever.js. Forever will restart
+the process if it accidentally crashes.
+
+In development, it is much more important to have "hot-reloading" of code available. This feature can be provided
+with Supervisor.js package. If you set NODE_HOT_RELOAD to 1, start.sh will run in hot-reloading mode watching your
+main script, libs folder and config folder.
+
+Unfortunately, Supervisor and Forever packages do not work nicely with each other, so you can only use one
+or the other, at this point. Setting NODE_HOT_RELOAD to 1 disables backgrounding of your script and runs your Node
+application in foreground (which, to be fair, in most cases, is what you probably want during development, anyway).
+
 
 ## Customization:
 
