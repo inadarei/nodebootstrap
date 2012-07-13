@@ -3,7 +3,7 @@
 # A generic script that can be customized using various environmental variables (@see: README.md)
 # Defaults in this script are suitable for production use.
 #
-# ATTENTION: You probably want to use start_dev.sh script, while developing, instead.
+# ATTENTION: You probably want to use dev_start.sh script, while developing, instead.
 
 while getopts "t" opt; do
   case $opt in
