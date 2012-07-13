@@ -11,7 +11,8 @@ while getopts "t" opt; do
   esac
 done
 
-if [ !$NODE_LAUNCH_SCRIPT ]; then
+
+if [ ! $NODE_LAUNCH_SCRIPT ]; then
   export NODE_LAUNCH_SCRIPT="server.js"
 fi
 if [ ! -f "$NODE_LAUNCH_SCRIPT" ]; then
@@ -19,30 +20,30 @@ if [ ! -f "$NODE_LAUNCH_SCRIPT" ]; then
   exit
 fi
 
-if [ !$NODE_ENV ]; then
+if [ ! $NODE_ENV ]; then
   export NODE_ENV=default
 fi
 
-if [ !$NODE_CLUSTERED ]; then
+if [ ! $NODE_CLUSTERED ]; then
   export NODE_CLUSTERED=1
 fi
 
-if [ !$NODE_SERVE_STATIC ]; then
+if [ ! $NODE_SERVE_STATIC ]; then
   export NODE_SERVE_STATIC=0
 fi
 
-if [ !$NODE_HOT_RELOAD ]; then
-  export NODE_HOT_RELOAD=1
+if [ ! $NODE_HOT_RELOAD ]; then
+  export NODE_HOT_RELOAD=0
 fi
 
-if [ !$NODE_CONFIG_DIR ]; then
+if [ !  $NODE_CONFIG_DIR ]; then
   export NODE_CONFIG_DIR="$PWD/config"
 fi
 if [ ! -d "$NODE_CONFIG_DIR" ]; then
   mkdir $NODE_CONFIG_DIR
 fi
 
-if [ !$NODE_LOG_DIR ]; then
+if [ ! $NODE_LOG_DIR ]; then
   export NODE_LOG_DIR="$PWD/logs"
 fi
 if [ ! -d "$NODE_LOG_DIR" ]; then
@@ -62,20 +63,24 @@ if [ ! -f "$NODE_LOG_DIR/err.log" ]; then
 fi
 
 
-# Let's make sure you have forever installed, if we are gonna need it:
-if [ !$NODE_HOT_RELOAD ] && [ ! `which forever` ]; then
+# Let's make sure you have forever/supervisor installed, if we are gonna need it:
+if [ $NODE_HOT_RELOAD -eq 0 ] && [ ! `which forever` ]; then
     echo "ERROR: Please install forever with:";
     echo "  npm install forever -g";
     exit 1;
 fi
 
-# Let's make sure you have supervisor installed, if we are going to need it:
-if [ $NODE_HOT_RELOAD ] && [ ! `which supervisor` ]; then
+if [ $NODE_HOT_RELOAD -eq 1 ] && [ ! `which supervisor` ]; then
     echo "ERROR: Please install supervisor with:";
     echo "  npm install supervisor -g";
     exit 1;
 fi
 
+# Let's make sure you NODE_HOT_RELOAD is set to one of the only two allowed values
+if [ ! $NODE_HOT_RELOAD -eq 1 ] && [ ! $NODE_HOT_RELOAD -eq 0 ]; then
+    echo "ERROR: The only two valid values for NODE_HOT_RELOAD are '1' and '0'. You are trying to set $NODE_HOT_RELOAD";
+    exit 1
+fi
 
 # @TODO: not necessarily the best way to stop the process
 if [ !$NODE_HOT_RELOAD ]; then
@@ -84,7 +89,7 @@ fi
 
 # Now that we know there is no old version running, let's start the processes
 
-if [ $NODE_HOT_RELOAD ]; then
+if [ $NODE_HOT_RELOAD -eq 0 ]; then
     NCMD="forever start"
     NCMD="$NCMD -a"
     NCMD="$NCMD -l $NODE_LOG_DIR/forever.log"
@@ -98,14 +103,16 @@ NCMD="$NCMD $NODE_LAUNCH_SCRIPT"
 
 $NCMD
 
-echo "--------------- NOTE: --------------"
-echo "You can stop the application by running (in this folder):"
-echo "  > forever stop $NODE_LAUNCH_SCRIPT"
-echo "You can see all Forever-running node apps by issuing:"
-echo "  > forever list"
-echo "See more about Forever at: https://github.com/indexzero/forever"
-echo "------------------------------------"
+if [ $NODE_HOT_RELOAD -eq 0 ]; then
+    echo "--------------- NOTE: --------------"
+    echo "You can stop the application by running (in this folder):"
+    echo "  > forever stop $NODE_LAUNCH_SCRIPT"
+    echo "You can see all Forever-running node apps by issuing:"
+    echo "  > forever list"
+    echo "See more about Forever at: https://github.com/indexzero/forever"
+    echo "------------------------------------"
+fi
 
-if [ $NB_TAIL_LOGS ]; then
+if [ $NB_TAIL_LOGS ] && [ $NODE_HOT_RELOAD -eq 0 ]; then
   tail -f $NODE_LOG_DIR/forever.log
 fi
