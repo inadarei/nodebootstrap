@@ -4,13 +4,11 @@ framework.
 Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
 modules and best-practices, as well as provides two convenient shell scripts:
 
-* start_dev.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled.
+* dev_start.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled.
 * start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
 
-By default, start_dev.sh also lets Express.js handle static files so you don't have to have a web server. The production
+By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
 version: start.sh assumes you want your web-server (Nginx?) to take on this job.
-
-Project is still in its infancy. Please use issue queue to submit any bug fixes or suggestions.
 
 ## Quick Test:
 
@@ -20,11 +18,11 @@ and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.gi
 
     > npm install supervisor -g
     > npm install
-    > chmod u+x start_dev.sh
-    > ./start_dev.sh
+    > chmod u+x dev_start.sh
+    > ./dev_start.sh
 
-You should see a simple "hello" at: http://localhost:9000/hello. 
-You can customize it by visiting http://localhost:9000/hello?name=yourname but really what you should probably do
+You should see a simple "hello" at: http://localhost:3000/hello.
+You can customize it by visiting http://localhost:3000/hello?name=yourname but really what you should probably do
 instead is dive into the code and see how it is put together.
 
 ## Contextualizing Runtime Environment
