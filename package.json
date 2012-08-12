@@ -13,11 +13,11 @@
   }
   ,"dependencies": {
     "yaml"          : ""
-    ,"express"       : ""
+    ,"express"       : "2.x"
     ,"config"       : ""
-    ,"handlebars"   : ""
-    ,"less"         : ""
+    ,"handlebars"   : "1.x"
+    ,"less"         : "1.x"
     ,"less-middleware"    : ""
-    ,"underscore"   : ""
+    ,"underscore"   : "1.x"
   }
 }
