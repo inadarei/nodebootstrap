@@ -1,0 +1,1 @@
+This version of Node Bootstrap is compatible with Express v 2.x
