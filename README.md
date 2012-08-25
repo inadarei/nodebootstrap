@@ -1,5 +1,5 @@
-Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.6.x+ development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended)
-framework.
+Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.6.x+ and [Express.js](http://expressjs.com)
+development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended) framework.
 
 Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
 modules and best-practices, as well as provides two convenient shell scripts:
@@ -9,6 +9,12 @@ modules and best-practices, as well as provides two convenient shell scripts:
 
 By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
 version: start.sh assumes you want your web-server (Nginx?) to take on this job.
+
+## Compatibility
+
+We try to keep Node Bootstrap updated with the latest versions of Node, Express and Bootstrap. In some cases, where it
+makes sense, branches compatible with older versions are created: https://github.com/inadarei/nodebootstrap/branches to
+make upgrade path a little smoother.
 
 ## Quick Test:
 
