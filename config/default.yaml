@@ -1,3 +1,4 @@
 app:
   port: 3000
   pub_dir: "/public"
+  cookie_secret: "your secret key salt goes here"
