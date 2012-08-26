@@ -2,32 +2,46 @@
 var util = require('util')
     ,cluster = require('cluster')
     ,express = require('express')
-    ,app = express.createServer()
+    ,app = express()
     ,_ = require('underscore')
     ,CONF = require('config')
     ,less = require('less')
-    ,handlebars = require('handlebars');
+    ,hbs = require('hbs');
 
 var pub_dir = CONF.app.pub_dir;
 if (pub_dir[0] != '/') { pub_dir = '/' + pub_dir; } // humans are forgetful
 pub_dir = __dirname + pub_dir;
 
 app.configure(function() {
+
   app.set('views', __dirname + '/views');
+
   app.set('view engine', 'handlebars');
+  app.engine('handlebars', require('hbs').__express);
+
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.query());
-  app.use(express.cookieParser());
+  app.use(express.cookieParser(CONF.app.cookie_secret));
+  app.use(express.session());
+  app.use(app.router);
   //app.use(express.responseTime());
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
   // This is not needed if you handle static files with, say, Nginx (recommended in production!)
   // Additionally you should probably precompile your LESS stylesheets in production
+  // Last, but not least: Express' default error handler is very useful in dev, but probably not in prod.
   if ((typeof process.env['NODE_SERVE_STATIC'] !== 'undefined') && process.env['NODE_SERVE_STATIC'] == 1) {
     app.use(require('less-middleware')({ src: pub_dir }));
     app.use(express.static(pub_dir));
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   }
+
+  // Catch-all error handler. Override as you see fit
+  app.use(function(err, req, res, next){
+      console.error(err.stack);
+      res.send(500, 'An unexpected error occurred! Please check logs.');
+  });
+
 });
 
 
