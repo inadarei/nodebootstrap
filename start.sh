@@ -93,8 +93,8 @@ if [ $NODE_HOT_RELOAD -eq 0 ]; then
     NCMD="forever start"
     NCMD="$NCMD -a"
     NCMD="$NCMD -l $NODE_LOG_DIR/forever.log"
-    NCMD="$NCMD -o $NODE_LOG_DIR/forever.log"
-    NCMD="$NCMD -e $NODE_LOG_DIR/forever.log"
+    NCMD="$NCMD -o $NODE_LOG_DIR/out.log"
+    NCMD="$NCMD -e $NODE_LOG_DIR/err.log"
 else
     NCMD="supervisor -n exit -w ./lib,$NODE_CONFIG_DIR,$NODE_LAUNCH_SCRIPT"
 fi
