@@ -36,7 +36,7 @@ instead is dive into the code and see how it is put together.
 Following environmental variables can affect the runtime behavior and startup mode:
 
 * NODE_LAUNCH_SCRIPT - defaults to "server.js"
-* NODE_ENV - defaults to "default"
+* NODE_ENV - defaults to "production"
 * NODE_CLUSTERED - defaults to 1 (on)
 * NODE_HOT_RELOAD - defaults to 0 (off)
 * NODE_SERVE_STATIC - defaults to 0 (off) - in production you should serve static content with NginX, not: Node.

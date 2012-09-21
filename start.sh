@@ -21,7 +21,7 @@ if [ ! -f "$NODE_LAUNCH_SCRIPT" ]; then
 fi
 
 if [ ! $NODE_ENV ]; then
-  export NODE_ENV=default
+  export NODE_ENV=production
 fi
 
 if [ ! $NODE_CLUSTERED ]; then
