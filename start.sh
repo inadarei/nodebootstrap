@@ -21,7 +21,7 @@ if [ ! -f "$NODE_LAUNCH_SCRIPT" ]; then
 fi
 
 if [ ! $NODE_ENV ]; then
-  export NODE_ENV=default
+  export NODE_ENV=production
 fi
 
 if [ ! $NODE_CLUSTERED ]; then
@@ -93,8 +93,8 @@ if [ $NODE_HOT_RELOAD -eq 0 ]; then
     NCMD="forever start"
     NCMD="$NCMD -a"
     NCMD="$NCMD -l $NODE_LOG_DIR/forever.log"
-    NCMD="$NCMD -o $NODE_LOG_DIR/forever.log"
-    NCMD="$NCMD -e $NODE_LOG_DIR/forever.log"
+    NCMD="$NCMD -o $NODE_LOG_DIR/out.log"
+    NCMD="$NCMD -e $NODE_LOG_DIR/err.log"
 else
     NCMD="supervisor -n exit -w ./lib,$NODE_CONFIG_DIR,$NODE_LAUNCH_SCRIPT"
 fi
