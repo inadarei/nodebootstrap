@@ -1,4 +1,4 @@
-Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.6.x+ and [Express.js](http://expressjs.com)
+Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.8.x+ and [Express.js](http://expressjs.com)
 development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended) framework.
 
 Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
