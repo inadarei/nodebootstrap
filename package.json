@@ -2,14 +2,14 @@
   "name" : "NodeJsBootstrap"
   ,"version" : "0.4.1"
   ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
-  ,"author" : "Irakli Nadareishvili"
+  ,"author" : "Irakli Nadareishvili, John Nelson"
   ,"main" : "./server.js"
   ,"repository": {
       "type": "git",
       "url": "https://github.com/inadarei/nodebootstrap"
   }
   ,"engines": {
-      "node": ">=0.8.9"
+      "node": ">=0.8.8"
   }
   ,"dependencies": {
     "yaml"                : ""
