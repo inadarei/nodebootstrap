@@ -44,13 +44,17 @@ app.configure(function() {
     console.error(err.stack);
     res.send(500, 'An unexpected error occurred! Please check logs.');
   });
+    
 });
 
+//---- INTERNAL MODULES
+var hello     = require('./lib/hello')
+  , routes    = require('./lib/routes'); 
 
-//-- Routes configuration is externalized in a different module (can be multiple) for cleaner code.
-  module.exports.app = app;
-  require('./lib/routes');
-//-- End routes configuration.
+app.use(hello);
+app.use(routes);
+
+//--- End of Internal modules
 
 var numCPUs = require('os').cpus().length;
 if (cluster.isMaster
