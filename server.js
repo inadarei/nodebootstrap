@@ -93,7 +93,7 @@ if (cluster.isMaster
 
   // Trick suggested by Ian Young (https://github.com/isaacs/node-supervisor/issues/40#issuecomment-4330946)
   // to make cluster and supervisor play nicely together:
-  if (process.env.NODE_HOT_RELOAD === 1) {
+  if (process.env.NODE_HOT_RELOAD == 1) {
     var signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
     _.each(signals, function(signal){
       process.on(signal, function(){
