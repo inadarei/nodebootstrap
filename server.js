@@ -58,7 +58,7 @@ app.use(routes);
 
 var numCPUs = require('os').cpus().length;
 if (cluster.isMaster
-    && (process.env.NODE_CLUSTERED === 1)) {
+    && (process.env.NODE_CLUSTERED == 1)) {
 
   util.log("Starting app in clustered mode");
   for (var i = 0; i < numCPUs; i++) {
