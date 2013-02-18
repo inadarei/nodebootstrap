@@ -61,6 +61,8 @@ if (cluster.isMaster
     && (process.env.NODE_CLUSTERED == 1)) {
 
   util.log("Starting app in clustered mode");
+  
+  var timeouts = [];
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
