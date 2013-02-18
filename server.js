@@ -48,11 +48,8 @@ app.configure(function() {
 });
 
 //---- INTERNAL MODULES
-var hello     = require('./lib/hello')
-  , routes    = require('./lib/routes'); 
-
-app.use(hello);
-app.use(routes);
+app.use(require('./lib/hello'));
+app.use(require('./lib/routes'));
 
 //--- End of Internal modules
 
