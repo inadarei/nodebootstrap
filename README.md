@@ -43,6 +43,16 @@ Following environmental variables can affect the runtime behavior and startup mo
 * NODE_CONFIG_DIR - defaults to "config" folder in the current folder
 * NODE_LOG_DIR - defaults to "logs" folder in the current folder
 
+## Customization:
+
+It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple 
+scripts on the server it can really help differentiate between various forever or "ps" processes. However, if you
+do rename server.js, please make sure to also update corresponding lines in start.sh script.
+
+Most of the launch logic is located in start.sh. By looking at dev_start.sh you can see that it is just altering
+some environmental variables. Following this pattern you can easily create launch scripts for other environments
+e.g. stage_start.sh, if needed.
+
 ## Hot Reloading vs. Daemon-izing Script.
 
 In production environments it is a good idea to daemon-ize your Node process using Forever.js. Forever will restart
@@ -56,16 +66,29 @@ Unfortunately, Supervisor and Forever packages do not work nicely with each othe
 or the other, at this point. Setting NODE_HOT_RELOAD to 1 disables backgrounding of your script and runs your Node
 application in foreground (which, to be fair, in most cases, is what you probably want during development, anyway).
 
+## File Limits
 
-## Customization:
+Hot reloading uses native file watching features of *nix systems. This is extremely handy and efficient, but 
+unfortunately most systems have very low limits on watched and open files. If you use hot reloading a lot, you should
+expect to see: "Error: watch EMFILE" or similar.
 
-It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple 
-scripts on the server it can really help differentiate between various forever or "ps" processes. However, if you
-do rename server.js, please make sure to also update corresponding lines in start.sh script.
+To solve the problem you need to raise your filesystem limits. This may be a two-step process. On Linux, there're hard
+limits (something root user can change in /etc/limits.conf or /ets/security/limits.conf) that govern the limits individual
+users can alter from command-line.
 
-Most of the launch logic is located in start.sh. By looking at dev_start.sh you can see that it is just altering
-some environmental variables. Following this pattern you can easily create launch scripts for other environments
-e.g. stage_start.sh, if needed.
+Put something like this (as root) in your /etc/limits.conf or /etc/security/limits.conf:
+
+```bash
+* hard nofile 10000
+```
+
+Then log out, log back in and run:
+
+```
+> ulimit -n 10000
+```
+
+You should probably put `ulimit -n 10000` in your .profile file, because it does not persist between restarts.
 
 ## License
 
