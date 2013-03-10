@@ -84,13 +84,19 @@ Put something like this (as root) in your /etc/limits.conf or /etc/security/limi
 
 Then log out, log back in and run:
 
-```
+```bash
 > ulimit -n 10000
 ```
 
 You should probably put `ulimit -n 10000` in your .profile file, because it does not persist between restarts.
 
 For OS-X and Solaris-specific instructions see [a Stackoverflow Answer](http://stackoverflow.com/questions/34588/how-do-i-change-the-number-of-open-files-limit-in-linux/34645#34645)
+
+On certain Linux distributions you may also need to raise iNotify limit:
+
+```bash
+sysctl fs.inotify.max_user_instances=16384 && echo sysctl fs.inotify.max_user_instances=16384  | sudo tee /etc/rc.local  
+```
 
 ## License
 
