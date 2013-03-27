@@ -98,6 +98,12 @@ On certain Linux distributions you may also need to raise iNotify limit:
 sysctl fs.inotify.max_user_instances=16384 && echo sysctl fs.inotify.max_user_instances=16384  | sudo tee /etc/rc.local  
 ```
 
+And last, but not least, it's a good idea to also run:
+
+```bash
+> sudo sysctl -w kern.maxfiles=40960 kern.maxfilesperproc=20480
+```
+
 ## License
 
 (The MIT License)
