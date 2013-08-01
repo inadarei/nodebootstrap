@@ -1,23 +1,37 @@
 {
-  "name" : "NodeJsBootstrap"
-  ,"version" : "0.4.1"
-  ,"description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
-  ,"author" : "Irakli Nadareishvili, John Nelson"
-  ,"main" : "./server.js"
-  ,"repository": {
-      "type": "git",
-      "url": "https://github.com/inadarei/nodebootstrap"
+    "name" : "NodeBootstrap"
+  , "version"     : "0.4.2"
+  , "description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
+  , "author"      : "Irakli Nadareishvili, John Nelson"
+  , "license" : {
+      "type" : "MIT"
+    , "url"  : "https://github.com/inadarei/nodebootstrap/blob/master/LICENSE"
   }
-  ,"engines": {
+  , "main"        : "./server.js"
+  , "repository"  : {
+      "type" : "git",
+      "url"  : "https://github.com/inadarei/nodebootstrap"
+  }
+  , "engines": {
       "node": ">=0.8.8"
   }
-  ,"dependencies": {
-    "yaml"                : ""
-    ,"express"            : "3.x"
-    ,"config"             : ""
-    ,"hbs"                : "1.x"
-    ,"less"               : "1.x"
-    ,"less-middleware"    : ""
-    ,"underscore"         : "1.x"
+  , "dependencies": {
+      "yaml"               : "*"
+    , "express"            : "3.x"
+    , "config"             : "*"
+    , "hbs"                : "1.x"
+    , "less"               : "1.x"
+    , "less-middleware"    : "*"
+    , "underscore"         : "1.x"
+    , "metalogger"         : "*"
   }
+  , "devDependencies" : {
+      "assert" : "*"
+    , "should" : "*"  
+    , "mocha"  : "*"
+  }
+  , "scripts": {
+    "test" : "mocha"
+  }  
+  
 }

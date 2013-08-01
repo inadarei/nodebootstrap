@@ -11,6 +11,13 @@ while getopts "t" opt; do
   esac
 done
 
+# Disable the runtime.json thing of config.js. It's annoying and sometimes breaks clustering.
+export NODE_CONFIG_DISABLE_FILE_WATCH="Y"
+
+# Setup metalogger
+export NODE_LOGGER_LEVEL='notice'
+export NODE_LOGGER_GRANULARLEVELS=0
+export NODE_LOGGER_PLUGIN='util'
 
 if [ ! $NODE_LAUNCH_SCRIPT ]; then
   export NODE_LAUNCH_SCRIPT="server.js"
