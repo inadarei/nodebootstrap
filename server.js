@@ -10,109 +10,40 @@ var util    = require('util')
   , hbs     = require('hbs');
 
 if ('log' in CONF) {
+
+  if ('plugin' in CONF.log) { process.env.NODE_LOGGER_PLUGIN = CONF.log.plugin; }
+  if ('level'  in CONF.log) { process.env.NODE_LOGGER_LEVEL  = CONF.log.level; }
+
   if ('customlevels' in CONF.log) {
     for (var key in CONF.log.customlevels) {
       process.env['NODE_LOGGER_LEVEL_' + key] = CONF.log.customlevels[key];
     }
   }     
-}  
+}
 
-var pub_dir = CONF.app.pub_dir;
-if (pub_dir[0] != '/') { pub_dir = '/' + pub_dir; } // humans are forgetful
-pub_dir = __dirname + pub_dir;
+require('./lib/app').setup(app);
 
-/**
- * All environments
- */
-app.configure(function() {
+var isClusterMaster = (cluster.isMaster && (process.env.NODE_CLUSTERED == 1));
 
-  app.set('views', __dirname + '/views');
+var is_http_thread = true;
+if (isClusterMaster ||
+    ( 'undefined' !== typeof process.env.NODE_ISNOT_HTTP_SERVER_THREAD &&
+        process.env.NODE_ISNOT_HTTP_SERVER_THREAD != 'true')) {
+  is_http_thread = false;
+}
 
-  app.set('view engine', 'handlebars');
-  app.engine('handlebars', hbs.__express);
 
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.query());
-  app.use(express.cookieParser(CONF.app.cookie_secret));
-  app.use(express.session());
-  app.use(app.router);
-  //app.use(express.responseTime());
+log.debug("is http thread? " + is_http_thread);
 
-  // This is not needed if you handle static files with, say, Nginx (recommended in production!)
-  // Additionally you should probably precompile your LESS stylesheets in production
-  // Last, but not least: Express' default error handler is very useful in dev, but probably not in prod.
-  if ((typeof process.env['NODE_SERVE_STATIC'] !== 'undefined') && process.env['NODE_SERVE_STATIC'] == 1) {
-      app.use(require('less-middleware')({ src: pub_dir }));
-      app.use(express.static(pub_dir));
-      app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  }
+if (isClusterMaster) {
+  require('./lib/clustering').setup();
+}
 
-  // Catch-all error handler. Override as you see fit
-  app.use(function(err, req, res, next){
-    log.error(err.stack);
-    res.send(500, 'An unexpected error occurred! Please check logs.');
-  });
-    
-});
-
-//---- INTERNAL MODULES
-app.use(require('./lib/hello'));
-app.use(require('./lib/routes'));
-
-//--- End of Internal modules
-
-var numCPUs = require('os').cpus().length;
-if (cluster.isMaster
-    && (process.env.NODE_CLUSTERED == 1)) {
-
-  log.notice("Starting app in clustered mode");
-  
-  var timeouts = [];
-  for (var i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
-
-  cluster.on('fork', function(worker) {
-    log.debug('Forking worker #', worker.id);
-    timeouts[worker.id] = setTimeout(function() {
-      log.error(['Worker taking too long to start']);
-    }, 2000);
-  });
-  cluster.on('listening', function(worker, address) {
-    log.notice('Worker #'+worker.id+' listening on port: ' + address.port);
-    clearTimeout(timeouts[worker.id]);
-  });
-  cluster.on('online', function(worker) {
-    log.debug('Worker #'+worker.id+' is online');
-  });
-  cluster.on('exit', function(worker, code, signal) {
-    log.error(['The worker #'+worker.id+' has exited with exitCode ' + worker.process.exitCode]);
-    clearTimeout(timeouts[worker.id]);
-    // Don't try to restart the workers when disconnect or destroy has been called
-    if(worker.suicide !== true) {
-      log.info('Worker #' + worker.id + ' did not commit suicide, restarting');
-      cluster.fork();
-    }
-  });
-  cluster.on('disconnect', function(worker) {
-    log.info('The worker #' + worker.id + ' has disconnected');
-  });
-
-  // Trick suggested by Ian Young (https://github.com/isaacs/node-supervisor/issues/40#issuecomment-4330946)
-  // to make cluster and supervisor play nicely together:
-  if (process.env.NODE_HOT_RELOAD == 1) {
-    var signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
-    _.each(signals, function(signal){
-      process.on(signal, function(){
-        _.each(cluster.workers, function(worker){
-          worker.destroy();
-        })
-      })
-    })
-  }
-
-} else {
+if (is_http_thread) {
   app.listen(CONF.app.port);
+}
+
+// If we are not running a cluster at all:
+if (!isClusterMaster && cluster.isMaster) {
   log.notice("Express server instance listening on port " + CONF.app.port);
 }

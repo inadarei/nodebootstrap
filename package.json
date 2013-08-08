@@ -19,7 +19,7 @@
       "yaml"               : "*"
     , "express"            : "3.x"
     , "config"             : "*"
-    , "hbs"                : "1.x"
+    , "hbs"                : "2.x"
     , "less"               : "1.x"
     , "less-middleware"    : "*"
     , "underscore"         : "1.x"
