@@ -27,8 +27,14 @@ and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.gi
     > chmod u+x dev_start.sh
     > ./dev_start.sh
 
-You should see a simple "hello" at: `http://localhost:3000/hello`.
-You can customize it by visiting `http://localhost:3000/hello?name=yourname`, but really what you should probably do instead is dive into the code and see how it is put together.
+You should see a simple "hello" at:
+
+```
+http://localhost:3000/hello
+```
+
+You can also customize it by visiting `http://localhost:3000/hello?name=yourname`, but really
+what you should probably do instead is dive into the code and see how it is put together.
 
 ## Contextualizing Runtime Environment
 
