@@ -23,7 +23,9 @@ Assuming you already have node and npm installed (If not:
 and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac):
 
     > npm install supervisor -g
+    > npm install bower -g
     > npm install
+    > bower install
     > chmod u+x dev_start.sh
     > ./dev_start.sh
 
