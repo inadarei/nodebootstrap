@@ -5,4 +5,5 @@ nbproject
 .settings
 node_modules
 logs
+public/bower_components
 config/runtime.json

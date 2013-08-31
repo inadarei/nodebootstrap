@@ -1,0 +1,24 @@
+{
+  "name": "nodebootstrap",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.0.0",
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.1",
+    "requirejs": "~2.1.8",
+    "respond": "~1.3.0"
+  },
+  "version": "0.5.1",
+  "homepage": "https://github.com/inadarei/nodebootstrap",
+  "authors": [
+    "Irakli Nadareishvili <irakli@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
