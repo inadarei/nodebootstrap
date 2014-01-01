@@ -115,7 +115,7 @@ And last, but not least, it's a good idea to also run:
 
 (The MIT License)
 
-Copyright (c) 2012-2013 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
+Copyright (c) 2012-2014 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
