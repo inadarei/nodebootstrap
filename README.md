@@ -1,42 +1,52 @@
-Node Bootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.8.x+ and [Express.js](http://expressjs.com)
-development with Twitter's [Bootstrap](http://twitter.github.com/bootstrap/) (no pun intended) framework.
+NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.8.x+ and [Express.js](http://expressjs.com)
+development. It captures common best-practice for project layout and setup configuration used by Node community.
 
-Project skeleton provides: common node.js webapp layout for responsive web development, suggests some common Node
-modules and best-practices, as well as provides two convenient shell scripts:
-
-* dev_start.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled.
-* start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
-
-By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
-version: start.sh assumes you want your web-server (Nginx?) to take on this job.
+For demonstration purposes NodeBootstrap also packs Twitter's [Bootstrap](http://twitter.github.com/bootstrap/)
+framework and shows how to manage Mustache/Handlebars-based view. It's not a mandatory part of the project.
+NodeBootstrap is often used for web API projects, where there is no human-centric UI.
 
 ## Compatibility
 
 We try to keep Node Bootstrap updated with the latest versions of Node, Express and Bootstrap. In some cases, where it
-makes sense, branches compatible with older versions are created: https://github.com/inadarei/nodebootstrap/branches to
-make upgrade path a little smoother.
+makes sense, branches compatible with older versions are created: <https://github.com/inadarei/nodebootstrap/branches> to
+make upgrade path smoother.
 
-## Quick Test:
+## Shell Scripts
+
+NodeBootstrap comes with three shell scripts (located in the `bin` folder):
+
+* dev_start.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled. Convenient for
+active development.
+* start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
+Recommended for production.
+* stop.sh is a counterpart of start.sh to easily stop running background processes.
+
+By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
+version: start.sh assumes that you want your web-server (Nginx?) to take on this job.
+
+## Quick Start:
 
 Assuming you already have node and npm installed (If not: 
 [this blog post](http://freshblurbs.com/install-node-js-and-express-js-nginx-debian-lenny) can help on Debian/Ubuntu
 and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac):
 
-    > npm install supervisor -g
-    > npm install bower -g
-    > npm install
-    > bower install
-    > chmod u+x dev_start.sh
-    > ./dev_start.sh
+```console
+$ npm install supervisor -g
+$ npm install bower -g
+$ npm install
+$ bower install
+$ chmod u+x dev_start.sh
+$ ./bin/dev_start.sh
+```
 
-You should see a simple "hello" at:
+You should see a simple "hello" response at:
 
 ```
 http://localhost:3000/hello
 ```
 
 You can also customize it by visiting `http://localhost:3000/hello?name=yourname`, but really
-what you should probably do instead is dive into the code and see how it is put together.
+what you should probably do instead is to dive into the code and see how everything is put together.
 
 ## Contextualizing Runtime Environment
 

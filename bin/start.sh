@@ -3,13 +3,18 @@
 # A generic script that can be customized using various environmental variables (@see: README.md)
 # Defaults in this script are suitable for production use.
 #
-# ATTENTION: You probably want to use dev_start.sh script, while developing, instead.
+# ATTENTION: You would want to use dev_start.sh script, while developing, instead.
 
 while getopts "t" opt; do
   case $opt in
     t) NB_TAIL_LOGS=1;;
   esac
 done
+
+if [ ! -d "$PWD/bin" -o ! -d "$PWD/lib" ]; then
+  echo "Please run the shell script from project's root folder"
+  exit
+fi
 
 # Disable the runtime.json thing of config.js. It's annoying and sometimes breaks clustering.
 export NODE_CONFIG_DISABLE_FILE_WATCH="Y"
@@ -19,11 +24,14 @@ export NODE_LOGGER_LEVEL='notice'
 export NODE_LOGGER_GRANULARLEVELS=0
 export NODE_LOGGER_PLUGIN='util'
 
+NBS_CURR_PROJECT_PATH=$PWD
+
 if [ ! $NODE_LAUNCH_SCRIPT ]; then
-  export NODE_LAUNCH_SCRIPT="server.js"
+  export NODE_LAUNCH_SCRIPT="$NBS_CURR_PROJECT_PATH/server.js"
 fi
+
 if [ ! -f "$NODE_LAUNCH_SCRIPT" ]; then
-  echo "Launch script: '$NODE_LAUNCH_SCRIPT' could not be located in the current folder. Aborting..."
+  echo "Launch script: '$NODE_LAUNCH_SCRIPT' could not be located. Aborting..."
   exit
 fi
 
@@ -44,14 +52,14 @@ if [ ! $NODE_HOT_RELOAD ]; then
 fi
 
 if [ !  $NODE_CONFIG_DIR ]; then
-  export NODE_CONFIG_DIR="$PWD/config"
+  export NODE_CONFIG_DIR="$NBS_CURR_PROJECT_PATH/config"
 fi
 if [ ! -d "$NODE_CONFIG_DIR" ]; then
   mkdir $NODE_CONFIG_DIR
 fi
 
 if [ ! $NODE_LOG_DIR ]; then
-  export NODE_LOG_DIR="$PWD/logs"
+  export NODE_LOG_DIR="$NBS_CURR_PROJECT_PATH/logs"
 fi
 if [ ! -d "$NODE_LOG_DIR" ]; then
   mkdir $NODE_LOG_DIR

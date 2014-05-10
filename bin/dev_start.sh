@@ -7,5 +7,5 @@ export NODE_SERVE_STATIC=1
 export NODE_HOT_RELOAD=1
 export NODE_LOGGER_GRANULARLEVELS=1
 
-./start.sh
+./bin/start.sh
 
