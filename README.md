@@ -28,14 +28,15 @@ version: start.sh assumes that you want your web-server (Nginx?) to take on this
 
 Assuming you already have node and npm installed (If not: 
 [this blog post](http://freshblurbs.com/install-node-js-and-express-js-nginx-debian-lenny) can help on Debian/Ubuntu
-and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac):
+and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac), run
+following comamnds in your project root:
 
 ```console
 $ npm install supervisor -g
 $ npm install bower -g
 $ npm install
 $ bower install
-$ chmod u+x dev_start.sh
+$ chmod u+x ./bin/dev_start.sh
 $ ./bin/dev_start.sh
 ```
 
