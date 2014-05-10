@@ -1,8 +1,8 @@
 {
     "name" : "NodeBootstrap"
-  , "version"     : "0.5.1"
-  , "description" : "Node/Express.js Template with Twitter Bootstrap2 and other goodies"
-  , "author"      : "Irakli Nadareishvili, John Nelson"
+  , "version"     : "0.5.2"
+  , "description" : "Node/Express.js Template with Twitter Bootstrap and other goodies"
+  , "author"      : "Irakli Nadareishvili"
   , "license" : {
       "type" : "MIT"
     , "url"  : "https://github.com/inadarei/nodebootstrap/blob/master/LICENSE"
