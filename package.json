@@ -1,6 +1,6 @@
 {
     "name" : "NodeBootstrap"
-  , "version"     : "0.6.0"
+  , "version"     : "0.7.0"
   , "description" : "Node/Express.js Template with Twitter Bootstrap and other goodies"
   , "author"      : "Irakli Nadareishvili"
   , "license" : {
