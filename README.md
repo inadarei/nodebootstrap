@@ -5,25 +5,6 @@ For demonstration purposes NodeBootstrap also packs Twitter's [Bootstrap](http:/
 framework and shows how to manage Mustache/Handlebars-based view. It's not a mandatory part of the project.
 NodeBootstrap is often used for web API projects, where there is no human-centric UI.
 
-## Compatibility
-
-We try to keep Node Bootstrap updated with the latest versions of Node, Express and Bootstrap. In some cases, where it
-makes sense, branches compatible with older versions are created: <https://github.com/inadarei/nodebootstrap/branches> to
-make upgrade path smoother.
-
-## Shell Scripts
-
-NodeBootstrap comes with three shell scripts (located in the `bin` folder):
-
-* dev_start.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled. Convenient for
-active development.
-* start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
-Recommended for production.
-* stop.sh is a counterpart of start.sh to easily stop running background processes.
-
-By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
-version: start.sh assumes that you want your web-server (Nginx?) to take on this job.
-
 ## Quick Start:
 
 Assuming you already have node and npm installed (If not: 
@@ -51,6 +32,19 @@ http://localhost:3000/hello
 
 You can also customize it by visiting `http://localhost:3000/hello?name=yourname`, but really
 what you should probably do instead is — dive into the code and see how everything is put together.
+
+## Shell Scripts
+
+NodeBootstrap comes with three shell scripts (located in the `bin` folder):
+
+* dev_start.sh will start your server.js node app in single-CPU mode with hot-realoading of code enabled. Convenient for
+active development.
+* start.sh will start your server.js without hot-reloading, but with as many child processes as you have CPU cores.
+Recommended for production.
+* stop.sh is a counterpart of start.sh to easily stop running background processes.
+
+By default, dev_start.sh also lets Express.js handle static files so you don't have to have a web server. The production
+version: start.sh assumes that you want your web-server (Nginx?) to take on this job.
 
 ## Contextualizing Runtime Environment
 
@@ -124,6 +118,12 @@ And last, but not least, it's a good idea to also run:
 ```bash
 > sudo sysctl -w kern.maxfiles=40960 kern.maxfilesperproc=20480
 ```
+
+## Compatibility
+
+We try to keep Node Bootstrap updated with the latest versions of Node, Express and Bootstrap. In some cases, where it
+makes sense, branches compatible with older versions are created: <https://github.com/inadarei/nodebootstrap/branches> to
+make upgrade path smoother.
 
 ## License
 
