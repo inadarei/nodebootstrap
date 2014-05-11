@@ -35,6 +35,7 @@ following comamnds in your project root:
 $ npm install supervisor -g
 $ npm install bower -g
 $ npm install
+$ npm install -g bower
 $ bower install
 $ chmod u+x ./bin/dev_start.sh
 $ ./bin/dev_start.sh
