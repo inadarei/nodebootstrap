@@ -1,6 +1,6 @@
 {
     "name" : "NodeBootstrap"
-  , "version"     : "0.5.2"
+  , "version"     : "0.6.0"
   , "description" : "Node/Express.js Template with Twitter Bootstrap and other goodies"
   , "author"      : "Irakli Nadareishvili"
   , "license" : {
@@ -16,14 +16,16 @@
       "node": ">=0.8.8"
   }
   , "dependencies": {
-      "yaml"               : "*"
-    , "express"            : "3.x"
-    , "config"             : "*"
-    , "hbs"                : "2.x"
-    , "less"               : "1.x"
-    , "less-middleware"    : "*"
-    , "underscore"         : "1.x"
-    , "metalogger"         : "*"
+      "yaml"                     : "*"
+    , "nodebootstrap-server"     : "*"
+    , "nodebootstrap-clustering" : "*"
+    , "express"                  : "3.x"
+    , "config"                   : "*"
+    , "hbs"                      : "2.x"
+    , "less"                     : "1.x"
+    , "less-middleware"          : "*"
+    , "underscore"               : "1.x"
+    , "metalogger"               : "*"
   }
   , "devDependencies" : {
       "assert" : "*"
