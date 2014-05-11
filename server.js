@@ -1,4 +1,4 @@
-require('./lib/app').setup(function(runningApp) {
+require('nodebootstrap-server').setup(function(runningApp) {
 
   //---- Mounting well-encapsulated application modules
   //---- See: http://vimeo.com/56166857
