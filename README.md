@@ -29,25 +29,28 @@ version: start.sh assumes that you want your web-server (Nginx?) to take on this
 Assuming you already have node and npm installed (If not: 
 [this blog post](http://freshblurbs.com/install-node-js-and-express-js-nginx-debian-lenny) can help on Debian/Ubuntu
 and you can figure out similar steps, with the help of [HomeBrew](http://mxcl.github.com/homebrew/) on Mac), run
-following comamnds in your project root:
+following comamands to bootstrap a new Node/Express project:
 
 ```console
-$ npm install supervisor -g
-$ npm install bower -g
-$ npm install
-$ bower install
-$ chmod u+x ./bin/dev_start.sh
+$ npm install nodebootstrap -g
+$ nodebootstrap build hello
+```
+
+You can replace `hello` in the above example with a sensible name for your project. Once the project is built, start the application by:
+
+```console
+$ cd hello
 $ ./bin/dev_start.sh
 ```
 
-You should see a simple "hello" response at:
+and you should see a simple "hello" response at:
 
 ```
 http://localhost:3000/hello
 ```
 
 You can also customize it by visiting `http://localhost:3000/hello?name=yourname`, but really
-what you should probably do instead is to dive into the code and see how everything is put together.
+what you should probably do instead is — dive into the code and see how everything is put together.
 
 ## Contextualizing Runtime Environment
 
