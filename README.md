@@ -41,24 +41,24 @@ re-usable, fully encapsulated, targeted set of modules.
 [TJ Holowaychuk](https://twitter.com/tjholowaychuk) explains this approach in a video screencast:
 <http://vimeo.com/56166857>
 
-In a more "spaghetti" Node project you may see HTTP route handlers in the main script or tangled together. What TJ
-argues for and NodeBootstrap implements is: letting each module declare their own handlers, so if you are installing
+In a more "spaghetti" Node project you may see HTTP route handlers in the main script or application area, tangled
+together. What TJ argues for and NodeBootstrap implements is: letting each module declare their own handlers, so if you are installing
 a "user management" or "blog" module, all you need to do is NPM install that module and indicate from the main app where
 in the URL path the routes get attached. Compare this, in your main server.js file:
 
 ```javascript
-app.use('/hello', require('./lib/hello')); // attach to sub-route
+app.use('/users', require('./lib/user')); // attach to sub-route
 ```
 
 to this:
 
 ```javascript
-app.get('/hello', hello.sayHello);
-app.post('/hello', hello.sayHello);
-...
 app.get('/user', user.get);
 app.post('/user', user.new);
 app.delete('/user', user.remove);
+...
+app.get('/users/locations', user.getLocations);
+app.post('/users/photos', user.getAvatars);
 ```
 
 First is how NodeBootstrap handles things, the latter: what you may, alas, see in many projects that don't use
