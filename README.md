@@ -1,4 +1,4 @@
-[![npm version](https://img.shields.io/npm/v/nodebootstrap.svg)]
+![npm version](https://img.shields.io/npm/v/nodebootstrap.svg)
 
 NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/) 0.8.x+ and [Express.js](http://expressjs.com)
 development. It captures common best-practice for project layout and setup configuration used by Node community.
