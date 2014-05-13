@@ -1,4 +1,4 @@
 app:
   port: 3000
   pub_dir: "/public"
-  cookie_secret: "your secret key salt goes here"
+  cookie_secret: "Your secret key salt goes here. Replace with random, long string in your project."
