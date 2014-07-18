@@ -1,7 +1,7 @@
 {
     "name" : "NodeBootstrap"
-  , "version"     : "0.7.0"
-  , "description" : "Node/Express.js Template with Twitter Bootstrap and other goodies"
+  , "version"     : "0.8.0"
+  , "description" : "Node/Express.js Project Boilerplate with Twitter Bootstrap and other goodies"
   , "author"      : "Irakli Nadareishvili"
   , "license" : {
       "type" : "MIT"
@@ -17,9 +17,9 @@
   }
   , "dependencies": {
       "yaml"                     : "*"
+    , "express"                  : "4.x"
     , "nodebootstrap-server"     : "*"
     , "nodebootstrap-clustering" : "*"
-    , "express"                  : "3.x"
     , "config"                   : "*"
     , "hbs"                      : "2.x"
     , "less"                     : "1.x"
@@ -28,8 +28,7 @@
     , "metalogger"               : "*"
   }
   , "devDependencies" : {
-      "assert" : "*"
-    , "should" : "*"  
+      "should" : "*"  
     , "mocha"  : "*"
   }
   , "scripts": {
