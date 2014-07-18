@@ -1,7 +1,7 @@
 ![npm version](https://img.shields.io/npm/v/nodebootstrap.svg)
 
-NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/) with [Express.js](http://expressjs.com)
-development. It captures common best-practice for project layout and setup configuration used by Node community.
+NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/)/[Express.js](http://expressjs.com)
+development. It captures common best-practices, used by Node community, for project layout and setup configuration.
 
 For demonstration purposes NodeBootstrap also packs Twitter's [Bootstrap](http://twitter.github.com/bootstrap/)
 framework and shows how to manage Mustache/Handlebars-based view. It's not a mandatory part of the project.
