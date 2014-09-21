@@ -6,7 +6,7 @@
 
   // Enforcing
   "bitwise"       : true,     // true: Prohibit bitwise operators (&, |, ^, etc.)
-  "camelcase"     : true,    // true: Identifiers must be in camelCase
+  "camelcase"     : false,    // true: Identifiers must be in camelCase
   "curly"         : true,     // true: Require {} for every new block or scope
   "eqeqeq"        : true,     // true: Require triple equals (===) for comparison
   "freeze"        : true,     // true: prohibits overwriting prototypes of native objects such as Array, Date etc.

@@ -34,7 +34,7 @@
     , "mocha": "^1.21.4"
     , "chai": "^1.9.1"
     , "should": "~4.0.4"
-    , "jshint": "~2.5.x"
+    , "jshint": "^2.5.x"
     , "commander" : ""
     , "glob" : ""
   }
