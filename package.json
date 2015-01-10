@@ -23,7 +23,7 @@
     , "nodebootstrap-clustering" : "*"
     , "config"                   : "*"
     , "hbs"                      : "2.x"
-    , "less"                     : "1.x"
+    , "less"                     : "2.x"
     , "less-middleware"          : "*"
     , "underscore"               : "1.x"
     , "metalogger"               : "*"
@@ -31,12 +31,12 @@
   , "devDependencies" : {
       "after": "^0.8.1"
     , "istanbul": "^0.3.2"
-    , "mocha": "^1.21.4"
+    , "mocha": "^2.1.0"
     , "chai": "^1.9.1"
-    , "should": "~4.0.4"
+    , "should": "^4.4.4"
     , "jshint": "^2.5.x"
-    , "commander" : ""
-    , "glob" : ""
+    , "commander" : "^2.6.0"
+    , "glob" : "^4.3.2"
   }
   , "scripts": {
       "prepublish": "npm prune"
