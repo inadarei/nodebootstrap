@@ -1,6 +1,6 @@
 {
     "name" : "nodebootstrap"
-  , "version"     : "1.2.1"
+  , "version"     : "1.2.2"
   , "private": true
   , "description" : "Node/Express.js Project Boilerplate with Twitter Bootstrap and other goodies"
   , "author"      : "Irakli Nadareishvili"
