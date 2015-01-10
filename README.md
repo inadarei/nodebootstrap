@@ -2,6 +2,7 @@
 ![npm version](https://img.shields.io/npm/v/nodebootstrap.svg?style=flat)
 ![build status](https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg)](https://codeclimate.com/github/inadarei/nodebootstrap)
+![dependencies](https://img.shields.io/david/inadarei/nodebootstrap.svg?style=flat)
 
 NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/)/[Express.js](http://expressjs.com)
 development. It captures common best-practices, used by Node community, for project layout and setup configuration.
