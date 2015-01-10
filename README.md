@@ -1,4 +1,5 @@
-![npm version](https://img.shields.io/npm/v/nodebootstrap.svg)
+[![GitHub Link](https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat)](https://github.com/inadarei/nodebootstrap)
+![npm version](https://img.shields.io/npm/v/nodebootstrap.svg?style=flat)
 ![build status](https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg)](https://codeclimate.com/github/inadarei/nodebootstrap)
 
