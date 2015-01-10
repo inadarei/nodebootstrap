@@ -1,8 +1,8 @@
 [![GitHub Link](https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat)](https://github.com/inadarei/nodebootstrap)
 ![npm version](https://img.shields.io/npm/v/nodebootstrap.svg?style=flat)
 ![build status](https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431)](https://www.codacy.com/public/irakli/nodebootstrap_2)
 [![Code Climate](https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg)](https://codeclimate.com/github/inadarei/nodebootstrap)
-[![Codacy Badge](https://www.codacy.com/project/badge/9238c564b7f8465ca17e2dbd6d29a094)](https://www.codacy.com/public/irakli/nodebootstrap)
 ![dependencies](https://img.shields.io/david/inadarei/nodebootstrap.svg?style=flat)
 
 NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/)/[Express.js](http://expressjs.com)
