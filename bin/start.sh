@@ -7,7 +7,7 @@
 
 # Set NODE_PATH env variable to 'lib' so that application specific modules
 # are first class citizens of the application
-export NODE_PATH=$PWD/lib
+export NODE_PATH=$PWD/lib:$NODE_PATH
 
 while getopts "t" opt; do
   case $opt in
