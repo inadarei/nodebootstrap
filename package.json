@@ -1,6 +1,6 @@
 {
     "name" : "nodebootstrap"
-  , "version"     : "1.2.2"
+  , "version"     : "1.2.3"
   , "private": true
   , "description" : "Node/Express.js Project Boilerplate with Twitter Bootstrap and other goodies"
   , "author"      : "Irakli Nadareishvili"
@@ -18,14 +18,10 @@
   }
   , "dependencies": {
       "yaml"                     : "*"
-    , "express"                  : "4.x"
+    , "express"                  : "^4.11.0"
     , "nodebootstrap-server"     : "*"
-    , "nodebootstrap-clustering" : "*"
     , "config"                   : "*"
-    , "hbs"                      : "2.x"
-    , "less"                     : "2.x"
-    , "less-middleware"          : "*"
-    , "underscore"               : "1.x"
+    , "underscore"               : "^1.7.0"
     , "metalogger"               : "*"
   }
   , "devDependencies" : {
