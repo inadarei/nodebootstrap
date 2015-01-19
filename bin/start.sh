@@ -24,9 +24,15 @@ fi
 export NODE_CONFIG_DISABLE_FILE_WATCH="Y"
 
 # Setup metalogger
-export NODE_LOGGER_LEVEL='notice'
-export NODE_LOGGER_GRANULARLEVELS=0
-export NODE_LOGGER_PLUGIN='util'
+if [ ! $NODE_LOGGER_LEVEL ]; then
+  export NODE_LOGGER_LEVEL='notice'
+fi
+if [ ! $NODE_LOGGER_GRANULARLEVELS ]; then
+  export NODE_LOGGER_GRANULARLEVELS=0
+fi
+if [ ! $NODE_LOGGER_PLUGIN ]; then
+  export NODE_LOGGER_PLUGIN='util'
+fi
 
 NBS_CURR_PROJECT_PATH=$PWD
 
@@ -48,7 +54,7 @@ if [ ! $NODE_CLUSTERED ]; then
 fi
 
 if [ ! $NODE_SERVE_STATIC ]; then
-  export NODE_SERVE_STATIC=0
+  export NODE_SERVE_STATIC=1
 fi
 
 if [ ! $NODE_HOT_RELOAD ]; then
