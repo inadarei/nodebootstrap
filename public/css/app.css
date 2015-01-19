@@ -1,0 +1,10 @@
+body {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+header#layout-marker {
+  color: white;
+  background-color: #ffb5c0;
+  padding: .3em 0.7em; 
+}
