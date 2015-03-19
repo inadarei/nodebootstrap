@@ -60,6 +60,8 @@ function build_bootstrapped_project(projectPath) {
         var setupScript  = "#!/bin/bash\n";
         setupScript     += "npm install supervisor -g\n"
         setupScript     += "npm install bower -g\n";
+        setupScript     += "rm -rf ./bin";
+        setupScript     += "rm -f package.json && mv package.json.skeleton package.json";
         setupScript     += "npm install\n";
         setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./scripts/start.sh\n";

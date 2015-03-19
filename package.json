@@ -1,45 +1,28 @@
 {
-    "name" : "nodebootstrap"
-  , "version"     : "1.2.3"
-  , "private": true
-  , "description" : "Node/Express.js Project Boilerplate with Twitter Bootstrap and other goodies"
-  , "author"      : "Irakli Nadareishvili"
-  , "license" : {
-      "type" : "MIT"
-    , "url"  : "https://github.com/inadarei/nodebootstrap/blob/master/LICENSE"
-  }
-  , "main"        : "./server.js"
-  , "repository"  : {
-      "type" : "git",
-      "url"  : "https://github.com/inadarei/nodebootstrap"
-  }
-  , "engines": {
-      "node": ">=0.8.8"
-  }
-  , "dependencies": {
-      "yaml"                     : "*"
-    , "express"                  : "^4.11.0"
-    , "nodebootstrap-server"     : "*"
-    , "config"                   : "*"
-    , "underscore"               : "^1.7.0"
-    , "metalogger"               : "*"
-  }
-  , "devDependencies" : {
-      "after": "^0.8.1"
-    , "istanbul": "^0.3.2"
-    , "mocha": "^2.1.0"
-    , "chai": "^1.9.1"
-    , "should": "^4.4.4"
-    , "jshint": "^2.5.x"
-    , "commander" : "^2.6.0"
-    , "glob" : "^4.3.2"
-  }
-  , "scripts": {
-      "prepublish": "npm prune"
-    , "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/"
-    , "pretest": "jshint lib test"
-    , "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/"
-    , "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/"
-  }  
-  
+  "name": "nodebootstrap"
+  , "description": "Node/Express.js Project Boilerplate Capturing Project Composition Best Practices"
+  , "version": "2.1.0"
+  , "repository": {
+      "type": "git"
+    , "url": "git@github.com:inadarei/nodebootstrap.git"
+    }
+  , "author": "Irakli Nadareishvili <irakli@gmail.com> (http://freshblurbs.com)"
+  , "contributors": []
+  , "bin": { "nodebootstrap": "./bin/nodebootstrap" }
+  , "engines": [ "node >=0.10.0" ]
+  , "dependencies" : {
+      "colors"      : "^1.0.3"
+    , "commander"   : "^2.5.0"
+    , "request"     : "^2.48.0"
+    , "unzip"       : "^0.1.11"
+    , "mv"          : "^2.0.3"
+    }
+  , "keywords": [
+      "node"
+    , "express"
+    , "boilerplate"
+    , "kit"
+    , "bootstrap"
+    , "best practices"
+  ]
 }
