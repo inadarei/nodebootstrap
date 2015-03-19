@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , os      = require('os')
+  , path    = require('path')
+  , fs      = require('fs')
+  , unzip   = require('unzip')
+  , mv      = require('mv')
+  , cli     = require('child_process')
+  , request = require('request');
+
+var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
+
+//program
+//  .version('1.1.2');
+
+program
+  .description('Bootstrap new Node/Express.js project.')
+  .command('build <projectname>')
+  .action(function(projectname){
+    var projectPath = projectname;
+    if (fs.existsSync(projectPath)) {
+      console.log("Error: folder '%s' already exists. Aborting.", projectPath);
+      process.exit(1);
+    }
+
+    console.log('Building new project under: %s', projectPath);
+    build_bootstrapped_project(projectPath);
+  });
+
+program.parse(process.argv);
+
+if (!program.args.length) program.help();
+
+
+function build_bootstrapped_project(projectPath) {
+  var tmp = os.tmpdir();
+  
+  // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
+  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep }; 
+
+  var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
+  var writer = fs.createWriteStream(zipFilepath);
+  var download = request(projectURL).pipe(writer);
+
+  writer.on('finish', function () {
+
+    var extractor = unzip.Extract({ path: tmp });
+    fs.createReadStream(zipFilepath).pipe(extractor);
+
+    extractor.on('close', function() {
+      fs.unlinkSync(zipFilepath);
+
+      mv(tmp + 'nodebootstrap-master', projectPath, function (err) {
+        if (err) {
+          throw err;
+          process.exit(1);
+        }
+
+        var setupScript  = "#!/bin/bash\n";
+        setupScript     += "npm install supervisor -g\n"
+        setupScript     += "npm install bower -g\n";
+        setupScript     += "npm install\n";
+        setupScript     += "bower install\n";
+        setupScript     += "chmod u+x ./scripts/start.sh\n";
+        setupScript     += "chmod u+x ./scripts/stop.sh\n";
+        setupScript     += "chmod u+x ./scripts/dev_start.sh\n";
+
+        fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
+          if(err) { throw err; process.exit(1); }
+
+          cli.exec ("chmod u+x " + projectPath + "/setup.sh", function(err, stdout, stderr) {
+            if (err) { throw err; process.exit(); }
+
+            console.log("Project Created.")
+            console.log("Executing installation of dependencies. This may take several minutes.")
+            var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
+              if (err) { throw err; process.exit(); }
+
+              console.log("");
+              console.log("======================= Installation Completed! ===================");
+              console.log("You can now run your newly minted Node app by executing:");
+              console.log("  > cd " + projectPath);
+              console.log("  > ./bin/dev_starth.sh");
+              console.log("");
+              console.log("Once the app is up and running you can access it from your browser at: ");
+              console.log("http://localhost:3000/hello")
+              console.log("===================================================================")
+              console.log("");
+            });
+
+            setupcli.stdout.pipe(process.stdout);
+
+          });
+        });
+
+      });
+    })
+
+  });
+
+
+}
