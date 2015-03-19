@@ -1,17 +1,16 @@
 {
-    "name" : "nodebootstrap"
-  , "version"     : "1.2.3"
+    "name" : "nodebootstrap-based application"
   , "private": true
-  , "description" : "Node/Express.js Project Boilerplate Capturing Project Composition Best Practices"
-  , "author"      : "Irakli Nadareishvili"
+  , "description" : ""
+  , "author"      : ""
   , "license" : {
       "type" : "MIT"
-    , "url"  : "https://github.com/inadarei/nodebootstrap/blob/master/LICENSE"
+    , "url"  : ""
   }
   , "main"        : "./server.js"
   , "repository"  : {
       "type" : "git",
-      "url"  : "https://github.com/inadarei/nodebootstrap"
+      "url"  : ""
   }
   , "engines": {
       "node": ">=0.8.8"
