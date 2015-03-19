@@ -15,7 +15,7 @@ while getopts "t" opt; do
   esac
 done
 
-if [ ! -d "$PWD/bin" -o ! -d "$PWD/lib" ]; then
+if [ ! -d "$PWD/scripts" -o ! -d "$PWD/lib" ]; then
   echo "Please run the shell script from project's root folder"
   exit
 fi

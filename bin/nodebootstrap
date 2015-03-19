@@ -84,7 +84,7 @@ function build_bootstrapped_project(projectPath) {
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
               console.log("  > cd " + projectPath);
-              console.log("  > ./scripts/dev_starth.sh");
+              console.log("  > ./scripts/dev_start.sh");
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
               console.log("http://localhost:3000/hello")
