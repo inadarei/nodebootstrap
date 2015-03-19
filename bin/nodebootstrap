@@ -60,8 +60,9 @@ function build_bootstrapped_project(projectPath) {
         var setupScript  = "#!/bin/bash\n";
         setupScript     += "npm install supervisor -g\n"
         setupScript     += "npm install bower -g\n";
-        setupScript     += "rm -rf ./bin";
-        setupScript     += "rm -f package.json && mv package.json.skeleton package.json";
+        setupScript     += "rm -rf ./bin\n";
+        setupScript     += "rm -f package.json\n";
+        setupScript     += "mv package.json.skeleton package.json\n";
         setupScript     += "npm install\n";
         setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./scripts/start.sh\n";
@@ -83,7 +84,7 @@ function build_bootstrapped_project(projectPath) {
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
               console.log("  > cd " + projectPath);
-              console.log("  > ./bin/dev_starth.sh");
+              console.log("  > ./scripts/dev_starth.sh");
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
               console.log("http://localhost:3000/hello")
