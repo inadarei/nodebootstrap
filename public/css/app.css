@@ -3,7 +3,7 @@ body {
   margin: 0 auto;
 }
 
-header#layout-marker {
+#layout-marker {
   color: white;
   background-color: #ffb5c0;
   padding: .3em 0.7em; 
