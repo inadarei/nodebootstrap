@@ -62,6 +62,7 @@ function build_bootstrapped_project(projectPath) {
         setupScript     += "npm install bower -g\n";
         setupScript     += "rm -rf ./bin\n";
         setupScript     += "mv scripts bin\n";
+        setupScript     += "rm -f butler.sh\n";
         setupScript     += "rm -f package.json\n";
         setupScript     += "mv package.json.skeleton package.json\n";
         setupScript     += "npm install\n";
