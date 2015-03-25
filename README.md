@@ -15,7 +15,7 @@ NodeBootstrap is often used for web API projects, where there is no human-centri
 
 Assuming you already have node and npm installed (if not: 
 I recommend using [nvm](https://github.com/creationix/nvm)), run
-following comamands to bootstrap a new Node/Express project:
+following commands to bootstrap a new Node/Express project:
 
 ```console
 $ npm install nodebootstrap -g
