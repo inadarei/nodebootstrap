@@ -11,7 +11,7 @@ server.setup(function(runningApp) {
   runningApp.use(require('routes')); // attach to root route
   
   // If you need websockets:
-  // var socketio = require('socket.io')(http);
+  // var socketio = require('socket.io')(runningApp.http);
   // require('fauxchatapp')(socketio);
   
 });
