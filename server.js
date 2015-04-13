@@ -10,4 +10,8 @@ server.setup(function(runningApp) {
   runningApp.use('/hello', require('hello')); // attach to sub-route
   runningApp.use(require('routes')); // attach to root route
   
+  // If you need websockets:
+  // var socketio = require('socket.io')(http);
+  // require('fauxchatapp')(socketio);
+  
 });
