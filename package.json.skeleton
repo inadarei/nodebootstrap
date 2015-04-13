@@ -18,6 +18,8 @@
   , "dependencies": {
       "yaml"                     : "*"
     , "express"                  : "^4.11.0"
+    , "hbs"                      : "3.x"
+    
     , "nodebootstrap-server"     : "*"
     , "config"                   : "*"
     , "underscore"               : "^1.7.0"
