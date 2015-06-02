@@ -1,0 +1,4 @@
+#!/bin/bash
+# see: https://github.com/phusion/baseimage-docker#adding-additional-daemons
+cd /opt/application
+node server.js
