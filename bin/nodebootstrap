@@ -12,7 +12,7 @@ var program = require('commander')
 var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
 
 program
-  .version("3.0.1")
+  .version("3.0.2")
   .description('Bootstrap new Node/Express.js project.')
   //.usage('build [options] [command]')
   .command('build <project_title>')
@@ -59,7 +59,7 @@ function build_bootstrapped_project(projectPath) {
         var setupScript  = "#!/bin/bash\n";
         setupScript     += "npm install supervisor -g\n"
         setupScript     += "npm install bower -g\n";
-        setupScript     += "rm -rf ./bin README.md LICENSE.txt\n";
+        setupScript     += "rm -rf ./bin README.md LICENSE\n";
         setupScript     += "mv scripts bin\n";
         setupScript     += "rm -f butler.sh setup.sh\n";
         setupScript     += "rm -f package.json package.json.cli\n";
