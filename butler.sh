@@ -57,6 +57,7 @@ case "$cmd" in
   "devbuild")
     echo "building dev setup..."
     rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
+    rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
     exit 0;
     ;;
   *)
