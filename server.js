@@ -19,6 +19,9 @@ server.setup(function(runningApp) {
   runningApp.use('/hello', require('hello')); // attach to sub-route
   runningApp.use(require('routes')); // attach to root route
   
+  // API endpoint attached to root route:
+  runningApp.use('/', require('homedoc')); // attach to sub-route
+  
   // If you need websockets:
   // var socketio = require('socket.io')(runningApp.http);
   // require('fauxchatapp')(socketio);

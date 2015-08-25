@@ -13,7 +13,7 @@ NodeBootstrap is often used for web API projects, where there is no human-centri
 
 ## Quick Start:
 
-Assuming you already have node and npm installed (if not: 
+Assuming you already have node and npm installed (if not:
 I recommend using [nvm](https://github.com/creationix/nvm)), run
 following commands to bootstrap a new Node/Express project:
 
@@ -100,7 +100,7 @@ Following environmental variables can affect the runtime behavior and startup mo
 
 ## Customization:
 
-It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple 
+It's not a bad idea to use more expressive name than default server.js for your main script. If you run multiple
 scripts on the server it can really help differentiate between various forever or "ps" processes. However, if you
 do rename server.js, please make sure to also update corresponding lines in start.sh script.
 
@@ -161,7 +161,7 @@ application in foreground (which, to be fair, in most cases, is what you probabl
 
 ## File Limits
 
-Hot reloading uses native file watching features of *nix systems. This is extremely handy and efficient, but 
+Hot reloading uses native file watching features of unix-compatible systems. This is extremely handy and efficient, but 
 unfortunately most systems have very low limits on watched and open files. If you use hot reloading a lot, you should
 expect to see: "Error: watch EMFILE" or similar.
 

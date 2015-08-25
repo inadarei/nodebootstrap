@@ -1,0 +1,39 @@
+[
+  {
+    "rel": "self",
+    "url": "/"
+  },
+  {
+    "label": "Random Password Generator",
+    "rel": "/profile#password_generator",
+    "url": "http://api.froyo.io/pwd",
+    "model": "{length}",
+    "action": "append",
+    "data": [
+      {
+        "name": "length",
+        "label": "Numerical value indicating how long you want the generated password"
+      }
+    ]
+  },
+  {
+    "label": "Astronomy Picture of the Day",
+    "profile": "/profile#apod",
+    "name": "apod",
+    "rel": "/profiles#apod",
+    "url": "/apod"
+  },
+  {
+    "label": "Random Name Generator",
+    "rel": "/profile#nameGenerator",
+    "url": "/names",
+    "model": "{gender}",
+    "action": "append",
+    "data": [
+      {
+        "name": "gender",
+        "label": "Gender of the name to be generated"
+      }
+    ]
+  }
+]
