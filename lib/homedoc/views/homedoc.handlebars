@@ -6,9 +6,9 @@
   {
     "label": "Random Password Generator",
     "rel": "/profile#password_generator",
-    "url": "http://api.froyo.io/pwd",
+    "url": "{{base_url}}/pwd",
     "model": "{length}",
-    "action": "append",
+    "action": "read",
     "data": [
       {
         "name": "length",
@@ -21,14 +21,14 @@
     "profile": "/profile#apod",
     "name": "apod",
     "rel": "/profiles#apod",
-    "url": "/apod"
+    "url": "{{base_url}}/apod"
   },
   {
     "label": "Random Name Generator",
     "rel": "/profile#nameGenerator",
-    "url": "/names",
+    "url": "{{base_url}}/names",
     "model": "{gender}",
-    "action": "append",
+    "action": "read",
     "data": [
       {
         "name": "gender",
