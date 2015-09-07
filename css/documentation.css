@@ -48,7 +48,7 @@
 
 #sidebar ul {
   margin: 0 0 0 1rem;
-  padding: 0 0 0 1.0rem;
+  padding: 0 0 0 0;
   line-height: 2.0rem;
   list-style: none;
 }
