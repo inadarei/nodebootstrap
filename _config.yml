@@ -1,10 +1,5 @@
 markdown: kramdown
-highlighter: coderay
-kramdown:
-  use_coderay: true
-  coderay:
-    coderay_line_numbers: nil
-    coderay_css: class
+highlighter: pygments
 #permalink: /:year-:month-:day/:title.html
 safe: true
 lsi: false
