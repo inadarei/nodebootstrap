@@ -17,7 +17,7 @@ title: NodeBootstrap Reference
   <div class="col-md-6 code" markdown="1">
 
 
-```
+~~~~~~~~
 Get /users/123 HTTP/1.1
 Host: api.example.org
 Content-Type: application/json  
@@ -34,7 +34,7 @@ Vary: Accept-Encoding
 Preference-Applied: return=minimal
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Content-Type
-```
+~~~~~~~~
       
   </div>
 </div> <!-- //.row -->
