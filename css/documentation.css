@@ -47,15 +47,31 @@
 }
 
 #sidebar ul {
-  margin: 0 0 0 1rem;
-  padding: 0 0 0 0;
+  margin: 0;
+  padding: 0;
   line-height: 2.0rem;
   list-style: none;
+}
+
+#sidebar ul ul {
+  margin-left: 1.5rem;
 }
 
 #slidebar li {
   line-height: 20px;
   list-style-type: none;
+}
+
+#documentation #sidebar a {
+  color: #333;
+  position: relative;
+  display: block;
+  padding: 5px 7px;
+  text-decoration: none;
+}
+
+#sidebar li a:hover {
+  background-color: #ebebeb;
 }
 
 #documentation #content {
@@ -131,6 +147,10 @@ body {
   line-height: 1.8;
 }
 
+#documentation #sidebar {
+  font-family: Verdana;
+}
+
 #documentation #sidebar h5 {
   color: #69c;
   text-transform: uppercase;
@@ -138,10 +158,6 @@ body {
   display: block;
   margin: 1.8rem auto 1rem auto;
   padding: 0;
-}
-
-#documentation #sidebar a {
-  color: #333;
 }
 
 a {
