@@ -11,7 +11,7 @@
   left: 0;
   position: absolute;
   top: 0;
-  z-index: 75;
+  /** z-index: 75; **/
   width: 220px;
   background: #fafcfc;
   border-right: 1px solid #f0f4f7;
@@ -25,9 +25,6 @@
   width: 220px;
   border-bottom: 1px solid #f0f4f7;
   height: 49px;
-}
-
-#sidebar .header {
 }
 
 #sidebar .header #logo {
@@ -75,23 +72,21 @@
 }
 
 #documentation #content {
-  bottom: 0;
-  left: 230px;
-  position: fixed;
-  right: 0;
   top: 0;
+  left: 230px;
+  position: absolute;
 }
 
 .narrative {
   /** width: 440px; **/
   /** background: red; **/
-  height: 100%;
+  min-height: 100%;
   background-color: white;
 }
 
 #documentation .code {
   display: block;
-  height:  100%;
+  min-height:  100%;
   background-color: #40464a;
   color: white;
   
@@ -121,20 +116,20 @@
  */
 
 html {
-  height: 100%;
+  min-height: 100%;
   font-size: 62.5%; /* Setting base font to 10px and define all your units in rem. 1rem = 10px */
 }
 
 body {
   margin: 0;
-  height: 100%;
+  min-height: 100%;
   display: block;
 } 
 
 body {
-  font-family: 'GFS Didot', serif;
-  font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
-  font-weight: 200;
+  
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   font-size: 1.8rem;
   line-height: 1.6;
   color: #333;
