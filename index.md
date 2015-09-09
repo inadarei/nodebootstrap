@@ -52,11 +52,11 @@ title: Node Bootstrap
         
         <div class="row logorow">
         <div class="logos clearfix">
-          <div class="float-left"><img src="logos/npr.png"/></div>
-          <div class="float-left"><img src="logos/worldbank.svg"/></div>
-          <div class="float-left"><img src="logos/pmp.png"/></div>          
-          <div class="float-left"><img src="logos/urgentconsult.png"/></div>
-          <div class="float-left"><img src="logos/picktek.png"/></div>
+          <div class="float-left"><a href="http://npr.org"><img src="logos/npr.png"/></a></div>
+          <div class="float-left"><a href="http://worldbank.org"><img src="logos/worldbank.svg"/></a></div>
+          <div class="float-left"><a href="http://pmp.io"><img src="logos/pmp.png"/></a></div>          
+          <div class="float-left"><a href="https://www.urgentconsult.com"><img src="logos/urgentconsult.png"/></a></div>
+          <div class="float-left"><a href="http://picktek.com"><img src="logos/picktek.png"/></a></div>
         </div>
         Would like to see your logo here, as well? <a href="https://github.com/inadarei/nodebootstrap/issues/41">Let us know.</a>
         </div>
