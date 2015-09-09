@@ -1,0 +1,71 @@
+#homepage .content-column {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+#homepage h1 {
+  font-family: "Special Elite";
+  font-size: 5.0rem;
+  text-align: center;
+  margin-top: 5%;
+}
+
+#homepage h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#homepage .abstract {
+  color: #777;
+}
+
+#homepage .project-links {
+  padding-top: 3rem;
+  margin-top: 3rem;
+  text-align: center;
+  border-top: 1px #efefef solid;
+}
+
+#homepage .project-links a {
+  margin-right: 2rem;
+}
+
+#homepage .brandsusing {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#homepage .logos {
+  text-align: center;
+  width: auto;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+#homepage .logos img {
+  border: 0;
+  height: 5.0rem;
+}
+
+#homepage .logos .float-left {
+  float: left;
+  margin-left: 3.5rem;
+  margin-top: 2.0rem;
+  
+}
+
+#homepage .logorow {
+  text-align: center;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+#homepage .installcode {
+  margin-top: 5rem;
+  font-size: 1.1em;
+  text-align: left;
+  background-color: #0c0c0c;
+  color: #d2e3f1;
+}
