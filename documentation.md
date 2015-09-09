@@ -17,23 +17,23 @@ title: NodeBootstrap Reference
   <div class="col-md-6 code" markdown="1">
 
 
-~~~~~~~~
-Get /users/123 HTTP/1.1
-Host: api.example.org
-Content-Type: application/json  
-Prefer: return=minimal
-Vary: Prefer,Accept,Accept-Encoding
+~~~~~~~~ javascript
+function showTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
 
-HTTP/1.1 200 OK
-Server: nginx/1.4.6 (Ubuntu)
-Date: Sat, 27 Jun 2015 11:03:32 GMT
-Content-Type: application/json; charset=utf-8
-Transfer-Encoding: chunked
-Connection: close
-Vary: Accept-Encoding
-Preference-Applied: return=minimal
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Headers: Content-Type
+        var timeStr = "" + ((hours > 12) ? hours - 12 : hours);
+
+        timeStr += ((minutes < 10) ? ":0" : ":") + minutes;
+        timeStr += ((seconds < 10) ? ":0" : ":") + seconds;
+        timeStr += (hours >= 12) ? " P.M." : " A.M.";
+
+        status = timeStr; // time is displayed in the Status Line because that's what we do, and how we do
+
+        setTimeout("showTime()", 1000);
+}
 ~~~~~~~~
       
   </div>

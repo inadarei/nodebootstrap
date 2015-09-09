@@ -3,23 +3,38 @@ layout: base
 title: NodeBootstrap Reference
 ---
 
-  <body id="documentation" data-proglang="node">
-    
-    {% include sidebar.html %}
-    
-    {% comment %} 
-    {% include sidebar-small-screen.html %}
-    {% endcomment %} 
-    
-    <div id="content">
-      <div class="container-fluid">
-        <div class="row top-bar">
-          <div class="col-md-6 narrative"></div>
-          <div class="col-md-6 code"></div>
-        </div>
+<body id="documentation" data-proglang="node">
+  
+  {% include sidebar.html %}
+  
+  {% comment %} 
+  {% include sidebar-small-screen.html %}
+  {% endcomment %} 
+  
+  <div id="content">
+    <div class="container-fluid">
+      <div class="row top-bar">
+        <div class="col-md-6 narrative"></div>
+        <div class="col-md-6 code"></div>
+      </div>
 
-        {{content}}  
+      {{content}}  
 
-      </div><!--// .container-->  
-    </div>
-  </body>
+    </div><!--// .container-->  
+  </div>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+  [].forEach.call(document.getElementsByTagName("pre"), function(el) {
+    el.classList.add("prettyprint");
+    el.classList.add("linenums");
+  });
+
+  $(function() {
+    prettyPrint();
+  });
+  
+</script>
+<!--script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>-->
+<script src="prettify/prettify.js"></script>
+</body>

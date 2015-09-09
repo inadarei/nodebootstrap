@@ -7,10 +7,11 @@
  */
  
 #documentation #sidebar {
-  bottom: 0;
   left: 0;
-  position: absolute;
   top: 0;
+  position: absolute;
+  min-height: 100%;
+  
   /** z-index: 75; **/
   width: 220px;
   background: #fafcfc;
@@ -103,7 +104,7 @@
   color: white;
   word-break: break-all;
   word-wrap: break-word;
-  background-color: #2d3133;
+  /** background-color: #2d3133; **/
   border: 0;
 }
 
