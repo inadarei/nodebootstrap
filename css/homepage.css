@@ -69,3 +69,8 @@
   background-color: #0c0c0c;
   color: #d2e3f1;
 }
+
+#homepage .negate {
+  color: #ef5b24;
+  font-weight: bold;
+}

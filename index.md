@@ -24,7 +24,7 @@ title: Node Bootstrap
           <h2>Unobtrusive, minimal project skeleton for Node.js + Express.js.</h2>
         </div>
         <div class="row abstract">
-          Kick-start your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework! MIT Licensed.
+          Kick-start your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that <span class="negate">without</span> having to deal with a heavy or an opinionated framework! MIT Licensed.
         </div>
         
         <div class="row">
