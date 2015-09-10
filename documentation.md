@@ -3,9 +3,8 @@ layout: docs
 title: NodeBootstrap Reference
 ---
 
-<a class="sectional" name="bootstrapping-new-project"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="bootstrapping-new-project"></a>
 {% include quickstart-bootstrap-1.md %}    
 </div><!-- // .narrative -->
 <div class="col-md-6 code" markdown="1">
