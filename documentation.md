@@ -12,7 +12,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#project-structure"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="project-structure"></a>
 {% include quickstart-structure-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -21,7 +21,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#docker-support"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="docker-support"></a>
 {% include quickstart-docker-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -30,7 +30,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#encapsulation"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="encapsulation"></a>
 {% include usage-encapsulation-1.md %}
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -39,7 +39,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#environments"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="environments"></a>
 {% include usage-environments-1.md %}    
 </div>
 <div class="col-md-6 code" markdown="1">
@@ -48,7 +48,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#startup-scripts"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="startup-scripts"></a>
 {% include quickstart-docker-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -57,7 +57,7 @@ title: NodeBootstrap Reference
 </div><!-- //.row -->
 
 <div class="row">
-<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="#hot-reloading"></a>
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="hot-reloading"></a>
 {% include quickstart-docker-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
