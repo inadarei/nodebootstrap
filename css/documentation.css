@@ -243,6 +243,9 @@ a {
   font-weight: bold;
   color: #e9efc0;
 }
+#documentation .narrative dt {
+  color: #eb660c;
+}
 #documentation .fancydl dt:after {
   content: ":";
 }
