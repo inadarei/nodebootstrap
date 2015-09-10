@@ -65,10 +65,9 @@
 #homepage .installcode {
   margin-top: 5rem;
   font-size: 1.1em;
-  text-align: left;
+  text-align: center;
   background-color: #0c0c0c;
   color: #d2e3f1;
-  height: 7.9rem;
 }
 
 #homepage .negate {

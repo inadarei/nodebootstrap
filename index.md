@@ -29,10 +29,8 @@ title: Node Bootstrap
         
         <div class="row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-        <pre class="installcode">
-          $ npm install -g nodebootstrap
-          $ nodebootstrap build hello</pre>
+        <div class="col-sm-8 installcode">
+          <img src="images/nodebootstrap_install.png" class="img-responsive" alt="npm install -g nodebootstrap && nodebootstrap build hello" />
         </div>
         <div class="col-sm-2"></div>
         </div>
