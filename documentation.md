@@ -2,6 +2,7 @@
 layout: docs
 title: NodeBootstrap Reference
 ---
+
 <a class="sectional" name="bootstrapping-new-project"></a>
 <div class="row">
 <div class="col-md-6 narrative" markdown="1">
