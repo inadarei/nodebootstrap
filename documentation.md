@@ -12,9 +12,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="project-structure"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="project-structure"></a>
 {% include quickstart-structure-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -22,9 +21,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="docker-support"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="docker-support"></a>
 {% include quickstart-docker-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -32,9 +30,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="encapsulation"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="encapsulation"></a>
 {% include usage-encapsulation-1.md %}
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -42,9 +39,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="environments"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="environments"></a>
 {% include usage-environments-1.md %}    
 </div>
 <div class="col-md-6 code" markdown="1">
@@ -52,9 +48,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="startup-scripts"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="startup-scripts"></a>
 {% include usage-scripts-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -62,9 +57,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="hot-reloading"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="hot-reloading"></a>
 {% include usage-hot-reloading-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
@@ -72,9 +66,8 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
-<a class="sectional" name="file-limits"></a>
 <div class="row">
-<div class="col-md-6 narrative" markdown="1">
+<div class="col-md-6 narrative" markdown="1"><a class="sectional" name="file-limits"></a>
 {% include usage-file-limits-1.md %}    
 </div>
 <div class="col-md-6 code fancydl" markdown="1">
