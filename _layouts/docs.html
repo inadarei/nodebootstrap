@@ -14,13 +14,13 @@ title: NodeBootstrap Reference
   <div id="content">
     <div class="container-fluid">
       <div class="row top-bar">
-        <div class="col-md-6 narrative"></div>
-        <div class="col-md-6 code"></div>
+        <div class="col-md-6 narrative">&nbsp;</div>
+        <div class="col-md-6 code">&nbsp;</div>
       </div>
 
       {{content}}  
 
-    </div><!--// .container-->  
+    </div><!--// .container-fluid -->  
   </div>
 
 <script src="js/jquery-2.1.4.min.js"></script>
@@ -32,6 +32,13 @@ title: NodeBootstrap Reference
 
   $(function() {
     prettyPrint();
+    
+    // Deep-linking anchors. Per: http://ben.balter.com/2014/03/13/pages-anchor-links/    
+    $(".narrative .sectional").each(function(i, el) {
+      var $el = $(el);
+      $el.html("<i class='fa fa-link'></i>");
+    });
+    
   });
   
 </script>

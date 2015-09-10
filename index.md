@@ -42,9 +42,6 @@ title: Node Bootstrap
           <a href="https://github.com/inadarei/nodebootstrap" class="btn btn-success btn-lg" role="button"><i class="fa fa-github fa-fw"></i> GitHub</a>
           <a href="https://twitter.com/nodebootstrap" class="btn btn-info btn-lg" role="button"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
         </div>
-
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         
         <div class="row brandsusing">
         Enjoyed by these awesome companies, among others:

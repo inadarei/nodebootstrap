@@ -14,7 +14,7 @@
   
   /** z-index: 75; **/
   width: 220px;
-  background: #fafcfc;
+  background-color: #fafcfc;
   border-right: 1px solid #f0f4f7;
   
   overflow-y: auto;
@@ -42,6 +42,11 @@
 
 #documentation .top-bar {
  height: 4.5rem;
+}
+
+#documentation .top-bar .code, 
+#documentation .top-bar .narrative {
+  background-color: white!important;
 }
 
 #documentation #sidebar ul {
@@ -78,21 +83,15 @@
 }
 
 #documentation .narrative {
-  /** width: 440px; **/
-  /** background: red; **/
   min-height: 100%;
   background-color: white;
 }
 
 #documentation .code {
-  display: block;
-  min-height:  100%;
-  background-color: #40464a;
-  color: white;
+  color: #c0c4c7;
   
   font-size: 1.6rem; 
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding: 1.4rem 3rem 1rem 3rem;
 }
 
 #documentation .code pre {
@@ -107,8 +106,52 @@
   border: 0;
 }
 
+#documentation .narrative p > code {
+  padding: 2px 4px;
+  color: #678cac;
+  color: #f9f9ec;
+  color: #678cb1;
+  background-color: #dfdfdf;
+  border-radius: 4px;  
+  font-size: 1.4rem;
+  font-weight: 200;
+}
+
 #documentation .row {
+  /** background-color: #fb00d2; **/
+}
+
+#documentation .row .code {
   background-color: #40464a;
+}
+
+/*
+#documentation .row{
+    overflow: hidden; 
+}
+
+#documentation [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+*/
+
+#documentation .row {
+    margin-bottom: 0.2rem;
+}
+
+/** See: http://stackoverflow.com/questions/19695784/how-can-i-make-bootstrap-columns-all-the-same-height **/
+@media (min-width: 970px) { /* this breaks responsiveness, so only allowed for larger devices */
+  #documentation .row {
+      display: table;
+      margin-bottom: 0.7rem;
+  }
+  
+  #documentation [class*="col-"] {
+      float: none;
+      display: table-cell;
+      vertical-align: top;
+  }
 }
 
 /*
@@ -148,6 +191,7 @@ a {
 
 #documentation #sidebar {
   font-family: Verdana;
+  position: fixed;
 }
 
 #documentation #sidebar h5 {
@@ -158,3 +202,52 @@ a {
   margin: 1.8rem auto 1rem auto;
   padding: 0;
 }
+
+/** Definition lists **/
+
+#documentation dl dt {
+  color: #e9efc0;
+}
+
+#documentation dl dd {
+  margin-left: 2rem;
+}
+
+/** Section Anchors **/
+
+#documentation .sectional {
+  
+  color: inherit !important;
+  position: absolute;
+  left: -0.5rem;
+  opacity: 0;
+  cursor: pointer;
+
+  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  -moz-transition: opacity 0.2s ease-in-out 0.1s;
+  -ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+#documentation .narrative:hover .sectional {
+  opacity: 0.8;
+}
+
+#documentation .fancydl dl {
+  padding: 0.5rem;
+}
+#documentation .fancydl dt {
+  float: left;
+  clear: left;
+  width: 10.0rem;
+  text-align: right;
+  font-weight: bold;
+  color: #e9efc0;
+}
+#documentation .fancydl dt:after {
+  content: ":";
+}
+#documentation .fancydl dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
+
