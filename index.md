@@ -12,12 +12,10 @@ title: Node Bootstrap
         <h1><span style="color: #80BD01">Node</span><span style="color: #48A5F8">Bootstrap</span></h1>
       </div>
       
-      <div style="text-align: center">
+      <div style="text-align: center" class="github-buttons">
         <iframe src="https://ghbtns.com/github-btn.html?user=inadarei&repo=nodebootstrap&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
         
-        <iframe src="https://ghbtns.com/github-btn.html?user=inadarei&repo=nodebootstrap&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-        
-        <iframe src="https://ghbtns.com/github-btn.html?user=inadarei&repo=nodebootstrap&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=inadarei&repo=nodebootstrap&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
       </div>
       
       <div class="row tagline">
@@ -42,7 +40,7 @@ title: Node Bootstrap
     <div class="container-fluid">
       <div class="row project-links">
         <a href="documentation.html" class="btn btn-primary btn-lg" role="button"><i class="fa fa-book fa-fw"></i> Documentation</a>
-        <a href="https://github.com/inadarei/nodebootstrap" class="btn btn-success btn-lg" role="button"><i class="fa fa-github fa-fw"></i> GitHub</a>
+        <a href="https://github.com/inadarei/nodebootstrap" class="btn btn-success btn-lg hidden-xs hidden-sm" role="button"><i class="fa fa-github fa-fw"></i> GitHub</a>
         <a href="https://twitter.com/nodebootstrap" class="btn btn-info btn-lg" role="button"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
       </div>
       
