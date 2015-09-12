@@ -21,8 +21,29 @@
   padding-left: 1.5rem;
 }
 
-#documentation #sidebar .header {
+#logo {
   font-family: "Special Elite";
+  font-size: 2.2rem;
+}
+
+@media (max-width: 991px) {
+  #documentation #logo {
+    margin: 1rem 0 0 0;
+  }
+  .smallscreen-logo-and-menu {
+    display: block;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .smallscreen-logo-and-menu {
+    display: none;
+  }
+}
+
+
+#documentation #sidebar .header {
   width: 220px;
   border-bottom: 1px solid #f0f4f7;
   height: 49px;
@@ -32,8 +53,6 @@
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-
-  font-size: 2.2rem;
   
   position: relative;
   top: 59%;
@@ -76,10 +95,20 @@
   background-color: #ebebeb;
 }
 
-#documentation #content {
-  top: 0;
-  left: 230px;
-  position: absolute;
+@media (min-width: 992px) {
+  #documentation #content {
+    top: 0;
+    left: 230px;
+    position: absolute;
+  }
+}
+
+@media (max-width: 992px) {
+  #documentation #content {
+    top: 0;
+    left: 0px;
+    position: absolute;
+  }
 }
 
 #documentation .narrative {
@@ -142,7 +171,7 @@
 }
 
 /** See: http://stackoverflow.com/questions/19695784/how-can-i-make-bootstrap-columns-all-the-same-height **/
-@media (min-width: 970px) { /* this breaks responsiveness, so only allowed for larger devices */
+@media (min-width: 992px) { /* this breaks responsiveness, so only allowed for larger devices */
   #documentation .row {
       display: table;
       margin-bottom: 0.7rem;
