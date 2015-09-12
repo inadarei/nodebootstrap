@@ -81,7 +81,7 @@ title: Node Bootstrap
   <script>
   $(function(){
       $(".typer").typed({
-        strings: ["unobtrusive", "lightweight", "unobtrusive"],
+        strings: ["unopinionated", "lightweight", "unobtrusive"],
         typeSpeed: 0
       });
   });
