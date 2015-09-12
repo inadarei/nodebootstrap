@@ -10,18 +10,21 @@
   margin-top: 5%;
 }
 
-#homepage h2 {
+#homepage .tagline h2 {
   text-align: center;
   margin-bottom: 1.5rem;
+  color: #ef5b25;
+  font-size: 3.0rem;
 }
 
 #homepage .abstract {
-  color: #777;
+  color: black;
+  font-family: Arial;
 }
 
 #homepage .project-links {
   padding-top: 3rem;
-  margin-top: 3rem;
+  margin-top: 0;
   text-align: center;
   border-top: 1px #efefef solid;
 }
@@ -30,26 +33,31 @@
   margin-right: 2rem;
 }
 
+/** Row of logos **/
+
 #homepage .brandsusing {
-  margin-top: 4rem;
+  margin-top: 7rem;
+  margin-bottom: 2rem;
   text-align: center;
+  font-family: Verdana;
+  color: 808080;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 300;
 }
 
-#homepage .logos {
+#homepage div.logos {
   text-align: center;
   width: auto;
   margin: 0 auto;
   margin-bottom: 2rem;
 }
 
-#homepage .logos img {
+#homepage div.logos img {
   border: 0;
   height: 5.0rem;
 }
 
-#homepage .logos .float-left {
+#homepage div.logos .float-left {
   float: left;
   margin-left: 3.5rem;
   margin-top: 2.0rem;
@@ -60,10 +68,30 @@
   text-align: center;
   font-size: 0.9em;
   color: #aaa;
+  margin-bottom: 2rem;
 }
+
+
+#homepage .logorow ul li {
+  display: inline;
+  list-style-type: none;
+}
+
+#homepage .logorow ul li img {
+  border: 0;
+  height: 5.0rem;
+  margin-right:  3rem;
+  
+  filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+/** Install code banner **/
 
 #homepage .installcode {
   margin-top: 5rem;
+  margin-bottom: 5.0rem;
   font-size: 1.1em;
   text-align: center;
   background-color: #0c0c0c;
@@ -73,4 +101,36 @@
 #homepage .negate {
   color: #ef5b24;
   font-weight: bold;
+}
+
+/** homepage bkg image */
+
+#homepage .top-part {
+  background: url(../images/construction-bkg.jpg) top center no-repeat fixed;  
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/** Typed **/
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
