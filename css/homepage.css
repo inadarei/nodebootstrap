@@ -81,7 +81,7 @@
 #homepage .logorow ul li img {
   border: 0;
   height: 5.0rem;
-  margin-right:  3rem;
+  margin-right:  1.8rem;
   
   filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
   filter: gray; /* IE6-9 */
