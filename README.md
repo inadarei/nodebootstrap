@@ -17,6 +17,8 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 ## License
 
+[![Join the chat at https://gitter.im/inadarei/nodebootstrap](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/inadarei/nodebootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 (The MIT License)
 
 Copyright (c) 2012-2015 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
