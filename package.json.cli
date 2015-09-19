@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap"
   , "description": "Node/Express.js Project Boilerplate Capturing Project Composition Best Practices"
-  , "version": "3.0.5"
+  , "version": "3.0.7"
   , "repository": {
       "type": "git"
     , "url": "git@github.com:inadarei/nodebootstrap.git"
