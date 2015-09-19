@@ -19,7 +19,9 @@ title: Node Bootstrap
       </div>
       
       <div class="row tagline">
-        <h2>Powerful Node.js + Express project scaffolding that is <span class="typer">unobtrusive</span></h2>
+        <div class="centered">
+          <h2>Powerful Node.js + Express project scaffolding that is <span class="typer-fixed"><span class="typer">unobtrusive</span></span></h2>
+        </div>
       </div>
       <div class="row abstract">
         Bootstrap and organize your Node.js project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework! <span class="negate">MIT Licensed.</span>

@@ -10,11 +10,22 @@
   margin-top: 5%;
 }
 
-#homepage .tagline h2 {
+#homepage .centered {
   text-align: center;
-  margin-bottom: 1.5rem;
+}
+
+#homepage .tagline h2 {
+  margin-bottom: 2.0rem;
   color: #ef5b25;
   font-size: 3.0rem;
+}
+
+#homepage .tagline .typer-fixed {
+  display: inline-block;
+  color: #cb3837;
+  width: 200px;
+  text-align: left;  
+  font-weight: bold;
 }
 
 #homepage .abstract {
