@@ -57,14 +57,14 @@ function build_bootstrapped_project(projectPath) {
         }
 
         var setupScript  = "#!/bin/bash\n";
-        setupScript     += "npm -s install supervisor -g\n"
-        setupScript     += "npm -s install bower -g\n";
+        setupScript     += "npm -q install supervisor -g\n"
+        setupScript     += "npm -q install bower -g\n";
         setupScript     += "rm -rf ./bin README.md LICENSE\n";
         setupScript     += "mv scripts bin\n";
         setupScript     += "rm -f butler.sh setup.sh\n";
         setupScript     += "rm -f package.json package.json.cli\n";
         setupScript     += "mv package.json.skeleton package.json\n";
-        setupScript     += "npm -s install\n";
+        setupScript     += "npm -q install\n";
         setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./bin/start.sh\n";
         setupScript     += "chmod u+x ./bin/stop.sh\n";
