@@ -60,10 +60,9 @@ function build_bootstrapped_project(projectPath) {
 
         var setupScript  = "#!/bin/bash\n";
         setupScript     += "npm -q install supervisor -g\n"
+        setupScript     += "npm -q install forever -g\n"
         setupScript     += "npm -q install bower -g\n";
-        setupScript     += "rm -rf ./bin README.md LICENSE\n";
-        //setupScript     += "rm -f package.json package.json.cli\n";
-        //setupScript     += "mv package.json.skeleton package.json\n";
+        setupScript     += "rm -rf README.md LICENSE\n";
         setupScript     += "npm -q install\n";
         setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./bin/start.sh\n";
@@ -78,7 +77,7 @@ function build_bootstrapped_project(projectPath) {
             if (err) { throw err; process.exit(); }
 
             console.log("Project Created.")
-            console.log("Executing installation of dependencies. This may take several minutes.")
+            console.log("Executing installation of dependencies. This may take several minutes…")
             var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
               if (err) { throw err; process.exit(); }
 
@@ -86,7 +85,7 @@ function build_bootstrapped_project(projectPath) {
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
               console.log("  > cd " + projectPath);
-              console.log("  > ./bin/dev_start.sh");
+              console.log("  > npm run dev");
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
               console.log("http://localhost:3000/hello")
