@@ -51,23 +51,20 @@ cmd=$1;
 
 case "$cmd" in
   "publish")
-    echo "publishing..."
-    rm -rf node_modules && cp package.json.cli package.json && npm publish && rm package.json
-    exit 0;
-    ;;
-  "devbuild")
-    echo "building dev setup..."
-    rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
-    rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
+    echo "publishing to npm..."
+    rm -rf node_modules && mv package.json package.json.skeleton && cp package.json.cli package.json && npm publish && mv package.json.skeleton package.json
     exit 0;
     ;;
   "local")
     echo "building local dev setup..."
-    rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
-    rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
-    cd node_modules && rm -rf nodebootstrap-server && npm link nodebootstrap-server && cd ..
-    cd node_modules && rm -rf nodebootstrap-clustering && npm link nodebootstrap-clustering && cd ..
-    ln -s package.json.skeleton package.json
+    rm -rf cli/node_modules && cp package.json.cli cli/package.json && cd cli && npm install && rm package.json && cd ..
+
+    npm rm -g nodebootstrap-server && npm rm -g nodebootstrap-clustering
+    rm -rf node_modules && npm install
+
+    rm -rf node_modules/nodebootstrap-server && rm -rf node_modules/nodebootstrap-clustering
+    npm link ../nodebootstrap-server && npm link ../nodebootstrap-clustering
+
     exit 0;
     ;;
   *)
