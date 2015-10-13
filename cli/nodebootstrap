@@ -11,8 +11,10 @@ var program = require('commander')
 
 var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
 
+var version = require('./package.json').version;
+
 program
-  .version("3.0.2")
+  .version(version)
   .description('Bootstrap new Node/Express.js project.')
   //.usage('build [options] [command]')
   .command('build <project_title>')
@@ -60,15 +62,14 @@ function build_bootstrapped_project(projectPath) {
         setupScript     += "npm -q install supervisor -g\n"
         setupScript     += "npm -q install bower -g\n";
         setupScript     += "rm -rf ./bin README.md LICENSE\n";
-        setupScript     += "mv scripts bin\n";
-        setupScript     += "rm -f butler.sh setup.sh\n";
-        setupScript     += "rm -f package.json package.json.cli\n";
-        setupScript     += "mv package.json.skeleton package.json\n";
+        //setupScript     += "rm -f package.json package.json.cli\n";
+        //setupScript     += "mv package.json.skeleton package.json\n";
         setupScript     += "npm -q install\n";
         setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./bin/start.sh\n";
         setupScript     += "chmod u+x ./bin/stop.sh\n";
         setupScript     += "chmod u+x ./bin/dev_start.sh\n";
+        setupScript     += "rm -f butler.sh setup.sh\n";
 
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
           if(err) { throw err; process.exit(1); }

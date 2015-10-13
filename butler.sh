@@ -17,8 +17,7 @@ show_help() {
     echo ""
     echo "       where <command> is one of:"
     echo "            publish  - publishes nodebootstrap to npm registry"
-    echo "            devbuild - npm installs skeleton's package.json for local development"
-    echo "            local    - same as 'devbuild' but with npm linked nodebootstrap-server and nodebootstrap-clustering"
+    echo "            local    - ssets up local dev environment with npm linked nodebootstrap-server and nodebootstrap-clustering"
     echo " "
 }
 
