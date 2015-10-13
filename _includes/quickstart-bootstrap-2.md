@@ -10,5 +10,5 @@ Once the project is built, you can start the application by:
 
 ~~~~ bash
 $ cd hello
-$ ./bin/dev_start.sh
+$ npm run dev
 ~~~~
