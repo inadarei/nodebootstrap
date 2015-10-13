@@ -18,6 +18,7 @@ show_help() {
     echo "       where <command> is one of:"
     echo "            publish  - publishes nodebootstrap to npm registry"
     echo "            devbuild - npm installs skeleton's package.json for local development"
+    echo "            local    - same as 'devbuild' but with npm linked nodebootstrap-server and nodebootstrap-clustering"
     echo " "
 }
 
@@ -58,6 +59,15 @@ case "$cmd" in
     echo "building dev setup..."
     rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
     rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
+    exit 0;
+    ;;
+  "local")
+    echo "building local dev setup..."
+    rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
+    rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
+    cd node_modules && rm -rf nodebootstrap-server && npm link nodebootstrap-server && cd ..
+    cd node_modules && rm -rf nodebootstrap-clustering && npm link nodebootstrap-clustering && cd ..
+    ln -s package.json.skeleton package.json
     exit 0;
     ;;
   *)

@@ -3,8 +3,8 @@ var server = require('nodebootstrap-server');
 server.setup(function(runningApp) {
   
   // runningApp.use(require('express-session')({secret: CONF.app.cookie_secret, resave: false, saveUninitialized: false}));
-  
-  // Choose your favorite view engine(s)  
+
+  // Choose your favorite view engine(s)
   runningApp.set('view engine', 'handlebars');
   runningApp.engine('handlebars', require('hbs').__express);
 
