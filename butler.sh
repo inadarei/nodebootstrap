@@ -51,7 +51,7 @@ cmd=$1;
 case "$cmd" in
   "publish")
     echo "publishing to npm..."
-    rm -rf node_modules && mv package.json package.json.skeleton && cp package.json.cli package.json && npm publish && mv package.json.skeleton package.json
+    cd cli && cp ../README.md README.md && npm publish && rm README.md && cd ..
     exit 0;
     ;;
   "local")
