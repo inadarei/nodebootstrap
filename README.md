@@ -21,7 +21,7 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 (The MIT License)
 
-Copyright (c) 2012-2015 Irakli Nadareishvili [@inadarei](http://twitter.com/inadarei)
+Copyright (c) 2012-2015 Irakli Nadareishvili [@inadarei](https://twitter.com/inadarei)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
