@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start" : "npm install forever -g && ./bin/start.sh",
-    "dev" : "npm install forever -g && ./bin/dev_start.sh",
+    "dev" : "npm install supervisor -g && ./bin/dev_start.sh",
     "prepublish": "npm prune",
     "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "pretest": "jshint lib test",
