@@ -7,9 +7,4 @@ export NODE_SERVE_STATIC=1
 export NODE_HOT_RELOAD=1
 export NODE_LOGGER_GRANULARLEVELS=1
 
-if [ ! -d "$PWD/scripts" ]; then
-  ./bin/start.sh
-else
-  ./scripts/start.sh
-fi
-
+./bin/start.sh
