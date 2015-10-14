@@ -19,7 +19,7 @@
     "config": "*",
     "consolidate": "^0.13.1",
     "express": "^4.11.0",
-    "hbs": "3.x",
+    "hbs": "^3.1",
     "metalogger": "*",
     "nodebootstrap-server": "*",
     "underscore": "^1.8.3",
@@ -36,8 +36,8 @@
     "glob": "^4.3.2"
   },
   "scripts": {
-    "start" : "npm install forever -g && ./bin/start.sh",
-    "dev" : "npm install supervisor -g && ./bin/dev_start.sh",
+    "start": "npm install forever -g && ./bin/start.sh",
+    "dev": "npm install supervisor -g && ./bin/dev_start.sh",
     "prepublish": "npm prune",
     "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "pretest": "jshint lib test",

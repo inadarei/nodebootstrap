@@ -1,7 +1,7 @@
 var server = require('nodebootstrap-server');
 
 server.setup(function(runningApp) {
-  
+
   // runningApp.use(require('express-session')({secret: CONF.app.cookie_secret, resave: false, saveUninitialized: false}));
 
   // Choose your favorite view engine(s)
@@ -21,9 +21,18 @@ server.setup(function(runningApp) {
   
   // API endpoint attached to root route:
   runningApp.use('/', require('homedoc')); // attach to sub-route
-  
+
   // If you need websockets:
   // var socketio = require('socket.io')(runningApp.http);
   // require('fauxchatapp')(socketio);
-  
+
+  // Catch-all error handler.
+  // runningApp.use(require('errorhandler')({ dumpExceptions: true, showStack: true }));
+  // Write your own if you need such thing. @see: http://expressjs.com/guide/error-handling.html
+  // runningApp.use(function(err, req, res, next) {
+  //   logic
+  // });
+
+
+
 });

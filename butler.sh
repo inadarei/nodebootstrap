@@ -61,8 +61,11 @@ case "$cmd" in
     npm rm -g nodebootstrap-server && npm rm -g nodebootstrap-clustering
     rm -rf node_modules && npm install
 
-    rm -rf node_modules/nodebootstrap-server && rm -rf node_modules/nodebootstrap-clustering
-    npm link ../nodebootstrap-server && npm link ../nodebootstrap-clustering
+    rm -rf node_modules/nodebootstrap-server && npm link ../nodebootstrap-server
+
+    cd ../nodebootstrap-server && rm -rf node_modules && npm install
+    rm -rf node_modules/nodebootstrap-clustering && npm link ../nodebootstrap-clustering
+    cd -
 
     exit 0;
     ;;
