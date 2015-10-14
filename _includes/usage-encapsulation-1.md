@@ -11,4 +11,6 @@ In a more "spaghetti" Node project you may see HTTP route handlers in the main s
 together. What TJ argues for and NodeBootstrap implements is: letting each module declare their own handlers, so if you are installing a "user management" or "blog" module, all you need to do is NPM install that module and indicate from the main app where in the URL path the routes get attached.
 
 Feel free to check-out more details about module design per NodeBootstrap in the source code of the
-sample module: <https://github.com/inadarei/nodebootstrap/tree/master/lib/hello>
+[sample module](https://github.com/inadarei/nodebootstrap/tree/master/lib/homedoc).
+
+For a more advanced example, see: <https://github.com/inadarei/nodebootstrap/tree/master/lib/hello>
