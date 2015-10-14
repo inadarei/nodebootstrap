@@ -16,6 +16,7 @@
     "node": ">=0.8.8"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "config": "*",
     "consolidate": "^0.13.1",
     "express": "^4.11.0",
