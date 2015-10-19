@@ -1,8 +1,5 @@
-[![GitHub Link]([github-img])]([github-url])
 [![NPM Version][npm-image]][npm-url]
-![build status]([travis-img])
-[![Codacy Badge](codacy-img)](codacy-url)
-[![Code Climate](codeclimate-img)](codeclimate-url)
+
 
 Organize your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
