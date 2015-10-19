@@ -35,4 +35,4 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 [codeclimate-img]: https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg
 [codeclimate-url]: https://codeclimate.com/github/inadarei/nodebootstrap
 [docker-img]: https://img.shields.io/badge/docker-ready-blue.svg
-[docker-url]: https://registry.hub.docker.com/u/irakli/nodebootstrap/
+[docker-url]: https://hub.docker.com/r/irakli/nodebootstrap-hello/
