@@ -1,5 +1,5 @@
 [![GitHub Link]([github-img])]([github-url])
-![npm version]([npm-img])
+[![NPM Version][npm-image]][npm-url]
 ![build status]([travis-img])
 [![Codacy Badge](codacy-img)](codacy-url)
 [![Code Climate](codeclimate-img)](codeclimate-url)
@@ -24,6 +24,7 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 [github-img]: https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat
 [github-url]: https://github.com/inadarei/nodebootstrap
 [npm-img]: https://img.shields.io/npm/v/nodebootstrap.svg?style=flat
+[npm-url]: https://www.npmjs.com/package/nodebootstrap
 [travis-img]: https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master
 [codacy-img]: https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431
 [codacy-url]: https://www.codacy.com/public/irakli/nodebootstrap_2
