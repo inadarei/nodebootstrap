@@ -1,5 +1,6 @@
-[![NPM Version][npm-image]][npm-url]
+# NodeBootstrap
 
+[![NPM Version][npm-image]][npm-url]
 
 Organize your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
