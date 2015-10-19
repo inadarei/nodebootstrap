@@ -1,6 +1,17 @@
 # NodeBootstrap
 
 [![NPM Version][npm-img]][npm-url]
+[![Github Link][github-img]][github-url]
+[![TravisCI Build Status][travis-img]][travis-url]
+[![Codacy Badge][codacy-img]][codacy-url]
+[![Code Climate Badge][codeclimate-img]][codeclimate-url]
+[![Docker Hub Link][docker-img]][docker-url]
+
+[![GitHub Link]([github-img])]([github-url])
+![build status]([travis-img])
+[![Codacy Badge](codacy-img)](codacy-url)
+[![Code Climate](codeclimate-img)](codeclimate-url)
+
 
 Organize your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
@@ -24,6 +35,7 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 [npm-img]: https://img.shields.io/npm/v/nodebootstrap.svg?style=flat
 [npm-url]: https://www.npmjs.com/package/nodebootstrap
 [travis-img]: https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master
+[travis-url]: https://travis-ci.org/inadarei/nodebootstrap
 [codacy-img]: https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431
 [codacy-url]: https://www.codacy.com/public/irakli/nodebootstrap_2
 [codeclimate-img]: https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg
