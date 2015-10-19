@@ -1,8 +1,8 @@
-[![GitHub Link](https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat)](https://github.com/inadarei/nodebootstrap)
-![npm version](https://img.shields.io/npm/v/nodebootstrap.svg?style=flat)
-![build status](https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master)
-[![Codacy Badge](https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431)](https://www.codacy.com/public/irakli/nodebootstrap_2)
-[![Code Climate](https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg)](https://codeclimate.com/github/inadarei/nodebootstrap)
+[![GitHub Link](github-img)](github-url)
+![npm version](npm-img)
+![build status](travis-img)
+[![Codacy Badge](codacy-img)](codacy-url)
+[![Code Climate](codeclimate-img)](codeclimate-url)
 
 Organize your Node project like a pro. Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
