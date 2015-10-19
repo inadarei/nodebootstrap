@@ -1,6 +1,6 @@
-[![GitHub Link](github-img)](github-url)
-![npm version](npm-img)
-![build status](travis-img)
+[![GitHub Link]([github-img])]([github-url])
+![npm version]([npm-img])
+![build status]([travis-img])
 [![Codacy Badge](codacy-img)](codacy-url)
 [![Code Climate](codeclimate-img)](codeclimate-url)
 
