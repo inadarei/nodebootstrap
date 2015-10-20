@@ -24,7 +24,7 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 [MIT](LICENSE)
 
-[github-img]: https://img.shields.io/github/stars/inadarei/nodebootstrap.svg?style=flat
+[github-img]: https://img.shields.io/github/stars/inadarei/nodebootstrap.svg
 [github-url]: https://github.com/inadarei/nodebootstrap
 [npm-img]: https://img.shields.io/npm/v/nodebootstrap.svg?style=flat
 [npm-url]: https://www.npmjs.com/package/nodebootstrap
