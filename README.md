@@ -1,8 +1,8 @@
 # NodeBootstrap
 
 [![NPM Version][npm-img]][npm-url]
-[![Docker Hub Link][docker-img]][docker-url]
 [![Github Link][github-img]][github-url]
+[![Docker Hub Link][docker-img]][docker-url]
 [![TravisCI Build Status][travis-img]][travis-url]
 [![Codacy Badge][codacy-img]][codacy-url]
 [![Code Climate Badge][codeclimate-img]][codeclimate-url]
