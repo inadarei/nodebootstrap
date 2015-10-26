@@ -7,6 +7,9 @@ server.setup(function(runningApp) {
 
   // runningApp.use(require('express-session')({secret: CONF.app.cookie_secret, resave: false, saveUninitialized: false}));
 
+  // Nothing ever comes from "x-powered-by", but a security hole
+  runningApp.disable("x-powered-by");
+  
   // Choose your favorite view engine(s)
   runningApp.set('view engine', 'handlebars');
   runningApp.engine('handlebars', require('hbs').__express);
