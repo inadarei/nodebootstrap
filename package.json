@@ -18,12 +18,16 @@
   "dependencies": {
     "app-module-path": "^1.0.4",
     "body-parser": "^1.14.1",
+    "chai": "^3.4.0",
     "config": "*",
     "consolidate": "^0.13.1",
     "express": "^4.11.0",
+    "glob": "^5.0.15",
     "hbs": "^3.1",
+    "istanbul": "^0.4.0",
     "metalogger": "*",
     "nodebootstrap-server": "*",
+    "should": "^7.1.1",
     "underscore": "^1.8.3",
     "yaml": "*"
   },
