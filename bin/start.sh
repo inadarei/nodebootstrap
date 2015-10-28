@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # A generic script that can be customized using various environmental variables (@see: README.md)
 # Defaults in this script are suitable for production use.
