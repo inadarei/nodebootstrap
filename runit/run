@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # see: https://github.com/phusion/baseimage-docker#adding-additional-daemons
 cd /opt/application
 npm install
