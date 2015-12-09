@@ -1,18 +1,22 @@
-FROM irakli/nodejs:latest
+# Ubuntu-based, larger container:
+# FROM irakli/nodejs:latest
 
-# Set correct environment variables.
-# ENV HOME /opt/application
-VOLUME /opt/application
+# Alpine Linux-based, tiny Node container:
+FROM irakli/alpine-nodejs-runit:latest
 
-ENV REFRESHED_AT 2015-10-22-15_31
+
+ENV REFRESHED_AT 2015-12-08-15_31
+
+ADD ./ /opt/application
+WORKDIR /opt/application
+RUN npm install
 
 COPY runit /etc/service/node-app
 RUN chmod -R 755 /etc/service/node-app
 RUN npm install -g supervisor
 
-ONBUILD ADD ./ /opt/application
-ONBUILD WORKDIR /opt/application
-ONBUILD RUN npm install
+# Set correct environment variables.
+# ENV HOME /opt/application
 
 EXPOSE 3000
 
@@ -29,5 +33,7 @@ ENV NODE_PATH="/opt/application/lib" \
     NODE_CONFIG_DIR="/opt/application/config" \
     NODE_LOG_DIR=/opt/application/logs"
     
-# Clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Clean up. Un-comment if using Ubuntu variant
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+CMD ["/sbin/runit_init"]
