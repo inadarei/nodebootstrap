@@ -56,15 +56,23 @@ case "$cmd" in
     ;;
   "local")
     echo "building local dev setup..."
+
     rm -rf cli/node_modules && cd cli && npm install && cd ..
 
-    npm rm -g nodebootstrap-server && npm rm -g nodebootstrap-clustering
+    npm rm -g nodebootstrap-server && \
+    npm rm -g nodebootstrap-htmlapp && \
+    npm rm -g nodebootstrap-clustering
+
     rm -rf node_modules && npm install
 
     rm -rf node_modules/nodebootstrap-server && npm link ../nodebootstrap-server
+    rm -rf node_modules/nodebootstrap-htmlapp && npm link ../nodebootstrap-htmlapp
 
     cd ../nodebootstrap-server && rm -rf node_modules && npm install 
     rm -rf node_modules/nodebootstrap-clustering && npm link ../nodebootstrap-clustering
+    cd -
+
+    cd ../nodebootstrap-htmlapp && rm -rf node_modules && npm install
     cd -
 
     exit 0;
