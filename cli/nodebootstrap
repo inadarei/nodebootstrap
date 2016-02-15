@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-var program = require('commander')
-  , os      = require('os')
+var os      = require('os')
   , path    = require('path')
   , fs      = require('fs')
+  , fse     = require('fs-extra')
   , unzip   = require('unzip')
-  , mv      = require('mv')
+  , ncp     = require('ncp').ncp
   , cli     = require('child_process')
   , request = require('request');
 
@@ -13,28 +13,106 @@ var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
 
 var version = require('./package.json').version;
 
-program
-  .version(version)
-  .description('Bootstrap new Node/Express.js project.')
-  //.usage('build [options] [command]')
-  .command('build <project_title>')
-  .action(function(project_title, options) {
-    var projectPath = project_title;
-    if (fs.existsSync(projectPath)) {
-      console.log("Error: folder '%s' already exists. Aborting.", projectPath);
-      process.exit(1);
-    }
+var argv = require('minimist')(process.argv.slice(2));
+console.log(argv);
 
-    console.log('Building new project under: %s', projectPath);
-    build_bootstrapped_project(projectPath);
+if ( argv.h || argv.help || 
+     argv._.length === 0 || argv._[0].toLowerCase() != "build" ||
+     argv._[1].length <1) {
+  help();
+  process.exit(0);
+}
+
+if (argv.v || argv.V || argv.version) {
+  version_info();
+  process.exit(0);
+}
+
+var _isAPI = false
+  , _name  = argv._[1]
+  , _path  = _name;
+
+if (argv.a || argv.api)  {
+  _isAPI = true;
+}
+
+if (argv.p || argv.path) {
+  _path = (argv.p) ? argv.p : argv.path;
+}
+
+var banner = "Building '" + _name + "'"; 
+
+if (_path && _path != _name) {
+  banner += " at '" + _path + "'";
+} 
+
+if (_isAPI) {
+  banner += " in API-only mode."
+} else {
+  banner += ".";
+}
+console.log(banner);
+
+if (_path === '.') {
+  var readline = require('readline');
+
+  console.log("")
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
   });
 
-program.parse(process.argv);
+  var prompt = 'You indicated current folder as the build path. Are you certain (y/N)? ';
+  rl.question(prompt, function(answer) {
+    rl.close();
+    answer = answer.toLowerCase();
+    if ( answer != 'y' ) {
+      process.exit(0);
+    }
 
-if (!program.args.length) program.help();
+    build_bootstrapped_project(_path, _isAPI);
+  });
 
+} else {
+  build_bootstrapped_project(_path, _isAPI);
+}
+
+
+function version_info() {
+  console.log(require('./package.json').version);
+}
+
+function help() {
+  console.log("");
+  console.log(require('./package.json').description);
+  console.log("");
+  console.log('Usage:');
+  console.log('  nodebootstrap build <project_name> [options]');
+  console.log('');
+  console.log('Options:');  
+  console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>. You can also indicate "." to build directly inside the current folder.');  
+  console.log('  -a, [--api]            build only the lighter skeleton required for API development');
+  console.log('  -h, [--help]           output usage information');
+  console.log('  -v, [-V], [--version]  output the version number');
+  console.log('');
+  console.log('Description:');
+  console.log('  The \'nodebootstrap build\' command creates a new application with a default');
+  console.log('  structure and configuration at the path you specify.');
+  console.log('');
+  console.log('Example:');
+  console.log('  nodebootstrap build best-api -p ~/projects/bestapi --api');
+  console.log('');  
+  console.log('  See more information at: http://www.nodebootstrap.io');
+  console.log('');  
+}
 
 function build_bootstrapped_project(projectPath) {
+
+  if (projectPath != '.' && fs.existsSync(projectPath)) {
+    console.log("Error: folder '%s' already exists. Aborting.", projectPath);
+    process.exit(1);
+  }
   var tmp = os.tmpdir();
   
   // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
@@ -52,7 +130,15 @@ function build_bootstrapped_project(projectPath) {
     extractor.on('close', function() {
       fs.unlinkSync(zipFilepath);
 
-      mv(tmp + 'nodebootstrap-master', projectPath, function (err) {
+      var srcPath = tmp + 'nodebootstrap-master';
+      var ncp_opts = {stopOnErr: true, clobber: true};
+      ncp.limit = 16;
+ 
+      fse.ensureDirSync(projectPath); //create destination directory structure, if necessary.
+
+      ncp(srcPath, projectPath, ncp_opts, function (err) {
+        fse.removeSync(srcPath); //clean-up
+
         if (err) {
           throw err;
           process.exit(1);
@@ -102,6 +188,4 @@ function build_bootstrapped_project(projectPath) {
     })
 
   });
-
-
 }
