@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git@github.com:inadarei/nodebootstrap.git"
   },
-  "author": "Irakli Nadareishvili <irakli@gmail.com> (http://freshblurbs.com)",
+  "author": "Irakli Nadareishvili (http://freshblurbs.com)",
   "contributors": [],
   "bin": {
     "nodebootstrap": "./nodebootstrap"
@@ -22,6 +22,7 @@
     "fs-extra": "^0.26.5",
     "minimist": "^1.2.0",
     "request": "^2.48.0",
+    "ncp": "^2.0.0",
     "unzip": "^0.1.11"
   },
   "keywords": [

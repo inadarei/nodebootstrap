@@ -1,18 +1,23 @@
 // @see: https://gist.github.com/branneman/8048520
 require('app-module-path').addPath(__dirname + '/lib');
 
-var server = require('nodebootstrap-server');
+var server = require('nodebootstrap-server')
+  , CONF    = require('config')
+  , app    = require('express')();
 
-server.setup(function(runningApp) {
+
+app = require('nodebootstrap-htmlapp').setup(app);
+
+server.setup(app, function(runningApp) {
 
   // Nothing ever comes from "x-powered-by", but a security hole
   runningApp.disable("x-powered-by");
-  
+
   // Choose your favorite view engine(s)
   runningApp.set('view engine', 'handlebars');
   runningApp.engine('handlebars', require('hbs').__express);
 
-  //// you could use two view engines in parallel (if you are brave):  
+  //// you could use two view engines in parallel (if you are brave):
   // runningApp.set('view engine', 'j2');
   // runningApp.engine('j2', require('swig').renderFile);
 

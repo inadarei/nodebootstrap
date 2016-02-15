@@ -3,10 +3,7 @@
   "private": true,
   "description": "",
   "author": "",
-  "license": {
-    "type": "MIT",
-    "url": ""
-  },
+  "license": "UNLICENSE",
   "main": "./server.js",
   "repository": {
     "type": "git",
@@ -23,12 +20,10 @@
     "express": "^4.11.0",
     "glob": "^7.0.0",
     "hbs": "^4.0",
-    "lodash": "^4.3.0 ",
+    "lodash": "^4.3.0",
     "metalogger": "*",
-    "ncp": "^2.0.0",
-    "yaml": "*"
-    "nodebootstrap-server": "*",
     "nodebootstrap-htmlapp": "*",
+    "nodebootstrap-server": "*"
   },
   "devDependencies": {
     "after": "^0.8.1",
@@ -36,9 +31,7 @@
     "mocha": "^2.1.0",
     "chai": "^3.5.0",
     "should": "^8.2.2",
-    "jshint": "^2.5.x",
-    "commander": "^2.6.0",
-    "glob": "^4.3.2"
+    "jshint": "^2.5.x"
   },
   "scripts": {
     "start": "npm install forever -g && ./bin/start.sh",

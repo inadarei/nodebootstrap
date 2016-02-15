@@ -16,9 +16,9 @@ var version = require('./package.json').version;
 
 var argv = require('minimist')(process.argv.slice(2));
 
-if ( argv.h || argv.help || 
+if ( argv.h || argv.help ||
      argv._.length === 0 || argv._[0].toLowerCase() != "build" ||
-     typeof argv._[1] === 'undefined' || 
+     typeof argv._[1] === 'undefined' ||
      argv._[1].length <1) {
   help();
   process.exit(0);
@@ -41,11 +41,11 @@ if (argv.p || argv.path) {
   _path = (argv.p) ? argv.p : argv.path;
 }
 
-var banner = "Building '" + _name + "'"; 
+var banner = "Building '" + _name + "'";
 
 if (_path && _path != _name) {
   banner += " at '" + _path + "'";
-} 
+}
 
 if (_isAPI) {
   banner += " in API-only mode."
@@ -91,7 +91,7 @@ function help() {
   console.log('Usage:'.bold);
   console.log('  nodebootstrap'.yellow + ' build <project_name>'.green + ' [options]');
   console.log('');
-  console.log('Options:'.bold);  
+  console.log('Options:'.bold);
   console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>. You can also indicate "." to build directly inside the current folder.');  
   console.log('  -a, [--api]            build only the lighter skeleton required for API development');
   console.log('  -h, [--help]           output usage information');
@@ -103,9 +103,9 @@ function help() {
   console.log('');
   console.log('Example:'.bold);
   console.log('  nodebootstrap build best-api -p ~/projects/bestapi --api');
-  console.log('');  
+  console.log('');
   console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
-  console.log('');  
+  console.log('');
 }
 
 function build_bootstrapped_project(projectPath) {
@@ -115,9 +115,9 @@ function build_bootstrapped_project(projectPath) {
     process.exit(1);
   }
   var tmp = os.tmpdir();
-  
+
   // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
-  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep }; 
+  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep };
 
   var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
   var writer = fs.createWriteStream(zipFilepath);
@@ -134,7 +134,7 @@ function build_bootstrapped_project(projectPath) {
       var srcPath = tmp + 'nodebootstrap-master';
       var ncp_opts = {stopOnErr: true, clobber: true};
       ncp.limit = 16;
- 
+
       fse.ensureDirSync(projectPath); //create destination directory structure, if necessary.
 
       ncp(srcPath, projectPath, ncp_opts, function (err) {
@@ -150,12 +150,14 @@ function build_bootstrapped_project(projectPath) {
         setupScript     += "npm -q install forever -g\n"
 
         if (!_isAPI) {
-          setupScript     += "npm -q install bower -g\n";  
-          setupScript     += "bower install\n";
+          setupScript   += "npm -q install bower -g\n";
+          setupScript   += "bower install\n";
         } else {
-          setupScript     += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";  
+          setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
+          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' package.json";
+          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' server.js";
         }
-        
+
         setupScript     += "rm -rf README.md LICENSE cli\n";
         setupScript     += "npm -q install\n";
         setupScript     += "chmod u+x ./bin/start.sh\n";
