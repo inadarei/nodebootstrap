@@ -7,6 +7,7 @@ var os      = require('os')
   , unzip   = require('unzip')
   , ncp     = require('ncp').ncp
   , cli     = require('child_process')
+  , colors  = require('colors')
   , request = require('request');
 
 var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
@@ -14,10 +15,10 @@ var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
 var version = require('./package.json').version;
 
 var argv = require('minimist')(process.argv.slice(2));
-console.log(argv);
 
 if ( argv.h || argv.help || 
      argv._.length === 0 || argv._[0].toLowerCase() != "build" ||
+     typeof argv._[1] === 'undefined' || 
      argv._[1].length <1) {
   help();
   process.exit(0);
@@ -63,7 +64,7 @@ if (_path === '.') {
     terminal: false
   });
 
-  var prompt = 'You indicated current folder as the build path. Are you certain (y/N)? ';
+  var prompt = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
   rl.question(prompt, function(answer) {
     rl.close();
     answer = answer.toLowerCase();
@@ -87,23 +88,23 @@ function help() {
   console.log("");
   console.log(require('./package.json').description);
   console.log("");
-  console.log('Usage:');
-  console.log('  nodebootstrap build <project_name> [options]');
+  console.log('Usage:'.bold);
+  console.log('  nodebootstrap'.yellow + ' build <project_name>'.green + ' [options]');
   console.log('');
-  console.log('Options:');  
+  console.log('Options:'.bold);  
   console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>. You can also indicate "." to build directly inside the current folder.');  
   console.log('  -a, [--api]            build only the lighter skeleton required for API development');
   console.log('  -h, [--help]           output usage information');
   console.log('  -v, [-V], [--version]  output the version number');
   console.log('');
-  console.log('Description:');
+  console.log('Description:'.bold);
   console.log('  The \'nodebootstrap build\' command creates a new application with a default');
   console.log('  structure and configuration at the path you specify.');
   console.log('');
-  console.log('Example:');
+  console.log('Example:'.bold);
   console.log('  nodebootstrap build best-api -p ~/projects/bestapi --api');
   console.log('');  
-  console.log('  See more information at: http://www.nodebootstrap.io');
+  console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
   console.log('');  
 }
 
