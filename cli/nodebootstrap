@@ -154,8 +154,9 @@ function build_bootstrapped_project(projectPath) {
           setupScript   += "bower install\n";
         } else {
           setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
-          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' package.json";
-          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' server.js";
+          setupScript   += "rm -f .bowerrc bower.json \n";
+          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' package.json \n";
+          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' server.js \n";
         }
 
         setupScript     += "rm -rf README.md LICENSE cli\n";
