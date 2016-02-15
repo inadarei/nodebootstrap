@@ -26,8 +26,9 @@
     "lodash": "^4.3.0 ",
     "metalogger": "*",
     "ncp": "^2.0.0",
-    "nodebootstrap-server": "*",
     "yaml": "*"
+    "nodebootstrap-server": "*",
+    "nodebootstrap-htmlapp": "*",
   },
   "devDependencies": {
     "after": "^0.8.1",
