@@ -1,15 +1,9 @@
 // @see: https://gist.github.com/branneman/8048520
 require('app-module-path').addPath(__dirname + '/lib');
 
-
-
 var server = require('nodebootstrap-server');
 
-var home = require('')
-
 server.setup(function(runningApp) {
-
-  // runningApp.use(require('express-session')({secret: CONF.app.cookie_secret, resave: false, saveUninitialized: false}));
 
   // Nothing ever comes from "x-powered-by", but a security hole
   runningApp.disable("x-powered-by");
@@ -33,14 +27,5 @@ server.setup(function(runningApp) {
   // If you need websockets:
   // var socketio = require('socket.io')(runningApp.http);
   // require('fauxchatapp')(socketio);
-
-  // Catch-all error handler.
-  // runningApp.use(require('errorhandler')({ dumpExceptions: true, showStack: true }));
-  // Write your own if you need such thing. @see: http://expressjs.com/guide/error-handling.html
-  // runningApp.use(function(err, req, res, next) {
-  //   logic
-  // });
-
-
 
 });

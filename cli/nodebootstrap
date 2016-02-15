@@ -148,10 +148,16 @@ function build_bootstrapped_project(projectPath) {
         var setupScript  = "#!/usr/bin/env sh\n";
         setupScript     += "npm -q install supervisor -g\n"
         setupScript     += "npm -q install forever -g\n"
-        setupScript     += "npm -q install bower -g\n";
+
+        if (!_isAPI) {
+          setupScript     += "npm -q install bower -g\n";  
+          setupScript     += "bower install\n";
+        } else {
+          setupScript     += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";  
+        }
+        
         setupScript     += "rm -rf README.md LICENSE cli\n";
         setupScript     += "npm -q install\n";
-        setupScript     += "bower install\n";
         setupScript     += "chmod u+x ./bin/start.sh\n";
         setupScript     += "chmod u+x ./bin/stop.sh\n";
         setupScript     += "chmod u+x ./bin/dev_start.sh\n";
@@ -175,7 +181,7 @@ function build_bootstrapped_project(projectPath) {
               console.log("  > npm run dev");
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
-              console.log("http://localhost:3000/hello")
+              console.log("http://localhost:3000/")
               console.log("===================================================================")
               console.log("");
             });
