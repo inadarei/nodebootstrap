@@ -32,7 +32,7 @@ ENV NODE_PATH="/opt/application/lib" \
     NODE_HOT_RELOAD=1 \
     NODE_CONFIG_DIR="/opt/application/config" \
     NODE_LOG_DIR=/opt/application/logs"
-    
+
 # Clean up. Un-comment if using Ubuntu variant
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
