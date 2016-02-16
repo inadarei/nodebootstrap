@@ -41,6 +41,16 @@ if (argv.p || argv.path) {
   _path = (argv.p) ? argv.p : argv.path;
 }
 
+  if (_path != '.' && fs.existsSync(_path)) {
+    console.log("Error: folder '%s' already exists. Aborting.", _path);
+    process.exit(1);
+  }
+  var pkgPath = _path + '/package.json';
+  if (_path === '.' && fs.existsSync(pkgPath)) {
+    console.log("Error: folder '%s' already contains a node project. Aborting.", _path);
+    process.exit(1);
+  }
+
 var banner = "Building '" + _name + "'";
 
 if (_path && _path != _name) {
@@ -110,10 +120,6 @@ function help() {
 
 function build_bootstrapped_project(projectPath) {
 
-  if (projectPath != '.' && fs.existsSync(projectPath)) {
-    console.log("Error: folder '%s' already exists. Aborting.", projectPath);
-    process.exit(1);
-  }
   var tmp = os.tmpdir();
 
   // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
@@ -155,8 +161,10 @@ function build_bootstrapped_project(projectPath) {
         } else {
           setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
           setupScript   += "rm -f .bowerrc bower.json \n";
-          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' package.json \n";
-          setupScript   += "sed -i '' -E 's/.*nodebootstrap-htmlapp.*/ /' server.js \n";
+
+          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
+          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
+          setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' server.js \n";
         }
 
         setupScript     += "rm -rf README.md LICENSE cli\n";
