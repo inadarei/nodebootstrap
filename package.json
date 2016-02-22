@@ -39,7 +39,7 @@
     "dev": "npm install supervisor -g && ./bin/dev_start.sh",
     "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
     "pretest": "jshint lib test",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/",
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/"
   }
 }
