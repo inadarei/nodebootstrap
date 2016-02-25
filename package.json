@@ -32,14 +32,17 @@
     "mocha": "^2.1.0",
     "chai": "^3.5.0",
     "should": "^8.2.2",
-    "jshint": "^2.5.x"
+    "jshint": "^2.5.x",
+    "nock": "^7.2.2",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0"
   },
   "scripts": {
     "start": "npm install forever -g && ./bin/start.sh",
     "dev": "npm install supervisor -g && ./bin/dev_start.sh",
-    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
+    "test": "mocha --bail test/ test/acceptance/",
     "pretest": "jshint lib test",
-    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/ test/acceptance/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/ test/acceptance/"
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
   }
 }
