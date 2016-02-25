@@ -2,7 +2,6 @@
 require('app-module-path').addPath(__dirname + '/lib');
 
 var server = require('nodebootstrap-server')
-  , CONF    = require('config')
   , app    = require('express')();
 
 
