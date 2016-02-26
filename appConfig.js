@@ -24,5 +24,7 @@ exports.setup = function(runningApp, callback) {
   // var socketio = require('socket.io')(runningApp.http);
   // require('fauxchatapp')(socketio);
 
-  callback(runningApp);
+  if(typeof callback === 'function') {
+    callback(runningApp);
+  }
 };
