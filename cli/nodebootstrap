@@ -164,7 +164,7 @@ function build_bootstrapped_project(projectPath) {
 
           setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
           setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
-          setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' server.js \n";
+          setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
         }
 
         setupScript     += "rm -rf README.md LICENSE cli\n";
