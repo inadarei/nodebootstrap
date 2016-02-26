@@ -39,12 +39,13 @@ describe('home document', function() {
       });
   });
 
-  it('response body should be an array', function(done) {
+  it('response body should be a valid uber document', function(done) {
     request(app)
       .get('/')
       .expect(200,done)
       .expect(function(res){
-        res.body.should.be.an.Array();
+        res.body.should.have.properties(['uber']);
+        res.body.uber.should.have.properties(['data']);
       });
   });
 });
