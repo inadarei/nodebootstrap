@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project builder / bootstrapper – capturing Node project composition best practices",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
