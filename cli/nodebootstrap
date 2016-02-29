@@ -16,16 +16,16 @@ var version = require('./package.json').version;
 
 var argv = require('minimist')(process.argv.slice(2));
 
-if ( argv.h || argv.help ||
-     argv._.length === 0 || argv._[0].toLowerCase() != "build" ||
-     typeof argv._[1] === 'undefined' ||
-     argv._[1].length <1) {
-  help();
+if (argv.v || argv.V || argv.version) {
+  version_info();
   process.exit(0);
 }
 
-if (argv.v || argv.V || argv.version) {
-  version_info();
+if ( argv.h || argv.help ||
+     argv._.length === 0 || argv._[0].toLowerCase() !== "build" ||
+     typeof argv._[1] === 'undefined' ||
+     argv._[1].length <1) {
+  help();
   process.exit(0);
 }
 
@@ -41,24 +41,25 @@ if (argv.p || argv.path) {
   _path = (argv.p) ? argv.p : argv.path;
 }
 
-  if (_path != '.' && fs.existsSync(_path)) {
-    console.log("Error: folder '%s' already exists. Aborting.", _path);
-    process.exit(1);
-  }
-  var pkgPath = _path + '/package.json';
-  if (_path === '.' && fs.existsSync(pkgPath)) {
-    console.log("Error: folder '%s' already contains a node project. Aborting.", _path);
-    process.exit(1);
-  }
+if (_path !== '.' && fs.existsSync(_path)) {
+  console.log("Error: folder '%s' already exists. Aborting.", _path);
+  process.exit(1);
+}
+
+var pkgPath = _path + '/package.json';
+if (_path === '.' && fs.existsSync(pkgPath)) {
+  console.log("Error: folder '%s' already contains a node project. Aborting.", _path);
+  process.exit(1);
+}
 
 var banner = "Building '" + _name + "'";
 
-if (_path && _path != _name) {
+if (_path && _path !== _name) {
   banner += " at '" + _path + "'";
 }
 
 if (_isAPI) {
-  banner += " in API-only mode."
+  banner += " in API-only mode.";
 } else {
   banner += ".";
 }
@@ -67,18 +68,18 @@ console.log(banner);
 if (_path === '.') {
   var readline = require('readline');
 
-  console.log("")
+  console.log("");
   var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
     terminal: false
   });
 
-  var prompt = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
-  rl.question(prompt, function(answer) {
+  var prompt1 = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
+  rl.question(prompt1, function(answer) {
     rl.close();
     answer = answer.toLowerCase();
-    if ( answer != 'y' ) {
+    if ( answer !== 'y' ) {
       process.exit(0);
     }
 
@@ -123,7 +124,7 @@ function build_bootstrapped_project(projectPath, isAPI) {
   var tmp = os.tmpdir();
 
   // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
-  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep };
+  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep; }
 
   var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
   var writer = fs.createWriteStream(zipFilepath);
@@ -148,12 +149,11 @@ function build_bootstrapped_project(projectPath, isAPI) {
 
         if (err) {
           throw err;
-          process.exit(1);
         }
 
         var setupScript  = "#!/usr/bin/env sh\n";
-        setupScript     += "npm -q install supervisor -g\n"
-        setupScript     += "npm -q install forever -g\n"
+        setupScript     += "npm -q install supervisor -g\n";
+        setupScript     += "npm -q install forever -g\n";
 
         if (!isAPI) {
           setupScript   += "npm -q install bower -g\n";
@@ -175,15 +175,15 @@ function build_bootstrapped_project(projectPath, isAPI) {
         setupScript     += "rm -f butler.sh setup.sh\n";
 
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
-          if(err) { throw err; process.exit(1); }
+          if(err) { throw err; }
 
           cli.exec ("chmod u+x " + projectPath + "/setup.sh", function(err, stdout, stderr) {
-            if (err) { throw err; process.exit(); }
+            if (err) { throw err; }
 
-            console.log("Project Created.")
-            console.log("Executing installation of dependencies. This may take several minutes…")
+            console.log("Project Created.");
+            console.log("Executing installation of dependencies. This may take several minutes…");
             var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
-              if (err) { throw err; process.exit(); }
+              if (err) { throw err; }
 
               console.log("");
               console.log("======================= Installation Completed! ===================");
@@ -192,8 +192,8 @@ function build_bootstrapped_project(projectPath, isAPI) {
               console.log("  > npm run dev");
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
-              console.log("http://localhost:3000/")
-              console.log("===================================================================")
+              console.log("http://localhost:3000/");
+              console.log("===================================================================");
               console.log("");
             });
 
@@ -203,7 +203,7 @@ function build_bootstrapped_project(projectPath, isAPI) {
         });
 
       });
-    })
+    });
 
   });
 }
