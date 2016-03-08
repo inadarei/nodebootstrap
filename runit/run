@@ -2,4 +2,4 @@
 # see: https://github.com/phusion/baseimage-docker#adding-additional-daemons
 cd ${HOME_DIR}
 
-npm run docker-start | tee -a ${NODE_LOG_DIR}/${NODE_APP_NAME}.log
+npm run docker-start
