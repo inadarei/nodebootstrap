@@ -38,11 +38,19 @@
     "supertest": "^1.2.0"
   },
   "scripts": {
-    "start": "npm install forever -g && ./bin/start.sh",
-    "dev": "npm install supervisor -g && ./bin/dev_start.sh",
-    "test": "mocha --bail test/ test/acceptance/",
+    "start": "./bin/start.sh",
+    "dev": "./bin/dev_start.sh",
+    "docker-start": "node server.js",
+    "docker-dev-start": "nodemon -L server.js",
+    "docker-build": "docker-compose build --force-rm --no-cache --pull",
+    "docker-up": "docker-compose up -d",
+    "docker-clean-up": "npm run docker-stop && npm run docker-build && npm run docker-up",
+    "docker-stop": "docker-compose down && docker-compose rm -f",
+    "docker-restart": "docker-compose restart",
+    "logs": "docker-compose logs",
+    "test": "export NODE_PATH=${PWD}/lib; mocha --bail test/ test/acceptance/",
     "pretest": "jshint lib test",
-    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
+    "test-cov": "export NODE_PATH=${PWD}/lib; node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
+    "test-travis": "export NODE_PATH=${PWD}/lib; istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
   }
 }
