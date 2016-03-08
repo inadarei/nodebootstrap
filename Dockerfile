@@ -27,9 +27,9 @@ ENV NODE_APP_NAME=api \
     NODE_LOGGER_LEVEL=warning \
     NODE_LOGGER_GRANULARLEVELS=0 \
     NODE_LOGGER_PLUGIN=util \
-    NODE_ENV=development \
+    NODE_ENV=production \
     NODE_CLUSTERED=1 \
-    NODE_HOT_RELOAD=1 \
+    NODE_HOT_RELOAD=0 \
     NODE_CONFIG_DIR=/opt/application/config \
     NODE_LOG_DIR=/opt/application/logs
 
