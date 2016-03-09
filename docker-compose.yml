@@ -1,6 +1,6 @@
 version: '2'
 services:
-  api:
+  app:
     build: .
     volumes:
       - .:/opt/application
@@ -9,7 +9,6 @@ services:
     environment:
       - HOME_DIR=/opt/application
       - NODE_ENV=development
-      - NODE_PATH=/opt/application/lib
       - NODE_CONFIG_DISABLE_FILE_WATCH=Y
       - NODE_LOGGER_LEVEL=info
       - NODE_LOGGER_GRANULARLEVELS=1
@@ -17,5 +16,5 @@ services:
       - NODE_CONFIG_DIR=/opt/application/config
       - NODE_LOG_DIR=/opt/application/logs
       - NODE_HOT_RELOAD=1
-      - NODE_CLUSTERED=0
+      - NODE_CLUSTERED=1
     command: [npm, run, docker-dev-start]
