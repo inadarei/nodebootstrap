@@ -17,9 +17,11 @@ RUN npm install -g nodemon
 
 EXPOSE 3000
 
-ENV NODE_APP_NAME=api \
-    HOME_DIR=/opt/application \
-    NODE_PATH=/opt/application/lib \
+
+# In dev we will always be using docker-compose anyway so values there will override the ENV values in Dockerfile.
+# By having Dockerfile values be sensible production values, you can easily run the
+# container in prod, without using docker-compose (which is nice)
+ENV HOME_DIR=/opt/application \
     NODE_CONFIG_DISABLE_FILE_WATCH=Y \
     NODE_LOGGER_LEVEL=warning \
     NODE_LOGGER_GRANULARLEVELS=0 \
