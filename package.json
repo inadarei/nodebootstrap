@@ -51,7 +51,7 @@
     "logs": "docker-compose logs",
     "test": "export NODE_PATH=${PWD}/lib; mocha --bail test/ test/acceptance/",
     "pretest": "jshint lib test",
-    "test-cov": "export NODE_PATH=${PWD}/lib; node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
-    "test-travis": "export NODE_PATH=${PWD}/lib; istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
   }
 }
