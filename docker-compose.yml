@@ -15,6 +15,5 @@ services:
       - NODE_LOGGER_PLUGIN=util
       - NODE_CONFIG_DIR=/opt/application/config
       - NODE_LOG_DIR=/opt/application/logs
-      - NODE_HOT_RELOAD=1
       - NODE_CLUSTERED=1
     command: [npm, run, docker-dev-start]
