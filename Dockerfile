@@ -28,7 +28,6 @@ ENV HOME_DIR=/opt/application \
     NODE_LOGGER_PLUGIN=util \
     NODE_ENV=production \
     NODE_CLUSTERED=1 \
-    NODE_HOT_RELOAD=0 \
     NODE_CONFIG_DIR=/opt/application/config \
     NODE_LOG_DIR=/opt/application/logs
 
