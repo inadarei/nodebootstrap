@@ -47,7 +47,7 @@
     "docker-clean-up": "npm run docker-stop && npm run docker-build && npm run docker-up",
     "docker-stop": "docker-compose down && docker-compose rm -f",
     "docker-restart": "docker-compose restart",
-    "docker-install-package": "docker-compose run api npm install --save",
+    "docker-install-package": "docker-compose run app npm install --save",
     "docker-test": "docker-compose run app npm test",
     "docker-test-cov": "docker-compose run app npm run test-cov",
     "logs": "docker-compose logs",
