@@ -47,6 +47,10 @@ if [ ! $NODE_SERVE_STATIC ]; then
   export NODE_SERVE_STATIC=1
 fi
 
+if [ ! $NODE_HOT_RELOAD ]; then
+  export NODE_HOT_RELOAD=0
+fi
+
 if [ !  $NODE_CONFIG_DIR ]; then
   export NODE_CONFIG_DIR="$NBS_CURR_PROJECT_PATH/config"
 fi
