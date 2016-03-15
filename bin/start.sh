@@ -5,16 +5,6 @@
 #
 # ATTENTION: You would want to use dev_start.sh script, while developing, instead.
 
-# Set NODE_PATH env variable to 'lib' so that application specific modules
-# are first class citizens of the application
-export NODE_PATH=$PWD/lib:$NODE_PATH
-
-while getopts "t" opt; do
-  case $opt in
-    t) NB_TAIL_LOGS=1;;
-  esac
-done
-
 if [ ! -d "$PWD/node_modules" ]; then
   echo "Please run the shell script from project's root folder"
   exit
@@ -75,69 +65,11 @@ if [ ! -d "$NODE_LOG_DIR" ]; then
   mkdir $NODE_LOG_DIR
 fi
 
-if [ ! -f "$NODE_LOG_DIR/forever.log" ]; then
-    touch $NODE_LOG_DIR/forever.log
-fi
-
-if [ ! -f "$NODE_LOG_DIR/out.log" ]; then
-    touch $NODE_LOG_DIR/out.log
-fi
-
-if [ ! -f "$NODE_LOG_DIR/err.log" ]; then
-    touch $NODE_LOG_DIR/err.log
-fi
-
-
 # Let's make sure you have forever/supervisor installed, if we are gonna need it:
-if [ $NODE_HOT_RELOAD -eq 0 ] && [ ! `which forever` ]; then
-    echo "ERROR: Please install forever with:";
-    echo "  npm install forever -g";
+if [ ! `which nodemon` ]; then
+    echo "ERROR: Please install nodemon with:";
+    echo "  npm install nodemon -g";
     exit 1;
 fi
 
-if [ $NODE_HOT_RELOAD -eq 1 ] && [ ! `which supervisor` ]; then
-    echo "ERROR: Please install supervisor with:";
-    echo "  npm install supervisor -g";
-    exit 1;
-fi
-
-# Let's make sure you NODE_HOT_RELOAD is set to one of the only two allowed values
-if [ ! $NODE_HOT_RELOAD -eq 1 ] && [ ! $NODE_HOT_RELOAD -eq 0 ]; then
-    echo "ERROR: The only two valid values for NODE_HOT_RELOAD are '1' and '0'. You are trying to set $NODE_HOT_RELOAD";
-    exit 1
-fi
-
-# @TODO: not necessarily the best way to stop the process
-if [ !$NODE_HOT_RELOAD ]; then
-    forever stop $NODE_LAUNCH_SCRIPT >/dev/null 2>&1
-fi
-
-# Now that we know there is no old version running, let's start the processes
-
-if [ $NODE_HOT_RELOAD -eq 0 ]; then
-    NCMD="forever start"
-    NCMD="$NCMD -a"
-    NCMD="$NCMD -l $NODE_LOG_DIR/forever.log"
-    NCMD="$NCMD -o $NODE_LOG_DIR/out.log"
-    NCMD="$NCMD -e $NODE_LOG_DIR/err.log"
-else
-    NCMD="supervisor -n exit -w ./lib,$NODE_CONFIG_DIR,$NODE_LAUNCH_SCRIPT"
-fi
-
-NCMD="$NCMD $NODE_LAUNCH_SCRIPT"
-
-$NCMD
-
-if [ $NODE_HOT_RELOAD -eq 0 ]; then
-    echo "--------------- NOTE: --------------"
-    echo "You can stop the application by running (in this folder):"
-    echo "  > forever stop $NODE_LAUNCH_SCRIPT"
-    echo "You can see all Forever-running node apps by issuing:"
-    echo "  > forever list"
-    echo "See more about Forever at: https://github.com/indexzero/forever"
-    echo "------------------------------------"
-fi
-
-if [ $NB_TAIL_LOGS ] && [ $NODE_HOT_RELOAD -eq 0 ]; then
-  tail -f $NODE_LOG_DIR/forever.log
-fi
+nodemon ${NODE_LAUNCH_SCRIPT}
