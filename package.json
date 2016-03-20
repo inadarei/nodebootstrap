@@ -10,7 +10,7 @@
     "url": ""
   },
   "engines": {
-    "node": ">=0.8.8"
+    "node": ">=0.10.8"
   },
   "dependencies": {
     "app-module-path": "^1.0.4",
@@ -22,6 +22,7 @@
     "hbs": "^4.0",
     "lodash": "^4.3.0",
     "metalogger": "*",
+    "nock": "^7.2.2",
     "nodebootstrap-htmlapp": "*",
     "nodebootstrap-server": "*",
     "yaml": "*"
