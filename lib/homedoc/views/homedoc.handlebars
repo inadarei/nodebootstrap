@@ -4,12 +4,12 @@
     "data": [
       {
         "rel": "self",
-        "url": "/"
+        "url": "{{ base_url }}/"
       },
       {
         "label": "Random Password Generator",
         "rel": "/profile#password_generator",
-        "url": "{{base_url}}/pwd",
+        "url": "{{external_api_url}}/pwd",
         "model": "{length}",
         "action": "read",
         "data": [
@@ -24,12 +24,12 @@
         "profile": "/profile#apod",
         "name": "apod",
         "rel": "/profiles#apod",
-        "url": "{{base_url}}/apod"
+        "url": "{{external_api_url}}/apod"
       },
       {
         "label": "Random Name Generator",
         "rel": "/profile#nameGenerator",
-        "url": "{{base_url}}/names",
+        "url": "{{external_api_url}}/names",
         "model": "{gender}",
         "action": "read",
         "data": [
