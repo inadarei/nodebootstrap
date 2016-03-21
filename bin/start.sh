@@ -65,14 +65,14 @@ if [ ! -d "$NODE_LOG_DIR" ]; then
   mkdir $NODE_LOG_DIR
 fi
 
-# Let's make sure you have forever/supervisor installed, if we are gonna need it:
-if [ ! `which nodemon` ]; then
-    echo "ERROR: Please install nodemon with:";
-    echo "  npm install nodemon -g";
-    exit 1;
-fi
+if [ $NODE_ENV == 'development' ]; then
 
-if [ $NODE_ENV == 'development']; then
+  # Let's make sure you have nodemon installed, if we are gonna need it:
+  if [ ! `which nodemon` ]; then
+    echo "ERROR: nodemon missing. Will try to install.";
+    npm install nodemon -g
+  fi
+
   nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
 else
   node ${NODE_LAUNCH_SCRIPT}
