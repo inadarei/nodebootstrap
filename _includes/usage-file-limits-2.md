@@ -14,7 +14,9 @@ Then log out, log back in and run:
 On certain Linux distributions you may also need to raise iNotify limit:
 
 ~~~~~bash
-> sysctl fs.inotify.max_user_instances=16384 && echo sysctl fs.inotify.max_user_instances=16384  | sudo tee /etc/rc.local  
+> sysctl fs.inotify.max_user_instances=16384 \
+> && echo sysctl fs.inotify.max_user_instances=16384 \
+> | sudo tee /etc/rc.local
 ~~~~~
 
 And last, but not least, it's a good idea to also run:

@@ -1,3 +1,4 @@
+List of environmental variables:
 
 NODE_LAUNCH_SCRIPT
 : defaults to "server.js"
