@@ -4,7 +4,7 @@ var os      = require('os')
   , path    = require('path')
   , fs      = require('fs')
   , fse     = require('fs-extra')
-  , unzip   = require('unzip')
+  , extract = require('extract-zip')
   , ncp     = require('ncp').ncp
   , cli     = require('child_process')
   , colors  = require('colors')
@@ -132,10 +132,13 @@ function build_bootstrapped_project(projectPath, isAPI) {
 
   writer.on('finish', function () {
 
-    var extractor = unzip.Extract({ path: tmp });
-    fs.createReadStream(zipFilepath).pipe(extractor);
+    extract(zipFilepath, {dir: tmp}, function (err) {
 
-    extractor.on('close', function() {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+
       fs.unlinkSync(zipFilepath);
 
       var srcPath = tmp + 'nodebootstrap-master';
