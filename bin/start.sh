@@ -72,4 +72,4 @@ if [ ! `which nodemon` ]; then
     exit 1;
 fi
 
-nodemon ${NODE_LAUNCH_SCRIPT}
+nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
