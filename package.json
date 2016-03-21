@@ -22,7 +22,6 @@
     "hbs": "^4.0",
     "lodash": "^4.3.0",
     "metalogger": "*",
-    "nock": "^7.2.2",
     "nodebootstrap-htmlapp": "*",
     "nodebootstrap-server": "*",
     "yaml": "*"
@@ -41,8 +40,8 @@
   "scripts": {
     "start": "./bin/start.sh",
     "dev": "./bin/dev_start.sh",
-    "docker-start": "node server.js",
-    "docker-dev-start": "nodemon -L server.js",
+    "docker-start": "docker-compose run -d -p 3000 app node server.js",
+    "docker-dev-start": "nodemon -L -e js,coffee,jade,handlebars server.js",
     "docker-build": "docker-compose build --force-rm --no-cache --pull",
     "docker-up": "docker-compose up -d",
     "docker-clean-up": "npm run docker-stop && npm run docker-build && npm run docker-up",

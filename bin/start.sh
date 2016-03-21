@@ -72,4 +72,8 @@ if [ ! `which nodemon` ]; then
     exit 1;
 fi
 
-nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
+if [ $NODE_ENV == 'development']; then
+  nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
+else
+  node ${NODE_LAUNCH_SCRIPT}
+fi
