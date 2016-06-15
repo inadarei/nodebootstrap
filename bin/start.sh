@@ -65,7 +65,7 @@ if [ ! -d "$NODE_LOG_DIR" ]; then
   mkdir $NODE_LOG_DIR
 fi
 
-if [ $NODE_ENV == 'development' ]; then
+if [ $NODE_ENV = 'development' ]; then
 
   # Let's make sure you have nodemon installed, if we are gonna need it:
   if [ ! `which nodemon` ]; then
