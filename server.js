@@ -1,29 +1,11 @@
-var server = require('nodebootstrap-server');
+// @see: https://gist.github.com/branneman/8048520
+require('app-module-path').addPath(__dirname + '/lib');
 
-server.setup(function(runningApp) {
-  
-  // runningApp.use(require('express-session')({secret: CONF.app.cookie_secret, resave: false, saveUninitialized: false}));
-  
-  // Choose your favorite view engine(s)  
-  runningApp.set('view engine', 'handlebars');
-  runningApp.engine('handlebars', require('hbs').__express);
-
-  //// you could use two view engines in parallel (if you are brave):  
-  // runningApp.set('view engine', 'j2');
-  // runningApp.engine('j2', require('swig').renderFile);
+var server = require('nodebootstrap-server')
+  , appConfig = require('./appConfig')
+  , app    = require('express')();
 
 
-  //---- Mounting well-encapsulated application modules
-  //---- See: http://vimeo.com/56166857
+app = require('nodebootstrap-htmlapp').setup(app);
 
-  runningApp.use('/hello', require('hello')); // attach to sub-route
-  runningApp.use(require('routes')); // attach to root route
-  
-  // API endpoint attached to root route:
-  runningApp.use('/', require('homedoc')); // attach to sub-route
-  
-  // If you need websockets:
-  // var socketio = require('socket.io')(runningApp.http);
-  // require('fauxchatapp')(socketio);
-  
-});
+server.setup(app, appConfig.setup);

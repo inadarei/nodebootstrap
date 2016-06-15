@@ -1,0 +1,37 @@
+{
+  "name": "nodebootstrap",
+  "description": "Node/Express.js project builder / bootstrapper – capturing Node project composition best practices",
+  "version": "3.5.4",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:inadarei/nodebootstrap.git"
+  },
+  "author": "Irakli Nadareishvili (http://freshblurbs.com)",
+  "contributors": [],
+  "bin": {
+    "nodebootstrap": "./nodebootstrap"
+  },
+  "engines": [
+    "node >=0.10.0"
+  ],
+  "dependencies": {
+    "colors": "^1.0.3",
+    "extract-zip": "^1.5.0",
+    "fs-extra": "^0.26.7",
+    "minimist": "^1.2.0",
+    "ncp": "^2.0.0",
+    "request": "^2.48.0"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "boilerplate",
+    "kit",
+    "bootstrap",
+    "best practices"
+  ],
+  "license": "MIT"
+}

@@ -17,7 +17,7 @@ show_help() {
     echo ""
     echo "       where <command> is one of:"
     echo "            publish  - publishes nodebootstrap to npm registry"
-    echo "            devbuild - npm installs skeleton's package.json for local development"
+    echo "            local    - ssets up local dev environment with npm linked nodebootstrap-server and nodebootstrap-clustering"
     echo " "
 }
 
@@ -50,14 +50,31 @@ cmd=$1;
 
 case "$cmd" in
   "publish")
-    echo "publishing..."
-    rm -rf node_modules && cp package.json.cli package.json && npm publish && rm package.json
+    echo "publishing to npm..."
+    cd cli && cp ../README.md README.md && npm publish && rm README.md && cd ..
     exit 0;
     ;;
-  "devbuild")
-    echo "building dev setup..."
-    rm -rf node_modules && cp package.json.skeleton package.json && npm install && rm package.json
-    rm -rf bin/node_modules && cp package.json.cli bin/package.json && cd bin && npm install && rm package.json && cd ..
+  "local")
+    echo "building local dev setup..."
+
+    rm -rf cli/node_modules && cd cli && npm install && cd ..
+
+    npm rm -g nodebootstrap-server && \
+    npm rm -g nodebootstrap-htmlapp && \
+    npm rm -g nodebootstrap-clustering
+
+    rm -rf node_modules && npm install
+
+    rm -rf node_modules/nodebootstrap-server && npm link ../nodebootstrap-server
+    rm -rf node_modules/nodebootstrap-htmlapp && npm link ../nodebootstrap-htmlapp
+
+    cd ../nodebootstrap-server && rm -rf node_modules && npm install 
+    rm -rf node_modules/nodebootstrap-clustering && npm link ../nodebootstrap-clustering
+    cd -
+
+    cd ../nodebootstrap-htmlapp && rm -rf node_modules && npm install
+    cd -
+
     exit 0;
     ;;
   *)

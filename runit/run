@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 # see: https://github.com/phusion/baseimage-docker#adding-additional-daemons
-cd /opt/application
-npm install
-npm install -g supervisor
-./bin/dev_start.sh
+cd ${HOME_DIR}
+
+npm run docker-start

@@ -1,0 +1,17 @@
+app:
+  build: .
+  volumes:
+    - .:/opt/application
+  ports:
+   - "5000:3000"
+  environment:
+    - HOME_DIR=/opt/application
+    - NODE_ENV=development
+    - NODE_CONFIG_DISABLE_FILE_WATCH=Y
+    - NODE_LOGGER_LEVEL=info
+    - NODE_LOGGER_GRANULARLEVELS=1
+    - NODE_LOGGER_PLUGIN=util
+    - NODE_CONFIG_DIR=/opt/application/config
+    - NODE_HOT_RELOAD=1
+    - NODE_LOG_DIR=/opt/application/logs
+  command: [npm, run, docker-dev-start]

@@ -1,0 +1,59 @@
+{
+  "name": "nodebootstrap-based-app",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "UNLICENSE",
+  "main": "./server.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=0.10.8"
+  },
+  "dependencies": {
+    "app-module-path": "^1.0.4",
+    "body-parser": "^1.14.1",
+    "config": "*",
+    "consolidate": "^0.14.0",
+    "express": "^4.11.0",
+    "glob": "^7.0.0",
+    "hbs": "^4.0",
+    "lodash": "^4.3.0",
+    "metalogger": "*",
+    "nodebootstrap-htmlapp": "*",
+    "nodebootstrap-server": "*",
+    "yaml": "*"
+  },
+  "devDependencies": {
+    "after": "^0.8.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.1.0",
+    "chai": "^3.5.0",
+    "should": "^9.0.0",
+    "jshint": "^2.5.x",
+    "nock": "^7.2.2",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0"
+  },
+  "scripts": {
+    "start": "./bin/start.sh",
+    "dev": "./bin/dev_start.sh",
+    "docker-start": "docker-compose run -d -p 3000 app node server.js",
+    "docker-build": "docker-compose build --force-rm --no-cache --pull",
+    "docker-dev": "docker-compose up -d",
+    "docker-dev-start": "nodemon -L -e js,coffee,jade,handlebars server.js",
+    "docker-clean-up": "npm run docker-stop && npm run docker-build && npm run docker-up",
+    "docker-stop": "docker-compose down && docker-compose rm -f",
+    "docker-restart": "docker-compose restart",
+    "docker-install-package": "docker-compose run app npm install --save",
+    "docker-test": "docker-compose run app npm test",
+    "docker-test-cov": "docker-compose run app npm run test-cov",
+    "logs": "docker-compose logs",
+    "test": "mocha --bail test/ test/acceptance/",
+    "pretest": "jshint lib test",
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
+  }
+}

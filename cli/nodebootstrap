@@ -1,0 +1,212 @@
+#!/usr/bin/env node
+
+var os      = require('os')
+  , path    = require('path')
+  , fs      = require('fs')
+  , fse     = require('fs-extra')
+  , extract = require('extract-zip')
+  , ncp     = require('ncp').ncp
+  , cli     = require('child_process')
+  , colors  = require('colors')
+  , request = require('request');
+
+var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
+
+var version = require('./package.json').version;
+
+var argv = require('minimist')(process.argv.slice(2));
+
+if (argv.v || argv.V || argv.version) {
+  version_info();
+  process.exit(0);
+}
+
+if ( argv.h || argv.help ||
+     argv._.length === 0 || argv._[0].toLowerCase() !== "build" ||
+     typeof argv._[1] === 'undefined' ||
+     argv._[1].length <1) {
+  help();
+  process.exit(0);
+}
+
+var _isAPI = false
+  , _name  = argv._[1]
+  , _path  = _name;
+
+if (argv.a || argv.api)  {
+  _isAPI = true;
+}
+
+if (argv.p || argv.path) {
+  _path = (argv.p) ? argv.p : argv.path;
+}
+
+if (_path !== '.' && fs.existsSync(_path)) {
+  console.log("Error: folder '%s' already exists. Aborting.", _path);
+  process.exit(1);
+}
+
+var pkgPath = _path + '/package.json';
+if (_path === '.' && fs.existsSync(pkgPath)) {
+  console.log("Error: folder '%s' already contains a node project. Aborting.", _path);
+  process.exit(1);
+}
+
+var banner = "Building '" + _name + "'";
+
+if (_path && _path !== _name) {
+  banner += " at '" + _path + "'";
+}
+
+if (_isAPI) {
+  banner += " in API-only mode.";
+} else {
+  banner += ".";
+}
+console.log(banner);
+
+if (_path === '.') {
+  var readline = require('readline');
+
+  console.log("");
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+
+  var prompt1 = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
+  rl.question(prompt1, function(answer) {
+    rl.close();
+    answer = answer.toLowerCase();
+    if ( answer !== 'y' ) {
+      process.exit(0);
+    }
+
+    build_bootstrapped_project(_path, _isAPI);
+  });
+
+} else {
+  build_bootstrapped_project(_path, _isAPI);
+}
+
+
+function version_info() {
+  console.log(require('./package.json').version);
+}
+
+function help() {
+  console.log("");
+  console.log(require('./package.json').description);
+  console.log("");
+  console.log('Usage:'.bold);
+  console.log('  nodebootstrap'.yellow + ' build <project_name>'.green + ' [options]');
+  console.log('');
+  console.log('Options:'.bold);
+  console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>. You can also indicate "." to build directly inside the current folder.');  
+  console.log('  -a, [--api]            build only the lighter skeleton required for API development');
+  console.log('  -h, [--help]           output usage information');
+  console.log('  -v, [-V], [--version]  output the version number');
+  console.log('');
+  console.log('Description:'.bold);
+  console.log('  The \'nodebootstrap build\' command creates a new application with a default');
+  console.log('  structure and configuration at the path you specify.');
+  console.log('');
+  console.log('Example:'.bold);
+  console.log('  nodebootstrap build best-api -p ~/projects/bestapi --api');
+  console.log('');
+  console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
+  console.log('');
+}
+
+function build_bootstrapped_project(projectPath, isAPI) {
+
+  var tmp = os.tmpdir();
+
+  // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
+  if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep; }
+
+  var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
+  var writer = fs.createWriteStream(zipFilepath);
+  var download = request(projectURL).pipe(writer);
+
+  writer.on('finish', function () {
+
+    extract(zipFilepath, {dir: tmp}, function (err) {
+
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+
+      fs.unlinkSync(zipFilepath);
+
+      var srcPath = tmp + 'nodebootstrap-master';
+      var ncp_opts = {stopOnErr: true, clobber: true};
+      ncp.limit = 16;
+
+      fse.ensureDirSync(projectPath); //create destination directory structure, if necessary.
+
+      ncp(srcPath, projectPath, ncp_opts, function (err) {
+        fse.removeSync(srcPath); //clean-up
+
+        if (err) {
+          throw err;
+        }
+
+        var setupScript  = "#!/usr/bin/env sh\n";
+        setupScript     += "npm -q install supervisor -g\n";
+        setupScript     += "npm -q install forever -g\n";
+
+        if (!isAPI) {
+          setupScript   += "npm -q install bower -g\n";
+          setupScript   += "bower install\n";
+        } else {
+          setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
+          setupScript   += "rm -f .bowerrc bower.json \n";
+
+          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
+          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
+          setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
+        }
+
+        setupScript     += "rm -rf README.md LICENSE cli\n";
+        setupScript     += "npm -q install\n";
+        setupScript     += "chmod u+x ./bin/start.sh\n";
+        setupScript     += "chmod u+x ./bin/stop.sh\n";
+        setupScript     += "chmod u+x ./bin/dev_start.sh\n";
+        setupScript     += "rm -f butler.sh setup.sh\n";
+
+        fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
+          if(err) { throw err; }
+
+          cli.exec ("chmod u+x " + projectPath + "/setup.sh", function(err, stdout, stderr) {
+            if (err) { throw err; }
+
+            console.log("Project Created.");
+            console.log("Executing installation of dependencies. This may take several minutes…");
+            var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
+              if (err) { throw err; }
+
+              console.log("");
+              console.log("======================= Installation Completed! ===================");
+              console.log("You can now run your newly minted Node app by executing:");
+              console.log("  > cd " + projectPath);
+              console.log("  > npm run dev");
+              console.log("");
+              console.log("Once the app is up and running you can access it from your browser at: ");
+              console.log("http://localhost:3000/");
+              console.log("===================================================================");
+              console.log("");
+            });
+
+            setupcli.stdout.pipe(process.stdout);
+
+          });
+        });
+
+      });
+    });
+
+  });
+}
