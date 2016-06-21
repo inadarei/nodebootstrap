@@ -2,10 +2,10 @@
 # FROM irakli/nodejs:latest
 
 # Alpine Linux-based, tiny Node container:
-FROM irakli/node-alpine:4.3-runit
+FROM irakli/node-alpine:4.4-runit
 
 
-ENV REFRESHED_AT 2016-02-15_1044_EST
+ENV REFRESHED_AT 2016-06-21_0020_EST
 
 ADD ./ /opt/application
 WORKDIR /opt/application
