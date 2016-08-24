@@ -4,6 +4,15 @@
 # Alpine Linux-based, tiny Node container:
 FROM irakli/node-alpine:4.4-runit
 
+# Adding pythong for node-gyp 
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install --upgrade pip \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
 
 ENV REFRESHED_AT 2016-06-21_0020_EST
 
