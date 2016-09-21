@@ -13,7 +13,7 @@
     "node": ">=0.10.8"
   },
   "dependencies": {
-    "app-module-path": "^1.0.4",
+    "app-module-path": "^2.0.0",
     "body-parser": "^1.14.1",
     "config": "*",
     "consolidate": "^0.14.0",
