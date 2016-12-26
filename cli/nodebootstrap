@@ -155,8 +155,7 @@ function build_bootstrapped_project(projectPath, isAPI) {
         }
 
         var setupScript  = "#!/usr/bin/env sh\n";
-        setupScript     += "npm -q install supervisor -g\n";
-        setupScript     += "npm -q install forever -g\n";
+        setupScript     += "npm -q install nodemon -g\n";
 
         if (!isAPI) {
           setupScript   += "npm -q install bower -g\n";
