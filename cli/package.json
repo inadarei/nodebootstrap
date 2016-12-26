@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project builder / bootstrapper – capturing Node project composition best practices",
-  "version": "3.5.4",
+  "version": "3.6.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -15,12 +15,12 @@
     "nodebootstrap": "./nodebootstrap"
   },
   "engines": [
-    "node >=0.10.0"
+    "node >=4.0.0"
   ],
   "dependencies": {
     "colors": "^1.0.3",
     "extract-zip": "^1.5.0",
-    "fs-extra": "^0.26.7",
+    "fs-extra": "^1.0.0",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "request": "^2.48.0"
