@@ -65,7 +65,7 @@ if [ ! -d "$NODE_LOG_DIR" ]; then
   mkdir $NODE_LOG_DIR
 fi
 
-if [ $NODE_ENV = 'development' ]; then
+if [ $NODE_HOT_RELOAD = 1 ]; then
 
   # Let's make sure you have nodemon installed, if we are gonna need it:
   if [ ! `which nodemon` ]; then
@@ -73,7 +73,11 @@ if [ $NODE_ENV = 'development' ]; then
     npm install nodemon -g
   fi
 
-  nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
+  if [ $NB_IS_CONTAINER = 1 ]; then
+    nodemon -L -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
+  else
+    nodemon -e js,coffee,jade,handlebars ${NODE_LAUNCH_SCRIPT}
+  fi
 else
   node ${NODE_LAUNCH_SCRIPT}
 fi
