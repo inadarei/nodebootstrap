@@ -5,4 +5,7 @@ app:
     - /opt/application/node_modules
   ports:
    - "3000"
-  command: bin/start.sh
+  environment:
+    - NODE_ENV=development
+    - NODE_HOT_RELOAD=1
+  command: bin/dev_start.sh
