@@ -1,5 +1,5 @@
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 #permalink: /:year-:month-:day/:title.html
 safe: true
 lsi: false
