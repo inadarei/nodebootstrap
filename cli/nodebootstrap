@@ -11,6 +11,7 @@ var os      = require('os')
   , request = require('request');
 
 var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
+var projectURLMicroservice = "https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip";
 
 var version = require('./package.json').version;
 
@@ -22,19 +23,24 @@ if (argv.v || argv.V || argv.version) {
 }
 
 if ( argv.h || argv.help ||
-     argv._.length === 0 || argv._[0].toLowerCase() !== "build" ||
-     typeof argv._[1] === 'undefined' ||
-     argv._[1].length <1) {
+     argv._.length === 0 ||
+     typeof argv._[0] === 'undefined' ||
+     argv._[0].length <2) {
   help();
   process.exit(0);
 }
 
-var _isAPI = false
-  , _name  = argv._[1]
+var mode   = "microservice"
+  , _name  = argv._[0]
   , _path  = _name;
 
-if (argv.a || argv.api)  {
-  _isAPI = true;
+if (argv.m || argv.mode)  {
+  mode = argv.m || argv.mode;
+}
+if (['webapp', 'api', 'microservice'].indexOf(mode) === -1) {
+  console.error("ERROR: invalid value provided for the 'mode' parameter.");
+  console.log("       Please run `nodebootstrap -h` to see allowed values."); 
+  process.exit(1);
 }
 
 if (argv.p || argv.path) {
@@ -58,12 +64,23 @@ if (_path && _path !== _name) {
   banner += " at '" + _path + "'";
 }
 
-if (_isAPI) {
-  banner += " in API-only mode.";
+if (mode) {
+  banner += " in " + mode +  " mode.";
 } else {
   banner += ".";
 }
 console.log(banner);
+
+var rlSync = require('readline-sync');
+
+if (mode === "microservice") {
+  console.log(" ATTENTION: microservice mode requires properly set up Docker.");
+  var dockerSetUp = rlSync.question('Do you have proper Docker setup (y/n)? ');
+  dockerSetUp = dockerSetUp.toLowerCase();
+  if ( dockerSetUp !== 'y' ) {
+    process.exit(0);
+  }
+}
 
 if (_path === '.') {
   var readline = require('readline');
@@ -83,11 +100,11 @@ if (_path === '.') {
       process.exit(0);
     }
 
-    build_bootstrapped_project(_path, _isAPI);
+    build_bootstrapped_project(_path, mode);
   });
 
 } else {
-  build_bootstrapped_project(_path, _isAPI);
+  build_bootstrapped_project(_path, mode);
 }
 
 
@@ -100,26 +117,28 @@ function help() {
   console.log(require('./package.json').description);
   console.log("");
   console.log('Usage:'.bold);
-  console.log('  nodebootstrap'.yellow + ' build <project_name>'.green + ' [options]');
+  console.log('  nodebootstrap'.yellow + ' <project_name>'.green + ' [options]');
   console.log('');
   console.log('Options:'.bold);
-  console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>. You can also indicate "." to build directly inside the current folder.');  
-  console.log('  -a, [--api]            build only the lighter skeleton required for API development');
+  console.log('  -m, [--mode]           build mode to use.');
+  console.log('                           Possible values: "webapp", "api" or "microservice" (default).');
+  console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>.'); 
+  console.log('                           You can also indicate "." to build directly inside the current folder.');
   console.log('  -h, [--help]           output usage information');
   console.log('  -v, [-V], [--version]  output the version number');
   console.log('');
   console.log('Description:'.bold);
-  console.log('  The \'nodebootstrap build\' command creates a new application with a default');
+  console.log('  The \'nodebootstrap \' command creates a new application with a default');
   console.log('  structure and configuration at the path you specify.');
   console.log('');
   console.log('Example:'.bold);
-  console.log('  nodebootstrap build best-api -p ~/projects/bestapi --api');
+  console.log('  nodebootstrap ms-my-first-microservice');
   console.log('');
   console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
   console.log('');
 }
 
-function build_bootstrapped_project(projectPath, isAPI) {
+function build_bootstrapped_project(projectPath, mode) {
 
   var tmp = os.tmpdir();
 
@@ -128,6 +147,10 @@ function build_bootstrapped_project(projectPath, isAPI) {
 
   var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
   var writer = fs.createWriteStream(zipFilepath);
+
+  if (mode == "microservice") {
+    projectURL = projectURLMicroservice;
+  }
   var download = request(projectURL).pipe(writer);
 
   writer.on('finish', function () {
@@ -141,7 +164,13 @@ function build_bootstrapped_project(projectPath, isAPI) {
 
       fs.unlinkSync(zipFilepath);
 
-      var srcPath = tmp + 'nodebootstrap-master';
+      var srcPath;
+      if (mode !== "microservice") {
+        srcPath = tmp + 'nodebootstrap-master';
+      } else {
+        srcPath = tmp + 'nodebootstrap-microservice-master';
+      }
+      
       var ncp_opts = {stopOnErr: true, clobber: true};
       ncp.limit = 16;
 
@@ -155,27 +184,30 @@ function build_bootstrapped_project(projectPath, isAPI) {
         }
 
         var setupScript  = "#!/usr/bin/env sh\n";
-        setupScript     += "npm -q install nodemon -g\n";
+        if (mode === "webapp" || mode === "api") {
+          setupScript     += "npm -q install nodemon -g\n";
 
-        if (!isAPI) {
-          setupScript   += "npm -q install bower -g\n";
-          setupScript   += "bower install\n";
-        } else {
-          setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
-          setupScript   += "rm -f .bowerrc bower.json \n";
+          if (mode === "webapp") {
+            setupScript   += "npm -q install bower -g\n";
+            setupScript   += "bower install\n";
+          } else if (mode === "api") {
+            setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
+            setupScript   += "rm -f .bowerrc bower.json \n";
 
-          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
-          setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
-          setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
+            setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
+            setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
+            setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
+          } // default: microservice
+
+            setupScript     += "rm -rf README.md LICENSE cli\n";
+            setupScript     += "npm -q install\n";
+            setupScript     += "chmod u+x ./bin/start.sh\n";
+            setupScript     += "chmod u+x ./bin/stop.sh\n";
+            setupScript     += "chmod u+x ./bin/dev_start.sh\n";
+            setupScript     += "rm -f butler.sh setup.sh\n";
+        } else { // microservice is much easier :)
+          setupScript     += "";
         }
-
-        setupScript     += "rm -rf README.md LICENSE cli\n";
-        setupScript     += "npm -q install\n";
-        setupScript     += "chmod u+x ./bin/start.sh\n";
-        setupScript     += "chmod u+x ./bin/stop.sh\n";
-        setupScript     += "chmod u+x ./bin/dev_start.sh\n";
-        setupScript     += "rm -f butler.sh setup.sh\n";
-
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
           if(err) { throw err; }
 
@@ -191,10 +223,19 @@ function build_bootstrapped_project(projectPath, isAPI) {
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
               console.log("  > cd " + projectPath);
-              console.log("  > npm run dev");
+              if (mode !== "microservice") {
+                console.log("  > npm run dev");
+              } else {
+                console.log("  > npm run clean");
+              }
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
-              console.log("http://localhost:3000/");
+              if (mode !== "microservice") {
+                console.log("http://localhost:3000/");
+              } else {
+                console.log("http://localhost:5501/");
+              }
+              
               console.log("===================================================================");
               console.log("");
             });
