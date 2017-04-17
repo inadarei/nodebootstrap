@@ -74,7 +74,7 @@ console.log(banner);
 var rlSync = require('readline-sync');
 
 if (mode === "microservice") {
-  console.log(" ATTENTION: microservice mode requires properly set up Docker.");
+  console.log(" ATTENTION: microservice mode requires properly set-up Docker environment.");
   var dockerSetUp = rlSync.question('Do you have proper Docker setup (y/n)? ');
   dockerSetUp = dockerSetUp.toLowerCase();
   if ( dockerSetUp !== 'y' ) {
@@ -132,7 +132,7 @@ function help() {
   console.log('  structure and configuration at the path you specify.');
   console.log('');
   console.log('Example:'.bold);
-  console.log('  nodebootstrap ms-my-first-microservice');
+  console.log('  nodebootstrap ms-first');
   console.log('');
   console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
   console.log('');
@@ -206,7 +206,8 @@ function build_bootstrapped_project(projectPath, mode) {
             setupScript     += "chmod u+x ./bin/dev_start.sh\n";
             setupScript     += "rm -f butler.sh setup.sh\n";
         } else { // microservice is much easier :)
-          setupScript     += "";
+            setupScript     += "rm -rf node_modules\n"; // just in case
+            setupScript     += "npm run build\n";
         }
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
           if(err) { throw err; }
@@ -226,7 +227,7 @@ function build_bootstrapped_project(projectPath, mode) {
               if (mode !== "microservice") {
                 console.log("  > npm run dev");
               } else {
-                console.log("  > npm run clean");
+                console.log("  > npm start");
               }
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
