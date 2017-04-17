@@ -34,7 +34,7 @@
     "should": "^11.0.0",
     "jshint": "^2.5.x",
     "nock": "^9.0.0",
-    "sinon": "^1.17.3",
+    "sinon": "^2.0.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
