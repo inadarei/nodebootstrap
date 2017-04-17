@@ -21,6 +21,7 @@ title: NodeBootstrap Reference
 </div>
 </div><!-- //.row -->
 
+<!--
 <div class="row">
 <div class="col-md-6 narrative" markdown="1"><a class="sectional" name="docker-support"></a>
 {% include quickstart-docker-1.md %}
@@ -28,7 +29,7 @@ title: NodeBootstrap Reference
 <div class="col-md-6 code fancydl" markdown="1">
 {% include quickstart-docker-2.md %}
 </div>
-</div><!-- //.row -->
+</div>--><!-- //.row -->
 
 <div class="row">
 <div class="col-md-6 narrative" markdown="1"><a class="sectional" name="encapsulation"></a>

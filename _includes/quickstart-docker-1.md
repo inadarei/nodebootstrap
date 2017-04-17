@@ -1,9 +1,13 @@
 
 ### Docker Support
 
-Docker containers are an extremely convenient way of pre-packaging complex applications for easy installation on large number of hosting providers and systems.
+Docker containers are an extremely convenient way of pre-packaging complex
+applications for easy installation on large number of hosting providers and
+systems.
 
-Nodebootstrap comes with Docker batteries included. As soon as you create a new project you can launch it in a container, given that you have Docker tooling on your machine. If you installation steps looked like the following:
+Nodebootstrap comes with Docker batteries included. As soon as you create a new
+project you can launch it in a container, given that you have Docker tooling on
+your machine. If you installation steps looked like the following:
 
 ~~~~ bash
 > nodebootstrap build firstapp
