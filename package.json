@@ -31,11 +31,11 @@
     "istanbul": "^0.4.2",
     "mocha": "^3.0.0",
     "chai": "^3.5.0",
-    "should": "^11.0.0",
+    "should": "^11.1.1",
     "jshint": "^2.5.x",
-    "nock": "^9.0.0",
+    "nock": "^9.0.2",
     "sinon": "^1.17.3",
-    "supertest": "^2.0.0"
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "./bin/start.sh",
