@@ -206,6 +206,14 @@ function build_bootstrapped_project(projectPath, mode) {
             setupScript     += "chmod u+x ./bin/dev_start.sh\n";
             setupScript     += "rm -f butler.sh setup.sh\n";
         } else { // microservice is much easier :)
+            // make name safe
+            var ms_name = _name.replace(/[^a-z0-9\-]/gi,'');
+            if (!ms_name.startsWith("ms-")) {
+              ms_name = "ms-" + ms_name;
+            }
+            // @todo: safe port using https://github.com/indexzero/node-portfinder
+            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' docker-compose.yml \n";
+            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' package.json \n";
             setupScript     += "rm -rf node_modules\n"; // just in case
             setupScript     += "npm run build\n";
         }
@@ -223,10 +231,12 @@ function build_bootstrapped_project(projectPath, mode) {
               console.log("");
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
-              console.log("  > cd " + projectPath);
               if (mode !== "microservice") {
+                console.log("  > cd " + projectPath);
                 console.log("  > npm run dev");
               } else {
+                //console.log("  > cd " + projectPath.replace(_name, ms_name));
+                console.log("  > cd " + projectPath);
                 console.log("  > npm start");
               }
               console.log("");
