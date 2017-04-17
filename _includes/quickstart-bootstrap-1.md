@@ -9,4 +9,5 @@ You can replace `hello` in the installation command, with a sensible name for
 your project. Once the new project is built (typically takes less than a
 minute), you need to start it via a bash script. When the application finishes
 start you should see a simple "home document" response at:
-`http://localhost:3000/`
+`http://localhost:3000/` (for microservice mode, follow instructions given
+by `npm start` since the port is not going to be `3000`.)
