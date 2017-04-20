@@ -11,10 +11,7 @@
 
 Organize your Node project like a pro. Now supports a Microservice mode!
 
-Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: clustering, Docker-support, error-handling, code modularity, logging, views, environments – you name it. And all of that without having to deal with a heavy or an opinionated framework!
-
-NodeBootstrap is a project skeleton for [Node.js](http://nodejs.org/)/[Express.js](http://expressjs.com)
-development. It captures common best-practices, used by Node community, for project layout and setup configuration.
+Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: microservice-style setup, clustering, Docker-support, database migrations, automated testing, error-handling, modularity, advanced logging, templated views, environments  – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
 For demonstration purposes NodeBootstrap also packs Twitter's [Bootstrap](http://twitter.github.com/bootstrap/)
 framework and shows how to manage Mustache/Handlebars-based view. It's not a mandatory part of the project.
