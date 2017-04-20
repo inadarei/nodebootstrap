@@ -13,10 +13,6 @@ Organize your Node project like a pro. Now supports a Microservice mode!
 
 Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: microservice-style setup, clustering, Docker-support, database migrations, automated testing, error-handling, modularity, advanced logging, templated views, environments  – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
-For demonstration purposes NodeBootstrap also packs Twitter's [Bootstrap](http://twitter.github.com/bootstrap/)
-framework and shows how to manage Mustache/Handlebars-based view. It's not a mandatory part of the project.
-NodeBootstrap is often used for web API projects, where there is no human-centric UI.
-
 To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 [![Join the chat at https://gitter.im/inadarei/nodebootstrap](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/inadarei/nodebootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
