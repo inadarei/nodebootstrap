@@ -13,6 +13,8 @@ Organize your Node project like a pro. Now supports a Microservice mode!
 
 Right out of the gate N.B. gets a [metric] ton of boilerplate taken care of: microservice-style setup, clustering, Docker-support, database migrations, automated testing, error-handling, modularity, advanced logging, templated views, environments  – you name it. And all of that without having to deal with a heavy or an opinionated framework!
 
+![Install Microservice](http://nodebootstrap.io/images/nodebootstrap_installv4.png)
+
 To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 [![Join the chat at https://gitter.im/inadarei/nodebootstrap](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/inadarei/nodebootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
