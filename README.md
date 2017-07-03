@@ -19,7 +19,7 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 [![Join the chat at https://gitter.im/inadarei/nodebootstrap](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/inadarei/nodebootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-If you like Nodebootstrap, also check out: [Microservices Workspace](https://github.com/inadarei/microservices-workspace) project to see how you can orchestrate multilingual (polyglot) microservices environment as a holistic and simple development environment.
+If you like Nodebootstrap, also check out: [Microservices Workspace](https://github.com/inadarei/microservices-workspace) project to see how you can orchestrate multilingual (polyglot) microservices setup as a holistic and simple development environment.
 
 ## License
 
