@@ -1,59 +1,38 @@
 {
-  "name": "nodebootstrap-based-app",
-  "private": true,
-  "description": "",
-  "author": "",
-  "license": "UNLICENSE",
-  "main": "./server.js",
+  "name": "nodebootstrap",
+  "description": "Node/Express.js project bootstrapper loaded with best-practices",
+  "version": "4.2.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:inadarei/nodebootstrap.git"
   },
-  "engines": {
-    "node": ">=6.2"
+  "author": "Irakli Nadareishvili (http://freshblurbs.com)",
+  "contributors": [],
+  "bin": {
+    "nodebootstrap": "./nodebootstrap"
   },
+  "engines": [
+    "node >=4.0.0"
+  ],
   "dependencies": {
-    "app-module-path": "^2.1.0",
-    "body-parser": "^1.14.1",
-    "config": "*",
-    "consolidate": "^0.14.0",
-    "express": "^4.11.0",
-    "glob": "^7.0.0",
-    "hbs": "^4.0",
-    "lodash": "^4.3.0",
-    "metalogger": "*",
-    "nodebootstrap-htmlapp": "*",
-    "nodebootstrap-server": "*",
-    "yaml": "*"
+    "colors": "^1.0.3",
+    "extract-zip": "^1.5.0",
+    "fs-extra": "^1.0.0",
+    "minimist": "^1.2.0",
+    "ncp": "^2.0.0",
+    "request": "^2.48.0",
+    "readline-sync": "^1.4.7"
   },
-  "devDependencies": {
-    "after": "^0.8.1",
-    "istanbul": "^0.4.2",
-    "mocha": "^3.0.0",
-    "chai": "^3.5.0",
-    "should": "^11.1.1",
-    "jshint": "^2.5.x",
-    "nock": "^9.0.2",
-    "sinon": "^1.17.3",
-    "supertest": "^3.0.0"
-  },
-  "scripts": {
-    "start": "./bin/start.sh",
-    "dev": "./bin/dev_start.sh",
-    "docker-start": "docker-compose up -d",
-    "docker-build": "docker-compose build --force-rm --no-cache --pull",
-    "docker-dev": "docker-compose -f docker-compose.dev.yml up -d",
-    "docker-clean-up": "npm run docker-stop && npm run docker-build && npm run docker-up",
-    "docker-stop": "docker-compose down && docker-compose rm -f",
-    "docker-restart": "docker-compose restart",
-    "docker-install-package": "docker-compose run app npm install --save",
-    "docker-test": "docker-compose run app npm test",
-    "docker-test-cov": "docker-compose run app npm run test-cov",
-    "logs": "docker-compose logs",
-    "logs-tail": "docker-compose logs -f",
-    "test": "mocha --bail test/ test/acceptance/",
-    "pretest": "jshint lib test",
-    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
-  }
+  "keywords": [
+    "node",
+    "express",
+    "boilerplate",
+    "kit",
+    "bootstrap",
+    "best practices"
+  ],
+  "license": "MIT"
 }

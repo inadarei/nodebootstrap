@@ -10,7 +10,7 @@ var os      = require('os')
   , colors  = require('colors')
   , request = require('request');
 
-var projectURL = "https://github.com/inadarei/nodebootstrap/archive/master.zip";
+var projectURL = "https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip";
 var projectURLMicroservice = "https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip";
 
 var version = require('./package.json').version;
@@ -166,7 +166,7 @@ function build_bootstrapped_project(projectPath, mode) {
 
       var srcPath;
       if (mode !== "microservice") {
-        srcPath = tmp + 'nodebootstrap-master';
+        srcPath = tmp + 'nodebootstrap-webapp-master';
       } else {
         srcPath = tmp + 'nodebootstrap-microservice-master';
       }

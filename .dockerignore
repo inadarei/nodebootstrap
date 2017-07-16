@@ -1,2 +1,0 @@
-# Put files and paths here that shouldn't get into Docker
-npm-debug.log*
