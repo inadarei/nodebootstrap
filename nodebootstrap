@@ -37,6 +37,7 @@ var mode   = "microservice"
 if (argv.m || argv.mode)  {
   mode = argv.m || argv.mode;
 }
+
 if (['webapp', 'api', 'microservice'].indexOf(mode) === -1) {
   console.error("ERROR: invalid value provided for the 'mode' parameter.");
   console.log("       Please run `nodebootstrap -h` to see allowed values."); 
@@ -131,8 +132,11 @@ function help() {
   console.log('  The \'nodebootstrap \' command creates a new application with a default');
   console.log('  structure and configuration at the path you specify.');
   console.log('');
-  console.log('Example:'.bold);
-  console.log('  nodebootstrap ms-first');
+  console.log('Examples:'.bold);
+  console.log('  # create a skeleton of a containerized microservice:');  
+  console.log('  > nodebootstrap ms-first');
+  console.log('  # create a skeleton of an express MVC webapp:');    
+  console.log('  > nodebootstrap -m webapp nodeapp-first');
   console.log('');
   console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
   console.log('');
