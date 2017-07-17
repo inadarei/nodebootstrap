@@ -39,7 +39,7 @@ if (argv.m || argv.mode)  {
   mode = argv.m || argv.mode;
 }
 
-if (['webapp', 'api', 'microservice'].indexOf(mode) === -1) {
+if (['webapp', 'api', 'microservice', 'cli'].indexOf(mode) === -1) {
   console.error("ERROR: invalid value provided for the 'mode' parameter.");
   console.log("       Please run `nodebootstrap -h` to see allowed values."); 
   process.exit(1);
@@ -155,8 +155,11 @@ function build_bootstrapped_project(projectPath, mode) {
   var zipFilepath = tmp + Date.now() + "-nodebootstrap.zip";
   var writer = fs.createWriteStream(zipFilepath);
 
-  if (mode == "microservice") {
+  if (mode === "microservice") {
     projectURL = projectURLMicroservice;
+  }
+  if (mode === "cli") {
+    projectURL = projectURLCLI;
   }
   var download = request(projectURL).pipe(writer);
 
@@ -172,10 +175,12 @@ function build_bootstrapped_project(projectPath, mode) {
       fs.unlinkSync(zipFilepath);
 
       var srcPath;
-      if (mode !== "microservice") {
-        srcPath = tmp + 'nodebootstrap-webapp-master';
-      } else {
+      if (mode === "microservice") {
         srcPath = tmp + 'nodebootstrap-microservice-master';
+      } else if (mode == 'cli') {
+        srcPath = tmp + 'nodebootstrap-cli-master';
+      } else {
+        srcPath = tmp + 'nodebootstrap-webapp-master';
       }
       
       var ncp_opts = {stopOnErr: true, clobber: true};
@@ -189,7 +194,7 @@ function build_bootstrapped_project(projectPath, mode) {
         if (err) {
           throw err;
         }
-
+console.log("------------ " + mode);
         var setupScript  = "#!/usr/bin/env sh\n";
         if (mode === "webapp" || mode === "api") {
           setupScript     += "npm -q install nodemon -g\n";
@@ -205,13 +210,19 @@ function build_bootstrapped_project(projectPath, mode) {
             setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
             setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
           } // default: microservice
-
-            setupScript     += "rm -rf README.md LICENSE cli\n";
+            setupScript     += "rm -rf README.md LICENSE\n";
             setupScript     += "npm -q install\n";
             setupScript     += "chmod u+x ./bin/start.sh\n";
             setupScript     += "chmod u+x ./bin/stop.sh\n";
             setupScript     += "chmod u+x ./bin/dev_start.sh\n";
-            setupScript     += "rm -f butler.sh setup.sh\n";
+        } else if (mode === "cli") {
+            var cli_name   = _name.replace(/[^a-z0-9\-]/gi,'');
+            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' docker-compose.yml \n";
+            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' package.json \n";
+            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' Makefile \n";                        
+            setupScript   += "rm -rf node_modules\n"; // just in case
+            setupScript   += "make\n"; // just in case
+            setupScript   += "make stop\n"; // just in case                        
         } else { // microservice is much easier :)
             // make name safe
             var ms_name = _name.replace(/[^a-z0-9\-]/gi,'');
@@ -222,10 +233,10 @@ function build_bootstrapped_project(projectPath, mode) {
             setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' docker-compose.yml \n";
             setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' package.json \n";
             setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' Makefile \n";            
-            setupScript     += "rm -rf node_modules\n"; // just in case
-            setupScript     += "npm run build\n";
-            setupScript     += "npm start\n";
-            setupScript     += "npm stop\n";
+            setupScript   += "rm -rf node_modules\n"; // just in case
+            setupScript   += "npm run build\n";
+            setupScript   += "npm start\n";
+            setupScript   += "npm stop\n";
         }
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
           if(err) { throw err; }
@@ -241,10 +252,10 @@ function build_bootstrapped_project(projectPath, mode) {
               console.log("");
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
-              if (mode !== "microservice") {
+              if (mode === "webapp" || mode === "api") {
                 console.log("  > cd " + projectPath);
                 console.log("  > npm run dev");
-              } else {
+              } else { // works for microservice and cli
                 //console.log("  > cd " + projectPath.replace(_name, ms_name));
                 console.log("  > cd " + projectPath);
                 console.log("  > make");
