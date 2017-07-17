@@ -21,6 +21,17 @@ To learn more: [http://nodebootstrap.io](http://nodebootstrap.io)
 
 If you like Nodebootstrap, also check out: [Microservices Workspace](https://github.com/inadarei/microservices-workspace) project to see how you can orchestrate multilingual (polyglot) microservices setup as a holistic and simple development environment.
 
+## Examples:
+
+```
+  # create a skeleton of a containerized microservice:
+  > nodebootstrap ms-first
+  # create a skeleton of an express MVC webapp:
+  > nodebootstrap -m webapp nodeapp-first
+  # create a skeleton of a console or client Node application
+  > nodebootstrap -m cli client-first
+```
+
 ## License
 
 [MIT](LICENSE)
