@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project bootstrapper loaded with best-practices",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

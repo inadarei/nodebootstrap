@@ -12,6 +12,7 @@ var os      = require('os')
 
 var projectURL = "https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip";
 var projectURLMicroservice = "https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip";
+var projectURLCLI = "https://github.com/inadarei/nodebootstrap-cli/archive/master.zip";
 
 var version = require('./package.json').version;
 
@@ -122,7 +123,7 @@ function help() {
   console.log('');
   console.log('Options:'.bold);
   console.log('  -m, [--mode]           build mode to use.');
-  console.log('                           Possible values: "webapp", "api" or "microservice" (default).');
+  console.log('                           Possible values: "webapp", "api", "cli" or "microservice" (default).');
   console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>.'); 
   console.log('                           You can also indicate "." to build directly inside the current folder.');
   console.log('  -h, [--help]           output usage information');
@@ -137,6 +138,8 @@ function help() {
   console.log('  > nodebootstrap ms-first');
   console.log('  # create a skeleton of an express MVC webapp:');    
   console.log('  > nodebootstrap -m webapp nodeapp-first');
+  console.log('  # create a skeleton of a console or client Node application');  
+  console.log('  > nodebootstrap -m cli client-first');  
   console.log('');
   console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
   console.log('');
@@ -218,6 +221,7 @@ function build_bootstrapped_project(projectPath, mode) {
             // @todo: safe port using https://github.com/indexzero/node-portfinder
             setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' docker-compose.yml \n";
             setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' package.json \n";
+            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' Makefile \n";            
             setupScript     += "rm -rf node_modules\n"; // just in case
             setupScript     += "npm run build\n";
             setupScript     += "npm start\n";
@@ -243,7 +247,7 @@ function build_bootstrapped_project(projectPath, mode) {
               } else {
                 //console.log("  > cd " + projectPath.replace(_name, ms_name));
                 console.log("  > cd " + projectPath);
-                console.log("  > npm start");
+                console.log("  > make");
               }
               console.log("");
               console.log("Once the app is up and running you can access it from your browser at: ");
