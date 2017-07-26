@@ -249,6 +249,8 @@ console.log("------------ " + mode);
             var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
               if (err) { throw err; }
 
+              fs.unlinkSync("./setup.sh");
+
               console.log("");
               console.log("======================= Installation Completed! ===================");
               console.log("You can now run your newly minted Node app by executing:");
