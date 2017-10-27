@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project bootstrapper loaded with best-practices",
-  "version": "4.3.3",
+  "version": "4.3.4",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -20,7 +20,7 @@
   "dependencies": {
     "colors": "^1.0.3",
     "extract-zip": "^1.5.0",
-    "fs-extra": "^1.0.0",
+    "fs-extra": "^4.0.0",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "request": "^2.48.0",

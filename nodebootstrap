@@ -145,6 +145,14 @@ function help() {
   console.log('');
 }
 
+function logToFile(data) {
+  var d = new Date();
+  var timestamp = d.toLocaleString();       // -> "2/1/2013 7:37:08 AM"
+  var options = {"flag" : 'a+'};
+  var msg = "\n " + timestamp + ": " + data;
+  fs.writeFileSync("/tmp/ika.log", msg, options);
+}
+
 function build_bootstrapped_project(projectPath, mode) {
 
   var tmp = os.tmpdir();
@@ -166,13 +174,8 @@ function build_bootstrapped_project(projectPath, mode) {
   writer.on('finish', function () {
 
     extract(zipFilepath, {dir: tmp}, function (err) {
-
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-
       fs.unlinkSync(zipFilepath);
+      checkErrorFatal(err);
 
       var srcPath;
       if (mode === "microservice") {
@@ -190,66 +193,22 @@ function build_bootstrapped_project(projectPath, mode) {
 
       ncp(srcPath, projectPath, ncp_opts, function (err) {
         fse.removeSync(srcPath); //clean-up
+        checkErrorFatal(err);
 
-        if (err) {
-          throw err;
-        }
-console.log("------------ " + mode);
-        var setupScript  = "#!/usr/bin/env sh\n";
-        if (mode === "webapp" || mode === "api") {
-          setupScript     += "npm -q install nodemon -g\n";
-
-          if (mode === "webapp") {
-            setupScript   += "npm -q install bower -g\n";
-            setupScript   += "bower install\n";
-          } else if (mode === "api") {
-            setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
-            setupScript   += "rm -f .bowerrc bower.json \n";
-
-            setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
-            setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
-            setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
-          } // default: microservice
-            setupScript     += "rm -rf README.md LICENSE\n";
-            setupScript     += "npm -q install\n";
-            setupScript     += "chmod u+x ./bin/start.sh\n";
-            setupScript     += "chmod u+x ./bin/stop.sh\n";
-            setupScript     += "chmod u+x ./bin/dev_start.sh\n";
-        } else if (mode === "cli") {
-            var cli_name   = _name.replace(/[^a-z0-9\-]/gi,'');
-            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' docker-compose.yml \n";
-            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' package.json \n";
-            setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' Makefile \n";                        
-            setupScript   += "rm -rf node_modules\n"; // just in case
-            setupScript   += "make\n"; // just in case
-            setupScript   += "make stop\n"; // just in case                        
-        } else { // microservice is much easier :)
-            // make name safe
-            var ms_name = _name.replace(/[^a-z0-9\-]/gi,'');
-            if (!ms_name.startsWith("ms-")) {
-              ms_name = "ms-" + ms_name;
-            }
-            // @todo: safe port using https://github.com/indexzero/node-portfinder
-            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' docker-compose.yml \n";
-            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' package.json \n";
-            setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' Makefile \n";            
-            setupScript   += "rm -rf node_modules\n"; // just in case
-            setupScript   += "npm run build\n";
-            setupScript   += "npm start\n";
-            setupScript   += "npm stop\n";
-        }
+        var setupScript = setupScriptContent(mode, _name);
         fs.writeFile(projectPath + "/setup.sh", setupScript, function(err) {
-          if(err) { throw err; }
+          checkErrorFatal(err);
 
           cli.exec ("chmod u+x " + projectPath + "/setup.sh", function(err, stdout, stderr) {
-            if (err) { throw err; }
+            checkErrorFatal(err);
 
             console.log("Project Created.");
             console.log("Executing installation of dependencies. This may take several minutes…");
-            var setupcli = cli.execFile("./setup.sh", [], {"cwd" : projectPath}, function(err, stdout, stderr) {
-              if (err) { throw err; }
+            var cliSetupCmd = "./setup.sh";
+            var setupcli = cli.execFile(cliSetupCmd, [], {"cwd" : projectPath}, function(err, stdout, stderr) {
+              checkErrorFatal(err);
 
-              fs.unlinkSync("./setup.sh");
+              fs.unlinkSync(projectPath + "/setup.sh");
 
               console.log("");
               console.log("======================= Installation Completed! ===================");
@@ -258,7 +217,6 @@ console.log("------------ " + mode);
                 console.log("  > cd " + projectPath);
                 console.log("  > npm run dev");
               } else { // works for microservice and cli
-                //console.log("  > cd " + projectPath.replace(_name, ms_name));
                 console.log("  > cd " + projectPath);
                 console.log("  > make");
               }
@@ -273,7 +231,7 @@ console.log("------------ " + mode);
               console.log("===================================================================");
               console.log("");
             });
-
+            setupcli.stdout.pipe(process.stderr);
             setupcli.stdout.pipe(process.stdout);
 
           });
@@ -283,4 +241,60 @@ console.log("------------ " + mode);
     });
 
   });
+}
+
+function checkErrorFatal(err) {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+
+function setupScriptContent(mode, project_name) {
+
+  var setupScript  = "#!/usr/bin/env sh\n";
+  if (mode === "webapp" || mode === "api") {
+    setupScript     += "npm -q install nodemon -g\n";
+
+    if (mode === "webapp") {
+      setupScript   += "npm -q install bower -g\n";
+      setupScript   += "bower install\n";
+    } else if (mode === "api") {
+      setupScript   += "rm -rf ./lib/hello && rm -rf views && rm -rf public\n";
+      setupScript   += "rm -f .bowerrc bower.json \n";
+
+      setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' package.json \n";
+      setupScript   += "sed -i '' -E '/.*nodebootstrap-htmlapp.*/d' server.js \n";
+      setupScript   += "sed -i '' -E '/.*runningApp\.use.+require\(.+hello.+\).*/d' appConfig.js \n";
+    } // default: microservice
+      setupScript     += "rm -rf README.md LICENSE\n";
+      setupScript     += "npm -q install\n";
+      setupScript     += "chmod u+x ./bin/start.sh\n";
+      setupScript     += "chmod u+x ./bin/stop.sh\n";
+      setupScript     += "chmod u+x ./bin/dev_start.sh\n";
+  } else if (mode === "cli") {
+      var cli_name   = project_name.replace(/[^a-z0-9\-]/gi,'');
+      setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' docker-compose.yml \n";
+      setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' package.json \n";
+      setupScript   += "sed -i '' 's/nodebootstrap-cli-example/" + cli_name + "/g' Makefile \n";                        
+      setupScript   += "rm -rf node_modules\n"; // just in case
+      setupScript   += "make\n"; // just in case
+      setupScript   += "make stop\n"; // just in case                        
+  } else { // microservice is much easier :)
+      // make name safe
+      var ms_name = project_name.replace(/[^a-z0-9\-]/gi,'');
+      if (!ms_name.startsWith("ms-")) {
+        ms_name = "ms-" + ms_name;
+      }
+      // @todo: safe port using https://github.com/indexzero/node-portfinder
+      setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' docker-compose.yml \n";
+      setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' package.json \n";
+      setupScript   += "sed -i '' 's/ms-nodebootstrap-example/" + ms_name + "/g' Makefile \n";            
+      setupScript   += "rm -rf node_modules\n"; // just in case
+      setupScript   += "npm run build\n";
+      setupScript   += "npm start\n";
+      setupScript   += "npm stop\n";
+  }
+
+  return setupScript;
 }
