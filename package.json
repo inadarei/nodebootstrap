@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project bootstrapper loaded with best-practices",
-  "version": "4.3.4",
+  "version": "4.3.5",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -18,13 +18,13 @@
     "node": ">=4.0"
   },
   "dependencies": {
-    "colors": "^1.0.3",
-    "extract-zip": "^1.5.0",
-    "fs-extra": "^4.0.0",
+    "chalk": "^2.3.0",
+    "extract-zip": "^1.6.6",
+    "fs-extra": "^4.0.2",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
-    "request": "^2.48.0",
-    "readline-sync": "^1.4.7"
+    "readline-sync": "^1.4.7",
+    "request": "^2.48.0"
   },
   "keywords": [
     "node",
@@ -42,6 +42,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1"
