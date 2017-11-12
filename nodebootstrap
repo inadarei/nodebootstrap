@@ -7,7 +7,6 @@ var os      = require('os')
     , extract = require('extract-zip')
     , ncp     = require('ncp').ncp
     , cli     = require('child_process')
-    , colors  = require('colors')
     , chalk = require('chalk')
     , request = require('request');
 
@@ -25,12 +24,16 @@ if (argv.v || argv.V || argv.version) {
     process.exit(0);
 }
 
-if ( argv.h || argv.help ||
-     argv._.length === 0 ||
-     typeof argv._[0] === 'undefined' ||
-     argv._[0].length <2) {
+if ( argv.h || argv.help) {
     help();
     process.exit(0);
+}
+
+if (argv._.length === 0 || typeof argv._[0] === 'undefined' || argv._[0].length <2) {
+    console.log('');
+    console.log(error('ERROR: Mandatory argument <project_name> is missing!'));
+    console.log('       Please run `nodebootstrap -h` to see help.');
+    process.exit(1);
 }
 
 var mode   = 'microservice'
@@ -43,7 +46,7 @@ if (argv.m || argv.mode)  {
 
 if (['webapp', 'api', 'microservice', 'cli'].indexOf(mode) === -1) {
     console.log(error('ERROR: invalid value provided for the \'mode\' parameter.'));
-    console.log('       Please run `nodebootstrap -h` to see allowed values.'); 
+    console.log('       Please run `nodebootstrap -h` to see allowed values.');
     process.exit(1);
 }
 
@@ -120,30 +123,30 @@ function help() {
     console.log('');
     console.log(require('./package.json').description);
     console.log('');
-    console.log('Usage:'.bold);
-    console.log('  nodebootstrap'.yellow + ' <project_name>'.green + ' [options]');
+    console.log(chalk.bold('Usage:'));
+    console.log('  ' + chalk.gray('nodebootstrap') + chalk.yellow(' <project_name>') + chalk.gray(' [options]'));
     console.log('');
-    console.log('Options:'.bold);
+    console.log(chalk.bold('Options:'));
     console.log('  -m, [--mode]           build mode to use.');
     console.log('                           Possible values: "webapp", "api", "cli" or "microservice" (default).');
-    console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>.'); 
+    console.log('  -p, [--path=PATH]      output to the specified folder. Default is: <project_name>.');
     console.log('                           You can also indicate "." to build directly inside the current folder.');
     console.log('  -h, [--help]           output usage information');
     console.log('  -v, [-V], [--version]  output the version number');
     console.log('');
-    console.log('Description:'.bold);
+    console.log(chalk.bold('Description:'));
     console.log('  The \'nodebootstrap \' command creates a new application with a default');
     console.log('  structure and configuration at the path you specify.');
     console.log('');
-    console.log('Examples:'.bold);
-    console.log('  # create a skeleton of a containerized microservice:');  
+    console.log(chalk.bold('Examples:'));
+    console.log('  # create a skeleton of a containerized microservice:');
     console.log('  > nodebootstrap ms-first');
-    console.log('  # create a skeleton of an express MVC webapp:');    
+    console.log('  # create a skeleton of an express MVC webapp:');
     console.log('  > nodebootstrap -m webapp nodeapp-first');
-    console.log('  # create a skeleton of a console or client Node application');  
-    console.log('  > nodebootstrap -m cli client-first');  
+    console.log('  # create a skeleton of a console or client Node application');
+    console.log('  > nodebootstrap -m cli client-first');
     console.log('');
-    console.log('See more information at: ' + 'http://www.nodebootstrap.io'.underline);
+    console.log('See more information at: ' + chalk.underline('http://www.nodebootstrap.io'));
     console.log('');
 }
 
@@ -187,7 +190,7 @@ function build_bootstrapped_project(projectPath, mode) {
             } else {
                 srcPath = tmp + 'nodebootstrap-webapp-master';
             }
-      
+
             var ncp_opts = {stopOnErr: true, clobber: true};
             ncp.limit = 16;
 
@@ -229,7 +232,7 @@ function build_bootstrapped_project(projectPath, mode) {
                             } else {
                                 console.log('http://localhost:5501/');
                             }
-              
+
                             console.log('===================================================================');
                             console.log('');
                         });
@@ -247,7 +250,7 @@ function build_bootstrapped_project(projectPath, mode) {
 
 function checkErrorFatal(err) {
     if (err) {
-        console.error(err);
+        console.log(error(err));
         process.exit(1);
     }
 }
@@ -278,10 +281,10 @@ function setupScriptContent(mode, project_name) {
         var cli_name   = project_name.replace(/[^a-z0-9\-]/gi,'');
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' docker-compose.yml \n';
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' package.json \n';
-        setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';                        
+        setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';
         setupScript   += 'rm -rf node_modules\n'; // just in case
         setupScript   += 'make\n'; // just in case
-        setupScript   += 'make stop\n'; // just in case                        
+        setupScript   += 'make stop\n'; // just in case
     } else { // microservice is much easier :)
         // make name safe
         var ms_name = project_name.replace(/[^a-z0-9\-]/gi,'');
@@ -291,7 +294,7 @@ function setupScriptContent(mode, project_name) {
         // @todo: safe port using https://github.com/indexzero/node-portfinder
         setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' docker-compose.yml \n';
         setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' package.json \n';
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' Makefile \n';            
+        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' Makefile \n';
         setupScript   += 'rm -rf node_modules\n'; // just in case
         setupScript   += 'npm run build\n';
         setupScript   += 'npm start\n';
