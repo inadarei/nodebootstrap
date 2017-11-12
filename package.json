@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project bootstrapper loaded with best-practices",
-  "version": "4.3.4",
+  "version": "4.3.5",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -42,6 +42,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1"

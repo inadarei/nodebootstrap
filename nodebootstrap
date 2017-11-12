@@ -55,13 +55,13 @@ if (argv.p || argv.path) {
 }
 
 if (_path !== '.' && fs.existsSync(_path)) {
-    console.log('Error: folder \'%s\' already exists. Aborting.', _path);
+    console.log(error('Error: folder \'%s\' already exists. Aborting.', _path));
     process.exit(1);
 }
 
 var pkgPath = _path + '/package.json';
 if (_path === '.' && fs.existsSync(pkgPath)) {
-    console.log('Error: folder \'%s\' already contains a node project. Aborting.', _path);
+    console.log(error('Error: folder \'%s\' already contains a node project. Aborting.', _path));
     process.exit(1);
 }
 
@@ -81,10 +81,11 @@ console.log(banner);
 var rlSync = require('readline-sync');
 
 if (mode === 'microservice') {
-    console.log(' ATTENTION: microservice mode requires properly set-up Docker environment.');
-    var dockerSetUp = rlSync.question('Do you have proper Docker setup (y/n)? ');
+    console.log(warning(' ATTENTION: microservice mode requires properly set-up Docker environment.'));
+    var dockerSetUp = rlSync.question(' Do you have proper Docker setup (y/n)? ');
     dockerSetUp = dockerSetUp.toLowerCase();
     if ( dockerSetUp !== 'y' ) {
+        console.log('Aborting. Please install Docker on your system and try again');
         process.exit(0);
     }
 }
@@ -150,6 +151,7 @@ function help() {
     console.log('');
 }
 
+/* eslint-disable no-unused-vars */
 function logToFile(data) {
     var d = new Date();
     var timestamp = d.toLocaleString();       // -> "2/1/2013 7:37:08 AM"
@@ -157,6 +159,7 @@ function logToFile(data) {
     var msg = '\n ' + timestamp + ': ' + data;
     fs.writeFileSync('/tmp/ika.log', msg, options);
 }
+/* eslint-enable no-unused-vars */
 
 function build_bootstrapped_project(projectPath, mode) {
 
@@ -174,8 +177,8 @@ function build_bootstrapped_project(projectPath, mode) {
     if (mode === 'cli') {
         projectURL = projectURLCLI;
     }
-    var download = request(projectURL).pipe(writer);
 
+    request(projectURL).pipe(writer);
     writer.on('finish', function () {
 
         extract(zipFilepath, {dir: tmp}, function (err) {
@@ -204,13 +207,14 @@ function build_bootstrapped_project(projectPath, mode) {
                 fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
                     checkErrorFatal(err);
 
-                    cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err, stdout, stderr) {
+                    cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err) {
                         checkErrorFatal(err);
 
                         console.log('Project Created.');
                         console.log('Executing installation of dependencies. This may take several minutes…');
                         var cliSetupCmd = './setup.sh';
-                        var setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err, stdout, stderr) {
+
+                        var setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
                             checkErrorFatal(err);
 
                             fs.unlinkSync(projectPath + '/setup.sh');
@@ -236,9 +240,8 @@ function build_bootstrapped_project(projectPath, mode) {
                             console.log('===================================================================');
                             console.log('');
                         });
-                        setupcli.stdout.pipe(process.stderr);
+                        setupcli.stderr.pipe(process.stderr);
                         setupcli.stdout.pipe(process.stdout);
-
                     });
                 });
 

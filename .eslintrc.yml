@@ -22,3 +22,5 @@ rules:
     - warn
   no-console:
     - off
+  no-useless-escape:
+    - off
