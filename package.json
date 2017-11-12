@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:inadarei/nodebootstrap.git"
+    "url": "https://github.com/inadarei/nodebootstrap"
   },
   "author": "Irakli Nadareishvili (http://freshblurbs.com)",
   "contributors": [],
   "bin": {
     "nodebootstrap": "./nodebootstrap"
   },
-  "engines": [
-    "node >=4.0.0"
-  ],
+  "engines": {
+    "node": ">=4.0"
+  },
   "dependencies": {
     "colors": "^1.0.3",
     "extract-zip": "^1.5.0",
@@ -34,5 +34,16 @@
     "bootstrap",
     "best practices"
   ],
-  "license": "MIT"
+  "scripts": {
+    "start": "nodebootstrap",
+    "pretest": "node_modules/eslint/bin/eslint.js nodebootstrap",
+    "test": "mocha --bail test/",
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/ acceptance/"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1"
+  }
 }
