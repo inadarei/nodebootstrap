@@ -10,7 +10,7 @@ rules:
     - error
     - unix
   quotes:
-    - error
+    - warn
     - single
   semi:
     - error
@@ -20,3 +20,5 @@ rules:
     - except-parens
   no-unused-vars:
     - warn
+  no-console:
+    - off
