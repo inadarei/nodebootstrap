@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var os      = require('os')
+const os      = require('os')
     , path    = require('path')
     , fs      = require('fs')
     , fse     = require('fs-extra')
@@ -10,14 +10,14 @@ var os      = require('os')
     , chalk = require('chalk')
     , request = require('request');
 
-var error = chalk.bold.red
+const error = chalk.bold.red
     , warning = chalk.keyword('orange');
 
-var projectURL = 'https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip';
-var projectURLMicroservice = 'https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip';
-var projectURLCLI = 'https://github.com/inadarei/nodebootstrap-cli/archive/master.zip';
+let projectURL = 'https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip';
+const projectURLMicroservice = 'https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip';
+const projectURLCLI = 'https://github.com/inadarei/nodebootstrap-cli/archive/master.zip';
 
-var argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2));
 
 if (argv.v || argv.V || argv.version) {
     version_info();
@@ -36,8 +36,8 @@ if (argv._.length === 0 || typeof argv._[0] === 'undefined' || argv._[0].length 
     process.exit(1);
 }
 
-var mode   = 'microservice'
-    , _name  = argv._[0]
+const _name = argv._[0];
+let   mode   = 'microservice'
     , _path  = _name;
 
 if (argv.m || argv.mode)  {
@@ -59,13 +59,13 @@ if (_path !== '.' && fs.existsSync(_path)) {
     process.exit(1);
 }
 
-var pkgPath = _path + '/package.json';
+const pkgPath = _path + '/package.json';
 if (_path === '.' && fs.existsSync(pkgPath)) {
     console.log(error('Error: folder \'%s\' already contains a node project. Aborting.', _path));
     process.exit(1);
 }
 
-var banner = 'Building \'' + _name + '\'';
+let banner = 'Building \'' + _name + '\'';
 
 if (_path && _path !== _name) {
     banner += ' at \'' + _path + '\'';
@@ -78,11 +78,11 @@ if (mode) {
 }
 console.log(banner);
 
-var rlSync = require('readline-sync');
+const rlSync = require('readline-sync');
 
 if (mode === 'microservice') {
     console.log(warning(' ATTENTION: microservice mode requires properly set-up Docker environment.'));
-    var dockerSetUp = rlSync.question(' Do you have proper Docker setup (y/n)? ');
+    let dockerSetUp = rlSync.question(' Do you have proper Docker setup (y/n)? ');
     dockerSetUp = dockerSetUp.toLowerCase();
     if ( dockerSetUp !== 'y' ) {
         console.log('Aborting. Please install Docker on your system and try again');
@@ -91,16 +91,16 @@ if (mode === 'microservice') {
 }
 
 if (_path === '.') {
-    var readline = require('readline');
+    const readline = require('readline');
 
     console.log('');
-    var rl = readline.createInterface({
+    const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
         terminal: false
     });
 
-    var prompt1 = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
+    const prompt1 = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
     rl.question(prompt1, function(answer) {
         rl.close();
         answer = answer.toLowerCase();
@@ -153,23 +153,23 @@ function help() {
 
 /* eslint-disable no-unused-vars */
 function logToFile(data) {
-    var d = new Date();
-    var timestamp = d.toLocaleString();       // -> "2/1/2013 7:37:08 AM"
-    var options = {'flag' : 'a+'};
-    var msg = '\n ' + timestamp + ': ' + data;
+    const d = new Date();
+    const timestamp = d.toLocaleString();       // -> "2/1/2013 7:37:08 AM"
+    const options = {'flag' : 'a+'};
+    const msg = '\n ' + timestamp + ': ' + data;
     fs.writeFileSync('/tmp/ika.log', msg, options);
 }
 /* eslint-enable no-unused-vars */
 
 function build_bootstrapped_project(projectPath, mode) {
 
-    var tmp = os.tmpdir();
+    let tmp = os.tmpdir();
 
     // Mac adds "/" to tmpdir(), Linux Debian doesn't. Life's beautiful.
     if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep; }
 
-    var zipFilepath = tmp + Date.now() + '-nodebootstrap.zip';
-    var writer = fs.createWriteStream(zipFilepath);
+    const zipFilepath = tmp + Date.now() + '-nodebootstrap.zip';
+    const writer = fs.createWriteStream(zipFilepath);
 
     if (mode === 'microservice') {
         projectURL = projectURLMicroservice;
@@ -185,7 +185,7 @@ function build_bootstrapped_project(projectPath, mode) {
             fs.unlinkSync(zipFilepath);
             checkErrorFatal(err);
 
-            var srcPath;
+            let srcPath;
             if (mode === 'microservice') {
                 srcPath = tmp + 'nodebootstrap-microservice-master';
             } else if (mode == 'cli') {
@@ -194,7 +194,7 @@ function build_bootstrapped_project(projectPath, mode) {
                 srcPath = tmp + 'nodebootstrap-webapp-master';
             }
 
-            var ncp_opts = {stopOnErr: true, clobber: true};
+            const ncp_opts = {stopOnErr: true, clobber: true};
             ncp.limit = 16;
 
             fse.ensureDirSync(projectPath); //create destination directory structure, if necessary.
@@ -203,7 +203,7 @@ function build_bootstrapped_project(projectPath, mode) {
                 fse.removeSync(srcPath); //clean-up
                 checkErrorFatal(err);
 
-                var setupScript = setupScriptContent(mode, _name);
+                const setupScript = setupScriptContent(mode, _name);
                 fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
                     checkErrorFatal(err);
 
@@ -212,9 +212,9 @@ function build_bootstrapped_project(projectPath, mode) {
 
                         console.log('Project Created.');
                         console.log('Executing installation of dependencies. This may take several minutes…');
-                        var cliSetupCmd = './setup.sh';
+                        const cliSetupCmd = './setup.sh';
 
-                        var setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
+                        const setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
                             checkErrorFatal(err);
 
                             fs.unlinkSync(projectPath + '/setup.sh');
@@ -260,7 +260,7 @@ function checkErrorFatal(err) {
 
 function setupScriptContent(mode, project_name) {
 
-    var setupScript  = '#!/usr/bin/env sh\n';
+    let setupScript  = '#!/usr/bin/env sh\n';
     if (mode === 'webapp' || mode === 'api') {
         setupScript     += 'npm -q install nodemon -g\n';
 
@@ -281,7 +281,7 @@ function setupScriptContent(mode, project_name) {
         setupScript     += 'chmod u+x ./bin/stop.sh\n';
         setupScript     += 'chmod u+x ./bin/dev_start.sh\n';
     } else if (mode === 'cli') {
-        var cli_name   = project_name.replace(/[^a-z0-9\-]/gi,'');
+        const cli_name   = project_name.replace(/[^a-z0-9\-]/gi,'');
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' docker-compose.yml \n';
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' package.json \n';
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';
@@ -290,7 +290,7 @@ function setupScriptContent(mode, project_name) {
         setupScript   += 'make stop\n'; // just in case
     } else { // microservice is much easier :)
         // make name safe
-        var ms_name = project_name.replace(/[^a-z0-9\-]/gi,'');
+        let ms_name = project_name.replace(/[^a-z0-9\-]/gi,'');
         if (!ms_name.startsWith('ms-')) {
             ms_name = 'ms-' + ms_name;
         }
