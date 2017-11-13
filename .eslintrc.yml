@@ -20,6 +20,10 @@ rules:
     - except-parens
   no-unused-vars:
     - warn
+    - vars: local
+      args: none
+  prefer-const: warn
+  no-var: warn
   no-console:
     - off
   no-useless-escape:
