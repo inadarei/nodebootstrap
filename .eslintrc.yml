@@ -18,6 +18,7 @@ rules:
   no-cond-assign:
     - warn
     - except-parens
+  no-undef: error
   no-unused-vars:
     - warn
     - vars: local

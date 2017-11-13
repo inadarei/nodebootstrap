@@ -7,11 +7,15 @@ const os      = require('os')
     , extract = require('extract-zip')
     , ncp     = require('ncp').ncp
     , cli     = require('child_process')
-    , chalk = require('chalk')
+    , chalk   = require('chalk')
+    , Promise = require('bluebird')
+    , getPort = require('get-port')
     , request = require('request');
 
 const error = chalk.bold.red
     , warning = chalk.keyword('orange');
+
+const defaultDynPort = 5507;
 
 let projectURL = 'https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip';
 const projectURLMicroservice = 'https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip';
@@ -203,48 +207,29 @@ function build_bootstrapped_project(projectPath, mode) {
                 fse.removeSync(srcPath); //clean-up
                 checkErrorFatal(err);
 
-                const setupScript = setupScriptContent(mode, _name);
-                fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
-                    checkErrorFatal(err);
-
-                    cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err) {
+                findDynPort().then( dynamicPort => {
+                    const setupScript = setupScriptContent(mode, _name, dynamicPort);
+                    fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
                         checkErrorFatal(err);
 
-                        console.log('Project Created.');
-                        console.log('Executing installation of dependencies. This may take several minutes…');
-                        const cliSetupCmd = './setup.sh';
-
-                        const setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
+                        cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err) {
                             checkErrorFatal(err);
 
-                            fs.unlinkSync(projectPath + '/setup.sh');
+                            console.log('Project Created.');
+                            console.log('Executing installation of dependencies. This may take several minutes…');
+                            const cliSetupCmd = './setup.sh';
 
-                            console.log('');
-                            console.log('======================= Installation Completed! ===================');
-                            console.log('You can now run your newly minted Node app by executing:');
-                            if (mode === 'webapp' || mode === 'api') {
-                                console.log('  > cd ' + projectPath);
-                                console.log('  > npm run dev');
-                            } else { // works for microservice and cli
-                                console.log('  > cd ' + projectPath);
-                                console.log('  > make');
-                            }
-                            console.log('');
-                            console.log('Once the app is up and running you can access it from your browser at: ');
-                            if (mode !== 'microservice') {
-                                console.log('http://localhost:3000/');
-                            } else {
-                                console.log('http://localhost:5501/');
-                            }
+                            const setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
+                                checkErrorFatal(err);
 
-                            console.log('===================================================================');
-                            console.log('');
+                                fs.unlinkSync(projectPath + '/setup.sh');
+                                showCompletionMessage(mode, projectPath, dynamicPort);
+                            });
+                            setupcli.stderr.pipe(process.stderr);
+                            setupcli.stdout.pipe(process.stdout);
                         });
-                        setupcli.stderr.pipe(process.stderr);
-                        setupcli.stdout.pipe(process.stdout);
                     });
                 });
-
             });
         });
 
@@ -258,7 +243,50 @@ function checkErrorFatal(err) {
     }
 }
 
-function setupScriptContent(mode, project_name) {
+function showCompletionMessage(mode, projectPath, dynamicPort) {
+    console.log('');
+    console.log('======================= Installation Completed! ===================');
+    console.log('You can now run your newly minted Node app by executing:');
+    if (mode === 'webapp' || mode === 'api') {
+        console.log('  > cd ' + projectPath);
+        console.log('  > npm run dev');
+    } else { // works for microservice and cli
+        console.log('  > cd ' + projectPath);
+        console.log('  > make');
+    }
+    console.log('');
+    console.log('Once the app is up and running you can access it from your browser at: ');
+    if (mode !== 'microservice') {
+        console.log('http://localhost:3000/');
+    } else {
+        console.log('http://localhost:' + dynamicPort + '/');
+    }
+
+    console.log('===================================================================');
+    console.log('');
+}
+
+function findDynPort() {
+    return new Promise( (resolve, reject) => {
+        let startPort;
+        const batchSize = 20;
+        const stepSize  = 100;
+        const portPromises = [];
+        let increment = 0;
+        let opts = {};
+        while (increment < batchSize) {
+            startPort = defaultDynPort + batchSize * stepSize;
+            opts = {port: startPort, host: '0.0.0.0'};
+            portPromises.push(getPort(opts));
+            increment++;
+        }
+        Promise.any(portPromises).then( port => {
+            resolve(port);
+        });
+    });
+}
+
+function setupScriptContent(mode, project_name, dynamicPort) {
 
     let setupScript  = '#!/usr/bin/env sh\n';
     if (mode === 'webapp' || mode === 'api') {
@@ -298,6 +326,12 @@ function setupScriptContent(mode, project_name) {
         setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' docker-compose.yml \n';
         setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' package.json \n';
         setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' Makefile \n';
+
+        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' database.env \n';
+        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' docker-compose.yml \n';
+
+        setupScript   += 'sed -i \'\' \'s/5501:5501/' + dynamicPort + ':5501/g\' docker-compose.yml \n';
+
         setupScript   += 'rm -rf node_modules\n'; // just in case
         setupScript   += 'npm run build\n';
         setupScript   += 'npm start\n';
