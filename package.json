@@ -1,7 +1,7 @@
 {
   "name": "nodebootstrap",
   "description": "Node/Express.js project bootstrapper loaded with best-practices",
-  "version": "4.3.6",
+  "version": "4.3.7",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -18,9 +18,11 @@
     "node": ">=4.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "chalk": "^2.3.0",
     "extract-zip": "^1.6.6",
     "fs-extra": "^4.0.2",
+    "get-port": "^3.2.0",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "readline-sync": "^1.4.7",
