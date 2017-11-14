@@ -1,4 +1,4 @@
-### 4.4.1
+### 4.4.0
 
 - Upgraded to Node 8
 - Dynamic port identification in microservices mode
