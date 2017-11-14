@@ -254,12 +254,14 @@ function showCompletionMessage(mode, projectPath, dynamicPort) {
         console.log('  > cd ' + projectPath);
         console.log('  > make');
     }
-    console.log('');
-    console.log('Once the app is up and running you can access it from your browser at: ');
-    if (mode !== 'microservice') {
-        console.log('http://localhost:3000/');
-    } else {
-        console.log('http://localhost:' + dynamicPort + '/');
+    if (mode !== 'cli') {
+        console.log('');
+        console.log('Once the app is up and running you can access it from your browser at: ');
+        if (mode !== 'microservice') {
+            console.log('http://localhost:3000/');
+        } else {
+            console.log('http://localhost:' + dynamicPort + '/');
+        }
     }
 
     console.log('===================================================================');
@@ -314,8 +316,7 @@ function setupScriptContent(mode, project_name, dynamicPort) {
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' package.json \n';
         setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';
         setupScript   += 'rm -rf node_modules\n'; // just in case
-        setupScript   += 'make\n'; // just in case
-        setupScript   += 'make stop\n'; // just in case
+        setupScript   += 'make build\n';
     } else { // microservice is much easier :)
         // make name safe
         let ms_name = project_name.replace(/[^a-z0-9\-]/gi,'');
@@ -333,9 +334,10 @@ function setupScriptContent(mode, project_name, dynamicPort) {
         setupScript   += 'sed -i \'\' \'s/5501:5501/' + dynamicPort + ':5501/g\' docker-compose.yml \n';
 
         setupScript   += 'rm -rf node_modules\n'; // just in case
-        setupScript   += 'npm run build\n';
-        setupScript   += 'npm start\n';
-        setupScript   += 'npm stop\n';
+        setupScript   += 'make build\n';
+        //setupScript   += 'npm run build\n';
+        //setupScript   += 'npm start\n';
+        //setupScript   += 'npm stop\n';
     }
 
     return setupScript;
