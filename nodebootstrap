@@ -104,7 +104,7 @@ if (_path === '.') {
         terminal: false
     });
 
-    const prompt1 = 'You indicated current folder as the build path. Are you certain ' + '(y/N)? '.red;
+    const prompt1 = chalk.red('You indicated current folder as the build path. Are you certain ' + '(y/N)? ');
     rl.question(prompt1, function(answer) {
         rl.close();
         answer = answer.toLowerCase();
