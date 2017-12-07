@@ -3,9 +3,11 @@
 [![NPM Version][npm-img]][npm-url]
 [![Github Link][github-img]][github-url]
 ![Docker Hub Link][docker-img]
+[![NodeSecurity Status][nsp-img]][nsp-url]
 [![TravisCI Build Status][travis-img]][travis-url]
 [![Codacy Badge][codacy-img]][codacy-url]
 [![Code Climate Badge][codeclimate-img]][codeclimate-url]
+
 
 <!-- [![Github Link][github-img]][github-url] -->
 
@@ -48,3 +50,5 @@ If you like Nodebootstrap, also check out: [Microservices Workspace](https://git
 [codeclimate-url]: https://codeclimate.com/github/inadarei/nodebootstrap
 [docker-img]: https://img.shields.io/badge/docker-ready-blue.svg
 [docker-url]: https://hub.docker.com/r/irakli/nodebootstrap-hello/
+[nsp-img]: https://nodesecurity.io/orgs/inadarei-public/projects/730bf3d4-b846-42f0-a184-fcf7142c65ac/badge
+[nsp-url]: https://nodesecurity.io/orgs/inadarei-public/projects/730bf3d4-b846-42f0-a184-fcf7142c65ac
