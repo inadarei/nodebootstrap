@@ -5,7 +5,7 @@
 #
 # ATTENTION: You would want to use dev_start.sh script, while developing, instead.
 
-NB_IS_CONTAINER="${NB_IS_CONTAINER:-0}"
+export NB_IS_CONTAINER="${NB_IS_CONTAINER:-0}"
 
 if [ ! -d "$PWD/node_modules" ]; then
   echo "Please run the shell script from project's root folder"
