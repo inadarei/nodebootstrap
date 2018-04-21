@@ -6,8 +6,6 @@
 [![NodeSecurity Status][nsp-img]][nsp-url]
 [![TravisCI Build Status][travis-img]][travis-url]
 [![Codacy Badge][codacy-img]][codacy-url]
-[![Code Climate Badge][codeclimate-img]][codeclimate-url]
-
 
 <!-- [![Github Link][github-img]][github-url] -->
 
@@ -44,8 +42,8 @@ If you like Nodebootstrap, also check out: [Microservices Workspace](https://git
 [npm-url]: https://www.npmjs.com/package/nodebootstrap
 [travis-img]: https://travis-ci.org/inadarei/nodebootstrap.svg?branch=master
 [travis-url]: https://travis-ci.org/inadarei/nodebootstrap
-[codacy-img]: https://www.codacy.com/project/badge/41c49bb9c9384b7e8042f1e6c9645431
-[codacy-url]: https://www.codacy.com/public/irakli/nodebootstrap_2
+[codacy-img]: https://api.codacy.com/project/badge/Grade/41c49bb9c9384b7e8042f1e6c9645431
+[codacy-url]: https://www.codacy.com/app/irakli/nodebootstrap_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=inadarei/nodebootstrap&amp;utm_campaign=Badge_Grade
 [codeclimate-img]: https://codeclimate.com/github/inadarei/nodebootstrap/badges/gpa.svg
 [codeclimate-url]: https://codeclimate.com/github/inadarei/nodebootstrap
 [docker-img]: https://img.shields.io/badge/docker-ready-blue.svg
