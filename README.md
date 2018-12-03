@@ -6,7 +6,7 @@
 [![NodeSecurity Status][nsp-img]][nsp-url]
 [![TravisCI Build Status][travis-img]][travis-url]
 [![Codacy Badge][codacy-img]][codacy-url]
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap?ref=badge_shield)
+[![FOSSA Status][fossa-img]][fossa-url]
 
 <!-- [![Github Link][github-img]][github-url] -->
 
@@ -51,6 +51,5 @@ If you like Nodebootstrap, also check out: [Microservices Workspace](https://git
 [docker-url]: https://hub.docker.com/r/irakli/nodebootstrap-hello/
 [nsp-img]: https://nodesecurity.io/orgs/inadarei-public/projects/730bf3d4-b846-42f0-a184-fcf7142c65ac/badge
 [nsp-url]: https://nodesecurity.io/orgs/inadarei-public/projects/730bf3d4-b846-42f0-a184-fcf7142c65ac
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap?ref=badge_large)
+[fossa-img]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap.svg?type=large
+[fossa-url]: https://app.fossa.io/projects/git%2Bgithub.com%2Finadarei%2Fnodebootstrap?ref=badge_large
