@@ -3,7 +3,6 @@
 [![NPM Version][npm-img]][npm-url]
 [![Github Link][github-img]][github-url]
 ![Docker Hub Link][docker-img]
-[![NodeSecurity Status][nsp-img]][nsp-url]
 [![TravisCI Build Status][travis-img]][travis-url]
 [![Codacy Badge][codacy-img]][codacy-url]
 [![FOSSA Status][fossa-img]][fossa-url]
