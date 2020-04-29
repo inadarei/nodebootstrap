@@ -41,7 +41,7 @@ title: Node Bootstrap
     <div class="content-column">
     <div class="container-fluid">
       <div class="row project-links">
-        <a href="https://irakli.gitbooks.io/nodebootstrap/" class="btn btn-primary btn-lg" role="button"><i class="fa fa-book fa-fw"></i> Documentation</a>
+        <a href="https://docs.nodebootstrap.com" class="btn btn-primary btn-lg" role="button"><i class="fa fa-book fa-fw"></i> Documentation</a>
         <a href="https://github.com/inadarei/nodebootstrap" class="btn btn-success btn-lg hidden-xs hidden-sm" role="button"><i class="fa fa-github fa-fw"></i> GitHub</a>
         <a href="https://twitter.com/nodebootstrap" class="btn btn-info btn-lg" role="button"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
       </div>
