@@ -26,7 +26,8 @@
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "readline-sync": "^1.4.7",
-    "request": "^2.48.0"
+    "request": "^2.48.0",
+    "snyk": "^1.317.0"
   },
   "keywords": [
     "node",
@@ -40,7 +41,9 @@
     "start": "nodebootstrap",
     "pretest": "node_modules/eslint/bin/eslint.js nodebootstrap",
     "test": "mocha --bail test/",
-    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/ acceptance/"
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/ acceptance/",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -48,5 +51,6 @@
     "eslint": "^4.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.0.3"
-  }
+  },
+  "snyk": true
 }
