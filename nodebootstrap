@@ -17,9 +17,9 @@ const error = chalk.bold.red
 
 const defaultDynPort = 5507;
 
-let projectURL = 'https://github.com/inadarei/nodebootstrap-webapp/archive/master.zip';
-const projectURLMicroservice = 'https://github.com/inadarei/nodebootstrap-microservice/archive/master.zip';
-const projectURLCLI = 'https://github.com/inadarei/nodebootstrap-cli/archive/master.zip';
+let projectURL = 'https://github.com/inadarei/nodebootstrap-webapp/archive/main.zip';
+const projectURLMicroservice = 'https://github.com/inadarei/nodebootstrap-microservice/archive/main.zip';
+const projectURLCLI = 'https://github.com/inadarei/nodebootstrap-cli/archive/main.zip';
 
 const argv = require('minimist')(process.argv.slice(2));
 
@@ -92,6 +92,7 @@ if (mode === 'microservice') {
         console.log('Aborting. Please install Docker on your system and try again');
         process.exit(0);
     }
+    console.log("\tStarting installation…")
 }
 
 if (_path === '.') {
@@ -173,6 +174,7 @@ function build_bootstrapped_project(projectPath, mode) {
     if (tmp.substr(-1) !== path.sep) { tmp = tmp + path.sep; }
 
     const zipFilepath = tmp + Date.now() + '-nodebootstrap.zip';
+    console.log("\tDownloading zip archive to " + zipFilepath);
     const writer = fs.createWriteStream(zipFilepath);
 
     if (mode === 'microservice') {
@@ -183,56 +185,64 @@ function build_bootstrapped_project(projectPath, mode) {
     }
 
     request(projectURL).pipe(writer);
-    writer.on('finish', function () {
+    writer.on('finish', async function () {
+        console.log("\tZip archive downloaded");
 
-        extract(zipFilepath, {dir: tmp}, function (err) {
-            fs.unlinkSync(zipFilepath);
-            checkErrorFatal(err);
+        try {
+            await extract(zipFilepath, {dir: tmp})
+            console.log('\tExtraction complete')
 
             let srcPath;
             if (mode === 'microservice') {
-                srcPath = tmp + 'nodebootstrap-microservice-master';
+                srcPath = tmp + 'nodebootstrap-microservice';
             } else if (mode == 'cli') {
-                srcPath = tmp + 'nodebootstrap-cli-master';
+                srcPath = tmp + 'nodebootstrap-cli';
             } else {
-                srcPath = tmp + 'nodebootstrap-webapp-master';
+                srcPath = tmp + 'nodebootstrap-webapp';
             }
+            srcPath += "-main" 
 
             const ncp_opts = {stopOnErr: true, clobber: true};
             ncp.limit = 16;
 
             fse.ensureDirSync(projectPath); //create destination directory structure, if necessary.
 
-            ncp(srcPath, projectPath, ncp_opts, function (err) {
+            ncp(srcPath, projectPath, ncp_opts, async function (err) {
                 fse.removeSync(srcPath); //clean-up
                 checkErrorFatal(err);
 
-                findDynPort().then( dynamicPort => {
-                    const setupScript = setupScriptContent(mode, _name, dynamicPort);
-                    fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
+                dynamicPort = await findDynPort();
+                console.log("Will launch on port: " + dynamicPort);
+                const setupScript = setupScriptContent(mode, _name, dynamicPort);
+                fs.writeFile(projectPath + '/setup.sh', setupScript, function(err) {
+                    checkErrorFatal(err);
+                    console.log("Setup.sh created");
+
+                    
+                    cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err) {
                         checkErrorFatal(err);
 
-                        cli.exec ('chmod u+x ' + projectPath + '/setup.sh', function(err) {
+                        console.log('Project Created.');
+                        console.log('Executing installation of dependencies. This may take several minutes…');
+                        const cliSetupCmd = './setup.sh';
+
+                        const setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
                             checkErrorFatal(err);
 
-                            console.log('Project Created.');
-                            console.log('Executing installation of dependencies. This may take several minutes…');
-                            const cliSetupCmd = './setup.sh';
-
-                            const setupcli = cli.execFile(cliSetupCmd, [], {'cwd' : projectPath}, function(err) {
-                                checkErrorFatal(err);
-
-                                fs.unlinkSync(projectPath + '/setup.sh');
-                                showCompletionMessage(mode, projectPath, dynamicPort);
-                            });
-                            setupcli.stderr.pipe(process.stderr);
-                            setupcli.stdout.pipe(process.stdout);
+                            fs.unlinkSync(projectPath + '/setup.sh');
+                            showCompletionMessage(mode, projectPath, dynamicPort);
                         });
+                        setupcli.stderr.pipe(process.stderr);
+                        setupcli.stdout.pipe(process.stdout);
                     });
                 });
             });
-        });
 
+        } catch (err) {
+            checkErrorFatal(err);
+        } finally {
+            fs.unlinkSync(zipFilepath);
+        }
     });
 }
 
@@ -291,6 +301,12 @@ function findDynPort() {
 function setupScriptContent(mode, project_name, dynamicPort) {
 
     let setupScript  = '#!/usr/bin/env sh\n';
+    let sedCmd;
+    if (os.platform === 'darwin') {
+        sedCmd = 'sed -i \'\' ';
+    } else {
+        sedCmd = 'sed -i ';
+    }
     if (mode === 'webapp' || mode === 'api') {
         setupScript     += 'npm -q install nodemon -g\n';
 
@@ -301,9 +317,9 @@ function setupScriptContent(mode, project_name, dynamicPort) {
             setupScript   += 'rm -rf ./lib/hello && rm -rf views && rm -rf public\n';
             setupScript   += 'rm -f .bowerrc bower.json \n';
 
-            setupScript   += 'sed -i \'\' -E \'/.*nodebootstrap-htmlapp.*/d\' package.json \n';
-            setupScript   += 'sed -i \'\' -E \'/.*nodebootstrap-htmlapp.*/d\' server.js \n';
-            setupScript   += 'sed -i \'\' -E \'/.*runningApp\.use.+require\(.+hello.+\).*/d\' appConfig.js \n';
+            setupScript   += sedCmd + ' -E \'/.*nodebootstrap-htmlapp.*/d\' package.json \n';
+            setupScript   += sedCmd + ' -E \'/.*nodebootstrap-htmlapp.*/d\' server.js \n';
+            setupScript   += sedCmd + ' -E \'/.*runningApp\.use.+require\(.+hello.+\).*/d\' appConfig.js \n';
         } // default: microservice
         setupScript     += 'rm -rf README.md LICENSE\n';
         setupScript     += 'npm -q install\n';
@@ -312,9 +328,9 @@ function setupScriptContent(mode, project_name, dynamicPort) {
         setupScript     += 'chmod u+x ./bin/dev_start.sh\n';
     } else if (mode === 'cli') {
         const cli_name   = project_name.replace(/[^a-z0-9\-]/gi,'');
-        setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' docker-compose.yml \n';
-        setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' package.json \n';
-        setupScript   += 'sed -i \'\' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';
+        setupScript   += sedCmd + ' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' docker-compose.yml \n';
+        setupScript   += sedCmd + ' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' package.json \n';
+        setupScript   += sedCmd + ' \'s/nodebootstrap-cli-example/' + cli_name + '/g\' Makefile \n';
         setupScript   += 'rm -rf node_modules\n'; // just in case
         setupScript   += 'make build\n';
     } else { // microservice is much easier :)
@@ -324,14 +340,14 @@ function setupScriptContent(mode, project_name, dynamicPort) {
             ms_name = 'ms-' + ms_name;
         }
         // @todo: safe port using https://github.com/indexzero/node-portfinder
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' docker-compose.yml \n';
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' package.json \n';
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' Makefile \n';
+        setupScript   += sedCmd + ' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' docker-compose.yml \n';
+        setupScript   += sedCmd + ' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' package.json \n';
+        setupScript   += sedCmd + ' \'s/ms-nodebootstrap-example/' + ms_name + '/g\' Makefile \n';
 
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' database.env \n';
-        setupScript   += 'sed -i \'\' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' docker-compose.yml \n';
+        setupScript   += sedCmd + ' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' database.env \n';
+        setupScript   += sedCmd + ' \'s/ms-nodebootstrap-example-db/' + ms_name + '-db/g\' docker-compose.yml \n';
 
-        setupScript   += 'sed -i \'\' \'s/5501:5501/' + dynamicPort + ':5501/g\' docker-compose.yml \n';
+        setupScript   += sedCmd + ' \'s/5501:5501/' + dynamicPort + ':5501/g\' docker-compose.yml \n';
 
         setupScript   += 'rm -rf node_modules\n'; // just in case
         setupScript   += 'make build\n';
